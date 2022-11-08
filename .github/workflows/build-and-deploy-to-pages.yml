@@ -4,7 +4,7 @@ name: Build and deploy to GH Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: ["*"]
   pull_request:
     branches: ["main"]
 
