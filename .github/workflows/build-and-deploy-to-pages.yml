@@ -4,8 +4,6 @@ name: Build and deploy to GH Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["*"]
-  pull_request:
     branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -32,12 +30,21 @@ jobs:
 
     - name: Setup Flutter
       uses: subosito/flutter-action@v1
+    
+    - name: Flutter version
+      run: flutter --version
 
     - name: Enable Flutter web
       run: flutter config --enable-web
 
     - name: Install dependencies
       run: flutter packages get
+      
+    - name: Run code generation
+      run: flutter pub run build_runner build --delete-conflicting-outputs
+      
+    - name: Flutter analyze
+      run: flutter analyze
 
     - name: Build web
       run: flutter build web --release --base-href '/AdventOfCode2022/'
