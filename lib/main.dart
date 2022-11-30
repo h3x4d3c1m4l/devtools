@@ -1,3 +1,5 @@
+import 'package:aoc22/solvers/advent_of_code_2021/day_01_solver.dart';
+import 'package:aoc22/views/problem_solver_view.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
 void main() {
@@ -5,13 +7,16 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+
   const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
+
 }
 
 class _MyAppState extends State<MyApp> {
+
   int topIndex = 0;
 
   // This widget is the root of your application.
@@ -21,44 +26,51 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       home: NavigationView(
         appBar: const NavigationAppBar(
-          title: Text('NavigationView'),
+          title: Text('Advent of Code'),
+          automaticallyImplyLeading: false,
         ),
         pane: NavigationPane(
           selected: topIndex,
           onChanged: (index) => setState(() => topIndex = index),
           displayMode: PaneDisplayMode.open,
-          items: [
-            PaneItem(
-              icon: const Icon(FluentIcons.home),
-              title: const Text('Home'),
-              body: Text("Body 1"),
-            ),
-            PaneItem(
-              icon: const Icon(FluentIcons.issue_tracking),
-              title: const Text('Track an order'),
-              infoBadge: const InfoBadge(source: Text('8')),
-              body: Text("Body 1"),
-            ),
-            PaneItemExpander(
-              icon: const Icon(FluentIcons.account_management),
-              title: const Text('Account'),
-              body: Text("Body 1"),
-              items: [
-                PaneItem(
-                  icon: const Icon(FluentIcons.mail),
-                  title: const Text('Mail'),
-                  body: Text("Body 1"),
-                ),
-                PaneItem(
-                  icon: const Icon(FluentIcons.calendar),
-                  title: const Text('Calendar'),
-                  body: Text("Body 1"),
-                ),
-              ],
-            ),
-          ],
+          items: _getPaneItems(),
         ),
       ),
     );
   }
+
+  List<NavigationPaneItem> _getPaneItems() {
+    return [
+      PaneItem(
+        icon: const Icon(FluentIcons.home),
+        title: const Text('Home'),
+        body: Text("Body 1"),
+      ),
+      PaneItemExpander(
+        icon: const Icon(FluentIcons.code),
+        title: const Text('Advent of Code 2021'),
+        body: const Center(child: Text("Choose a day from the sub menu")),
+        items: [
+          PaneItem(
+            icon: const Icon(FluentIcons.mail),
+            title: const Text('Day 01'),
+            body: ProblemSolverView(title: "AoC 2021 - Day 01", solver: Day01Solver()),
+          ),
+        ],
+      ),
+      PaneItemExpander(
+        icon: const Icon(FluentIcons.code),
+        title: const Text('Advent of Code 2022'),
+        body: const Center(child: Text("Choose a day from the sub menu")),
+        items: [
+          PaneItem(
+            icon: const Icon(FluentIcons.mail),
+            title: const Text('Day 01'),
+            body: Text("Body 1"),
+          ),
+        ],
+      ),
+    ];
+  }
+
 }
