@@ -1,35 +1,41 @@
 import 'package:aoc22/solvers/solver.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
-class Day01Solver extends Solver<String> {
+class Day01Solver extends Solver<String, String> {
   
   @override
-  Widget getInputWidget(ValueChanged<String> onInputValueChanged) {
-    return TextBox(
-      onChanged: onInputValueChanged,
-    );
+  String getSolution(String input) {
+    // TODO: implement getSolution
+    throw UnimplementedError();
   }
 
-  @override
-  Widget getOutputWidget(String inputValue) {
-    List<String> inputLines = inputValue.split('\r\n');
+  // @override
+  // Widget getInputWidget(ValueChanged<String> onInputValueChanged) {
+  //   return TextBox(
+  //     onChanged: onInputValueChanged,
+  //   );
+  // }
 
-    int nLargerThanPrevious = 0;
-    int? previousValue;
-    for (String line in inputLines) {
-      int currentValue = int.parse(line);
+  // @override
+  // Widget getOutputWidget(String inputValue) {
+  //   List<String> inputLines = inputValue.split('\r\n');
 
-      if (previousValue != null && currentValue > previousValue) {
-        nLargerThanPrevious++;
-      }
+  //   int nLargerThanPrevious = 0;
+  //   int? previousValue;
+  //   for (String line in inputLines) {
+  //     int currentValue = int.parse(line);
 
-      previousValue = currentValue;
-    }
+  //     if (previousValue != null && currentValue > previousValue) {
+  //       nLargerThanPrevious++;
+  //     }
 
-    return TextBox(
-      readOnly: true,
-      initialValue: nLargerThanPrevious.toString(),
-    );
-  }
+  //     previousValue = currentValue;
+  //   }
+
+  //   return TextBox(
+  //     readOnly: true,
+  //     initialValue: nLargerThanPrevious.toString(),
+  //   );
+  // }
 
 }
