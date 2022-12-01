@@ -19,7 +19,14 @@ class ProblemSolverView extends StatefulWidget {
 
 class _ProblemSolverViewState extends State<ProblemSolverView> {
 
-  Object? _value;
+  dynamic _value;
+  dynamic _solution;
+
+  void _updateSolution() {
+    setState(() {
+      _solution = widget.solver.getSolution(_value);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +41,16 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
           // input
           Flexible(
             fit: FlexFit.tight,
-            child: widget.solver.getInputWidget((value) => _value = value),
+            child: TextBox(
+              initialValue: _value ?? '',
+              maxLines: null,
+              onChanged: (value) {
+                setState(() {
+                  _value = value;
+                  _updateSolution();
+                });
+              },
+            ),
           ),
 
           // separator
@@ -48,7 +64,10 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
           // output
           Flexible(
             fit: FlexFit.tight,
-            child: widget.solver.getOutputWidget("123\r\n456"),
+            child: TextBox(
+              initialValue: _solution ?? '',
+              readOnly: true,
+            ),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
-import 'package:aoc22/solvers/advent_of_code_2021/day_01_solver.dart';
+import 'package:aoc22/solvers/advent_of_code_2021/day_01_solver.dart' as aoc2101;
+import 'package:aoc22/solvers/advent_of_code_2022/day_01_solver.dart' as aoc2201;
 import 'package:aoc22/views/problem_solver_view.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
@@ -54,7 +55,7 @@ class _MyAppState extends State<MyApp> {
           PaneItem(
             icon: const Icon(FluentIcons.mail),
             title: const Text('Day 01'),
-            body: ProblemSolverView(title: "AoC 2021 - Day 01", solver: Day01Solver()),
+            body: ProblemSolverView(title: "AoC 2021 - Day 01", solver: aoc2101.Day01Solver()),
           ),
         ],
       ),
@@ -66,7 +67,7 @@ class _MyAppState extends State<MyApp> {
           PaneItem(
             icon: const Icon(FluentIcons.mail),
             title: const Text('Day 01'),
-            body: Text("Body 1"),
+            body: ProblemSolverView(title: "AoC 2021 - Day 01", solver: aoc2201.Day01Solver()),
           ),
         ],
       ),
