@@ -30,7 +30,6 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
 
   @override
   Widget build(BuildContext context) {
-    Typography typography = FluentTheme.of(context).typography;
     return ScaffoldPage.withPadding(
       header: PageHeader(
         title: Text(widget.title),
@@ -55,10 +54,7 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
 
           // separator
           const SizedBox(height: 32),
-          Container(
-            height: 1,
-            color: Colors.black,
-          ),
+          _getDivider(),
           const SizedBox(height: 32),
 
           // output
@@ -71,6 +67,22 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _getDivider() {
+    return Row(
+      children: [
+        const Flexible(
+          fit: FlexFit.tight,
+          child: Divider(),
+        ),
+        Button(child: const Text('test'), onPressed: () => {}),
+        const Flexible(
+          fit: FlexFit.tight,
+          child: Divider(),
+        ),
+      ],
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:aoc22/solvers/solver.dart';
 
-class Day01Solver extends Solver<String, String> {
+class Year2022Day01Solver extends Solver<String, String> {
   
   @override
   String getSolution(String input) {
