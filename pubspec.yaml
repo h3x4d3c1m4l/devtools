@@ -16,6 +16,7 @@ dependencies:
   # UI
   fluent_ui: 4.1.0
   cupertino_icons: ^1.0.2
+  intl: ^0.17.0
 
   # State management
   mobx: ^2.0.7+7
