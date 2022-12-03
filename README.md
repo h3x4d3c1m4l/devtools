@@ -1,16 +1,24 @@
-# aoc22
+# h3x4d3c1m4l's Coding Challenges Tool
 
-A new Flutter project.
+This is my [Flutter](https://flutter.dev/) project with solutions for problems from some coding challenges I have done.
 
-## Getting Started
+Additionally I'd like this project to serve as a sample and demo for GitHub Actions, GitHub Pages and Flutter Web.
 
-This project is a starting point for a Flutter application.
+When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c1m4l.github.io/AdventOfCode2022/
 
-A few resources to get you started if this is your first Flutter project:
+## This tool currently contains solutions for
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Advent of Code 2022](https://adventofcode.com/2022)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+
+### Done
+
+- [x] Auto deploy `main` branch to GitHub Pages
+- [x] Simple [Fluent UI](https://pub.dev/packages/fluent_ui) based interface
+
+### Planned
+
+- [ ] Run problem solver asynchronically
+- [ ] Track and show duration of solver run
+- [ ] Custom problem/solution views (currently it only works with string input/output)
