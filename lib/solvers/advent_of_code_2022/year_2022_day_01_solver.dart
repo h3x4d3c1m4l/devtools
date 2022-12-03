@@ -6,6 +6,7 @@ class Year2022Day01Solver extends Solver<String, String> {
   String getSolution(String input) {
     Iterable<String> splitInput = input.split('\n\n').where((elfCaloriesStr) => elfCaloriesStr.isNotEmpty);
 
+    // part 1
     int highestCalorieCount = 0;
     List<int> allElfCalories = [];
     for (String elfCaloriesStr in splitInput) {
@@ -19,9 +20,11 @@ class Year2022Day01Solver extends Solver<String, String> {
         highestCalorieCount = elfCalories;
       }
     }
-    allElfCalories.sort((a, b) => a < b ? 1 : -1);
 
+    // part 2
+    allElfCalories.sort((a, b) => a < b ? 1 : -1);
     int topThreeTotal = allElfCalories.take(3).reduce((value, element) => value + element);
+
     return 'Highest: $highestCalorieCount\nTop 3\'s total: $topThreeTotal';
   }
 
