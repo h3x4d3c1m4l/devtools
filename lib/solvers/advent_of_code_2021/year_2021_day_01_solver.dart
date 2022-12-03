@@ -4,37 +4,37 @@ class Year2021Day01Solver extends Solver<String, String> {
   
   @override
   String getSolution(String input) {
-    // TODO: implement getSolution
-    throw UnimplementedError();
+    List<int> measurements = input
+      .split('\n')
+      .where((rawMeasurement) => rawMeasurement.isNotEmpty)
+      .map((rawMeasurement) => int.parse(rawMeasurement))
+      .toList();
+
+    // part 1
+    int nLargerThanPrevious = 0;
+    int? previousValue;
+    for (int measurement in measurements) {
+      if (previousValue != null && measurement > previousValue) {
+        nLargerThanPrevious++;
+      }
+
+      previousValue = measurement;
+    }
+
+    // part 2
+    int nThreeMeasurementSlidingWindowLargerThanPrevious = 0;
+    int? previousThreeMeasurementSlidingWindowValue;
+    for (int i = 0; i < measurements.length - 2; i += 1) {
+      int total = measurements[i] + measurements[i + 1] + measurements[i + 2];
+
+      if (previousThreeMeasurementSlidingWindowValue != null && total > previousThreeMeasurementSlidingWindowValue) {
+        nThreeMeasurementSlidingWindowLargerThanPrevious++;
+      }
+
+      previousThreeMeasurementSlidingWindowValue = total;
+    }
+
+    return 'Measurements larger than the previous: $nLargerThanPrevious\nThree-measurement sliding window sums larger than the previous: $nThreeMeasurementSlidingWindowLargerThanPrevious';
   }
-
-  // @override
-  // Widget getInputWidget(ValueChanged<String> onInputValueChanged) {
-  //   return TextBox(
-  //     onChanged: onInputValueChanged,
-  //   );
-  // }
-
-  // @override
-  // Widget getOutputWidget(String inputValue) {
-  //   List<String> inputLines = inputValue.split('\r\n');
-
-  //   int nLargerThanPrevious = 0;
-  //   int? previousValue;
-  //   for (String line in inputLines) {
-  //     int currentValue = int.parse(line);
-
-  //     if (previousValue != null && currentValue > previousValue) {
-  //       nLargerThanPrevious++;
-  //     }
-
-  //     previousValue = currentValue;
-  //   }
-
-  //   return TextBox(
-  //     readOnly: true,
-  //     initialValue: nLargerThanPrevious.toString(),
-  //   );
-  // }
 
 }
