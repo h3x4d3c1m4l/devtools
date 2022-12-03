@@ -20,12 +20,19 @@ class ProblemSolverView extends StatefulWidget {
 class _ProblemSolverViewState extends State<ProblemSolverView> {
 
   dynamic _value;
-  dynamic _solution;
+  Future<dynamic>? _solutionFuture;
+  Duration? _solveDuration;
 
-  void _updateSolution() {
-    setState(() {
-      _solution = widget.solver.getSolution(_value);
-    });
+  void _solve() {
+    Stopwatch stopwatch = Stopwatch()..start();
+    try {
+      _solutionFuture = Future.value(widget.solver.getSolution(_value));
+    } catch (exception) {
+      _solutionFuture = Future.error(exception);
+    }
+    _solveDuration = stopwatch.elapsed;
+
+    setState(() {});
   }
 
   @override
@@ -37,46 +44,61 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // input
           Flexible(
             fit: FlexFit.tight,
-            child: TextBox(
-              initialValue: _value ?? '',
-              maxLines: null,
-              onChanged: (value) {
-                setState(() {
-                  _value = value;
-                });
-              },
-            ),
+            child: _inputWidget,
           ),
-
-          // separator
           const SizedBox(height: 32),
-          _getDivider(),
+          _dividerWidget,
           const SizedBox(height: 32),
-
-          // output
           Flexible(
             fit: FlexFit.tight,
-            child: Center(
-              child: Text(_solution ?? ''),
-            ),
+            child: _outputWidget,
           ),
         ],
       ),
+      bottomBar: _bottomBarWidget,
     );
   }
 
-  Widget _getDivider() {
+  Widget get _bottomBarWidget {
+    return FutureBuilder(
+      future: _solutionFuture,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          // success
+          return _getInfoBar(InfoBarSeverity.success, "Success", "Solving succeeded after $_solveDuration");
+        } else if (snapshot.hasError) {
+          // exception
+          return _getInfoBar(InfoBarSeverity.error, "Error", "Solving failed after $_solveDuration");
+        } else {
+          // not started yet
+          return const SizedBox();
+        }
+      },
+    );
+  }
+
+    Widget _getInfoBar(InfoBarSeverity severity, String title, String content) {
+      return SizedBox(
+        width: double.infinity,
+        child: InfoBar(
+          title: Text(title),
+          severity: severity,
+          content: Text(content),
+        ),
+      );
+    }
+
+  Widget get _dividerWidget {
     return Row(
       children: [
         const Flexible(
           fit: FlexFit.tight,
           child: Divider(),
         ),
-        Button(
-          onPressed: _updateSolution,
+        FilledButton(
+          onPressed: _solve,
           child: const Text('Solve'),
         ),
         const Flexible(
@@ -84,6 +106,47 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
           child: Divider(),
         ),
       ],
+    );
+  }
+
+  Widget get _inputWidget {
+    return TextBox(
+      initialValue: _value ?? '',
+      maxLines: null,
+      onChanged: (value) {
+        setState(() {
+          _value = value;
+        });
+      },
+    );
+  }
+
+  Widget get _outputWidget {
+    return FutureBuilder(
+      future: _solutionFuture,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          // success
+          return Center(
+            child: Text(snapshot.data ?? ''),
+          );
+        } else if (snapshot.hasError) {
+          // exception
+          return Center(
+            child: Text("Error: ${snapshot.error}"),
+          );
+        } else if (_solutionFuture != null) {
+          // solving
+          return const Center(
+            child: ProgressRing(),
+          );
+        } else {
+          // not started yet
+          return const Center(
+            child: Text('Click Solve to run this solver'),
+          );
+        }
+      },
     );
   }
 
