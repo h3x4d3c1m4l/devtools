@@ -1,5 +1,4 @@
 import 'package:aoc22/solvers/solver.dart';
-import 'package:fluent_ui/fluent_ui.dart';
 
 class Year2021Day01Solver extends Solver<String, String> {
   
