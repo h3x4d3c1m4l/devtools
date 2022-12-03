@@ -16,10 +16,12 @@ When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c
 
 - [x] Auto deploy `main` branch to GitHub Pages
 - [x] Simple [Fluent UI](https://pub.dev/packages/fluent_ui) based interface
+- [X] Track and show duration of solver run
+- [X] Error handling
 
 ### Planned
 
 - [ ] Run problem solver asynchronically
-- [ ] Track and show duration of solver run
 - [ ] Custom problem/solution views (currently it only works with string input/output)
-- [ ] Error handling
+- [ ] Link to problem web page
+- [ ] Show solver code

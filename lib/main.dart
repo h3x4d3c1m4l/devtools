@@ -52,25 +52,33 @@ class _MyAppState extends State<MyApp> {
           child: Text("Welcome!"),
         ),
       ),
-      PaneItemExpander(
-        icon: const Icon(FluentIcons.code),
-        title: const Text('Advent of Code 2021'),
-        body: const Center(child: Text("Choose a day from the sub menu")),
-        items: [
-          _getAdventOfCodePaneItem(2021, 01, Year2021Day01Solver()),
-        ],
-      ),
-      PaneItemExpander(
-        icon: const Icon(FluentIcons.code),
-        title: const Text('Advent of Code 2022'),
-        body: const Center(child: Text("Choose a day from the sub menu")),
-        items: [
-          _getAdventOfCodePaneItem(2022, 01, Year2022Day01Solver()),
-          _getAdventOfCodePaneItem(2022, 02, Year2022Day02Solver()),
-          _getAdventOfCodePaneItem(2022, 03, Year2022Day03Solver()),
-        ],
-      ),
+      _adventOfCode2021PaneItem,
+      _adventOfCode2022PaneItem,
     ];
+  }
+
+  PaneItemExpander get _adventOfCode2021PaneItem {
+    return PaneItemExpander(
+      icon: const Icon(FluentIcons.code),
+      title: const Text('Advent of Code 2021'),
+      body: const Center(child: Text("Choose a day from the sub menu")),
+      items: [
+        _getAdventOfCodePaneItem(2021, 01, Year2021Day01Solver()),
+      ],
+    );
+  }
+
+  PaneItemExpander get _adventOfCode2022PaneItem {
+    return PaneItemExpander(
+      icon: const Icon(FluentIcons.code),
+      title: const Text('Advent of Code 2022'),
+      body: const Center(child: Text("Choose a day from the sub menu")),
+      items: [
+        _getAdventOfCodePaneItem(2022, 01, Year2022Day01Solver()),
+        _getAdventOfCodePaneItem(2022, 02, Year2022Day02Solver()),
+        _getAdventOfCodePaneItem(2022, 03, Year2022Day03Solver()),
+      ],
+    );
   }
 
   PaneItem _getAdventOfCodePaneItem(int year, int day, Solver solver) {
