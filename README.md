@@ -22,3 +22,4 @@ When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c
 - [ ] Run problem solver asynchronically
 - [ ] Track and show duration of solver run
 - [ ] Custom problem/solution views (currently it only works with string input/output)
+- [ ] Error handling
