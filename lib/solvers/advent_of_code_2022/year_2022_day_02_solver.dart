@@ -4,7 +4,7 @@ class Year2022Day02Solver extends Solver<String, String> {
   
   @override
   String getSolution(String input) {
-    Iterable<String> intructions = input.split('\n');
+    List<String> intructions = input.split('\n').where((instruction) => instruction.isNotEmpty).toList();
 
     // part 1
     int totalAssumedStrategyGuidePoints = 0;
@@ -13,7 +13,7 @@ class Year2022Day02Solver extends Solver<String, String> {
       totalAssumedStrategyGuidePoints += _getAssumedPoints(instructionArguments[0], instructionArguments[1]);
     }
 
-    // part two
+    // part 2
     int totalActualStrategyGuidePoints = 0;
     for (String instruction in intructions) {
       List<String> instructionArguments = instruction.split(' ');

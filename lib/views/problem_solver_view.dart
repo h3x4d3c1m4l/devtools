@@ -46,7 +46,6 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
               onChanged: (value) {
                 setState(() {
                   _value = value;
-                  _updateSolution();
                 });
               },
             ),
@@ -60,9 +59,8 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
           // output
           Flexible(
             fit: FlexFit.tight,
-            child: TextBox(
-              initialValue: _solution ?? '',
-              readOnly: true,
+            child: Center(
+              child: Text(_solution ?? ''),
             ),
           ),
         ],
@@ -77,7 +75,10 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
           fit: FlexFit.tight,
           child: Divider(),
         ),
-        Button(child: const Text('test'), onPressed: () => {}),
+        Button(
+          onPressed: _updateSolution,
+          child: const Text('Solve'),
+        ),
         const Flexible(
           fit: FlexFit.tight,
           child: Divider(),
