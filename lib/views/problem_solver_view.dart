@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:aoc22/solvers/solver.dart';
+import 'package:aoc22/views/code_viewer.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 
 class ProblemSolverView extends StatefulWidget {
 
@@ -40,6 +45,14 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
     return ScaffoldPage.withPadding(
       header: PageHeader(
         title: Text(widget.title),
+        commandBar: Column(
+          children: [
+            Tooltip(
+              message: "Show solver's Dart code",
+              child: IconButton(icon: const Icon(FluentIcons.code), onPressed: () => _showCode(context)),
+            ),
+          ],
+        ),
       ),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,6 +160,43 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
           );
         }
       },
+    );
+  }
+
+  void _showCode(BuildContext context) async {
+    // load list of assets
+    final manifestContent = await rootBundle.loadString('AssetManifest.json');
+    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+
+    // find and read the code file asset
+    String solverCodeFilename = widget.solver.dartCodeFilename;
+    String solverCodeAssetPath = manifestMap.entries.where((entry) => entry.key.contains(solverCodeFilename)).single.value.first;
+    String code = await rootBundle.loadString(solverCodeAssetPath);
+
+    if (mounted) {
+      _openCodeDialog(context, code);
+    }
+  }
+
+  void _openCodeDialog(BuildContext context, String code) async {
+    await showDialog<String>(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) => ContentDialog(
+        constraints: const BoxConstraints.expand(),
+        title: Text('Code - ${widget.title}'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Close"),
+          ),
+        ],
+        content: CodeViewer(
+          code: code,	// Code text
+          syntaxTheme: SyntaxTheme.vscodeLight(),	// Theme
+          fontSize: 14.0,	// Font size
+        ),
+      ),
     );
   }
 

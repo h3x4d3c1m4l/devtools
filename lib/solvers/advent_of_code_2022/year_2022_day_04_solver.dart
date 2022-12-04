@@ -2,6 +2,9 @@ import 'package:aoc22/solvers/solver.dart';
 import 'package:tuple/tuple.dart';
 
 class Year2022Day04Solver extends Solver<String, String> {
+
+  @override
+  String get dartCodeFilename => 'year_2022_day_04_solver.dart';
   
   @override
   String getSolution(String input) {

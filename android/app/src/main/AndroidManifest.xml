@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.h3x4d3c1m4l.aoc22">
-   <application
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
         android:label="aoc22"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
