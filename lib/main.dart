@@ -36,7 +36,6 @@ class _MyAppState extends State<MyApp> {
         pane: NavigationPane(
           selected: topIndex,
           onChanged: (index) => setState(() => topIndex = index),
-          displayMode: PaneDisplayMode.open,
           items: _getPaneItems(),
         ),
       ),
