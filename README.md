@@ -25,3 +25,4 @@ When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c
 - [ ] Run problem solver asynchronically
 - [ ] Custom problem/solution views (currently it only works with string input/output)
 - [ ] Link to problem web page
+- [ ] Dark mode (auto switch based on OS/browser settings and toggleable)
