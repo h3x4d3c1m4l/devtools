@@ -18,10 +18,11 @@ When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c
 - [x] Simple [Fluent UI](https://pub.dev/packages/fluent_ui) based interface
 - [X] Track and show duration of solver run
 - [X] Error handling
+- [X] Show solver code
 
 ### Planned
 
 - [ ] Run problem solver asynchronically
 - [ ] Custom problem/solution views (currently it only works with string input/output)
 - [ ] Link to problem web page
-- [ ] Show solver code
+- [ ] Dark mode (auto switch based on OS/browser settings and toggleable)

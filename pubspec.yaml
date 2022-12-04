@@ -17,6 +17,10 @@ dependencies:
   fluent_ui: 4.1.0
   cupertino_icons: ^1.0.2
   intl: ^0.17.0
+  google_fonts: ^3.0.1
+  flutter_syntax_view: 
+    git:
+      url: https://github.com/YehudaKremer/flutter_syntax_view.git
 
   # State management
   mobx: ^2.0.7+7
@@ -24,6 +28,9 @@ dependencies:
 
   # Tuples
   tuple: ^2.0.1
+
+  # HTTP client
+  http: ^0.13.5
 
 dev_dependencies:
   # Flutter framework
@@ -42,3 +49,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+  - lib/solvers/advent_of_code_2021/
+  - lib/solvers/advent_of_code_2022/
+

@@ -1,6 +1,9 @@
 import 'package:aoc22/solvers/solver.dart';
 
 class Year2022Day03Solver extends Solver<String, String> {
+
+  @override
+  String get dartCodeFilename => 'year_2022_day_03_solver.dart';
   
   @override
   String getSolution(String input) {
