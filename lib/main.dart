@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
     return PaneItem(
       icon: const Icon(FluentIcons.issue_solid),
       title: Text('Day $dayString'),
-body: ProblemSolverView(title: "AoC $year - Day $dayString", solver: solver),
+      body: ProblemSolverView(title: "AoC $year - Day $dayString", solver: solver),
     );
   }
 

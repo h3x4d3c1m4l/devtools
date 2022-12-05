@@ -10,20 +10,20 @@ class Year2022Day02Solver extends Solver<String, String> {
     List<String> intructions = input.split('\n').where((instruction) => instruction.isNotEmpty).toList();
 
     // part 1
-    int nAssumedStrategyGuidePoints = 0;
+    int totalAssumedStrategyGuidePoints = 0;
     for (String instruction in intructions) {
       List<String> instructionArguments = instruction.split(' ');
-      nAssumedStrategyGuidePoints += _getAssumedPoints(instructionArguments[0], instructionArguments[1]);
+      totalAssumedStrategyGuidePoints += _getAssumedPoints(instructionArguments[0], instructionArguments[1]);
     }
 
     // part 2
-    int nActualStrategyGuidePoints = 0;
+    int totalActualStrategyGuidePoints = 0;
     for (String instruction in intructions) {
       List<String> instructionArguments = instruction.split(' ');
-      nActualStrategyGuidePoints += _getActualPoints(instructionArguments[0], instructionArguments[1]);
+      totalActualStrategyGuidePoints += _getActualPoints(instructionArguments[0], instructionArguments[1]);
     }
 
-    return 'Strategy guide assumed total score: $nAssumedStrategyGuidePoints\nStrategy guide actual total score: $nActualStrategyGuidePoints';
+    return 'Strategy guide assumed total score: $totalAssumedStrategyGuidePoints\nStrategy guide actual total score: $totalActualStrategyGuidePoints';
   }
 
   int _getAssumedPoints(String opponentChoice, String myChoice) {
