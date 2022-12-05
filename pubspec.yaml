@@ -32,6 +32,9 @@ dependencies:
   # HTTP client
   http: ^0.13.5
 
+  # Parsing
+  string_scanner: ^1.2.0
+
 dev_dependencies:
   # Flutter framework
   flutter_test:
