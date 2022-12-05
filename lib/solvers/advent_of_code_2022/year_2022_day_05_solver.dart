@@ -2,49 +2,42 @@ import 'dart:collection';
 
 import 'package:aoc22/solvers/solver.dart';
 import 'package:string_scanner/string_scanner.dart';
-import 'package:tuple/tuple.dart';
 
 class Year2022Day05Solver extends Solver<String, String> {
 
   @override
   String get dartCodeFilename => 'year_2022_day_05_solver.dart';
+
+  static final RegExp numberRegExp = RegExp(r'\d+');
   
   @override
   String getSolution(String input) {
     List<String> lines = input.split('\n').where((line) => line.isNotEmpty).toList(growable: false);
     List<ListQueue<String>> crateStacks;
-    List<Tuple3<int, int, int>> instructions = _parseInstructions(lines);
+    List<_MoveCrateInstruction> instructions = _parseInstructions(lines);
 
     // part 1
     crateStacks = _getInitialStacksFromInput(lines);
-    for (Tuple3<int, int, int> instruction in instructions) {
-      int nCrates = instruction.item1;
-      int fromCrateStack = instruction.item2;
-      int toCrateStack = instruction.item3;
-
+    for (_MoveCrateInstruction instruction in instructions) {
       // process crate move
-      for (int i = 0; i < nCrates; i++) {
-        String crate = crateStacks[fromCrateStack - 1].removeFirst();
-        crateStacks[toCrateStack - 1].addFirst(crate);
+      for (int i = 0; i < instruction.numberOfCrates; i++) {
+        String crate = crateStacks[instruction.sourceStack - 1].removeFirst();
+        crateStacks[instruction.destinationStack - 1].addFirst(crate);
       }
     }
     String part1TopCrates = crateStacks.map((crateStack) => crateStack.first).join();
 
     // part 2
     crateStacks = _getInitialStacksFromInput(lines);
-    for (Tuple3<int, int, int> instruction in instructions) {
-      int nCrates = instruction.item1;
-      int fromCrateStack = instruction.item2;
-      int toCrateStack = instruction.item3;
-
+    for (_MoveCrateInstruction instruction in instructions) {
       // process crate move
       List<String> crates = [];
-      for (int i = 0; i < nCrates; i++) {
-        String crate = crateStacks[fromCrateStack - 1].removeFirst();
+      for (int i = 0; i < instruction.numberOfCrates; i++) {
+        String crate = crateStacks[instruction.sourceStack - 1].removeFirst();
         crates.add(crate);
       }
-      for (int i = nCrates - 1; i >= 0; i--) {
-        crateStacks[toCrateStack - 1].addFirst(crates[i]); 
+      for (int i = instruction.numberOfCrates - 1; i >= 0; i--) {
+        crateStacks[instruction.destinationStack - 1].addFirst(crates[i]); 
       }
     }
     String part2TopCrates = crateStacks.map((crateStack) => crateStack.first).join();
@@ -52,8 +45,8 @@ class Year2022Day05Solver extends Solver<String, String> {
     return 'Part 1 top crates: $part1TopCrates\nPart 2 top crates: $part2TopCrates';
   }
 
-  List<Tuple3<int, int, int>> _parseInstructions(List<String> inputLines) {
-    List<Tuple3<int, int, int>> instructions = [];
+  List<_MoveCrateInstruction> _parseInstructions(List<String> inputLines) {
+    List<_MoveCrateInstruction> instructions = [];
 
     for (String inputLine in inputLines) {
       if (!inputLine.startsWith('move')) {
@@ -64,18 +57,18 @@ class Year2022Day05Solver extends Solver<String, String> {
       final scanner = StringScanner(inputLine);
 
       scanner.expect('move ');
-      scanner.expect(RegExp(r'\d+'));
+      scanner.expect(numberRegExp);
       int nCrates = int.parse(scanner.lastMatch![0]!);
 
       scanner.expect(' from ');
-      scanner.expect(RegExp(r'\d+'));
+      scanner.expect(numberRegExp);
       int fromCrateStack = int.parse(scanner.lastMatch![0]!);
 
       scanner.expect(' to ');
-      scanner.expect(RegExp(r'\d+'));
+      scanner.expect(numberRegExp);
       int toCrateStack = int.parse(scanner.lastMatch![0]!);
 
-      instructions.add(Tuple3(nCrates, fromCrateStack, toCrateStack));
+      instructions.add(_MoveCrateInstruction(nCrates, fromCrateStack, toCrateStack));
     }
 
     return instructions;
@@ -104,5 +97,15 @@ class Year2022Day05Solver extends Solver<String, String> {
 
     return crateStacks;
   }
+
+}
+
+class _MoveCrateInstruction {
+
+  final int numberOfCrates;
+  final int sourceStack;
+  final int destinationStack;
+
+  _MoveCrateInstruction(this.numberOfCrates, this.sourceStack, this.destinationStack);
 
 }

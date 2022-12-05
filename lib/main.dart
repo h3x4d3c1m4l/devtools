@@ -20,10 +20,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   static final NumberFormat _dayNumberFormat = NumberFormat('00');
-
-  int topIndex = 0;
-
-  // This widget is the root of your application.
+  int _topIndex = 0;
+  List<NavigationPaneItem>? _rootPainItems;
+  
   @override
   Widget build(BuildContext context) {
     return FluentApp(
@@ -34,8 +33,8 @@ class _MyAppState extends State<MyApp> {
           automaticallyImplyLeading: false,
         ),
         pane: NavigationPane(
-          selected: topIndex,
-          onChanged: (index) => setState(() => topIndex = index),
+          selected: _topIndex,
+          onChanged: (index) => setState(() => _topIndex = index),
           items: _getPaneItems(),
         ),
       ),
@@ -43,7 +42,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   List<NavigationPaneItem> _getPaneItems() {
-    return [
+    return _rootPainItems ??= [
       PaneItem(
         icon: const Icon(FluentIcons.home),
         title: const Text('Home'),
