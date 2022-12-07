@@ -1,10 +1,18 @@
 import 'package:aoc22/views/problem_solver_view.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import 'solvers/_all_solvers.dart';
 
 void main() {
+  // add OFL for Inconsolata font
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('google_fonts/OFL.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
+
   runApp(const MyApp());
 }
 
