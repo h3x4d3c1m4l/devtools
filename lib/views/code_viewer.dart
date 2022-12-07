@@ -2,22 +2,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CodeViewer extends SyntaxView {
 
-  CodeViewer({required super.code, super.syntaxTheme, super.fontSize});
+  final TextStyle? textStyle;
+
+  CodeViewer({required super.code, super.syntaxTheme, this.textStyle});
 
   @override
   State<StatefulWidget> createState() => SyntaxViewState();
 }
 
-class SyntaxViewState extends State<SyntaxView> {
+class SyntaxViewState extends State<CodeViewer> {
   @override
   Widget build(BuildContext context) {
     return SelectableText.rich(
       TextSpan(
-        style: GoogleFonts.firaCode(fontSize: widget.fontSize),
+        style: widget.textStyle ?? TextStyle(fontFamily: 'monospace', fontSize: widget.fontSize),
         children: <TextSpan>[getSyntax(widget.syntaxTheme).format(widget.code)],
       ),
     );
