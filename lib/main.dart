@@ -62,6 +62,7 @@ class _MyAppState extends State<MyApp> {
       body: const Center(child: Text("Choose a day from the sub menu")),
       items: [
         _getAdventOfCodePaneItem(2021, 01, Year2021Day01Solver()),
+        _getAdventOfCodePaneItem(2021, 02, Year2021Day02Solver()),
       ],
     );
   }

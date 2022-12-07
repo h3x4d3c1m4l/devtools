@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:aoc22/solvers/solver.dart';
 import 'package:aoc22/views/code_viewer.dart';
@@ -6,6 +7,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProblemSolverView extends StatefulWidget {
 
@@ -192,10 +194,18 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
             child: const Text("Close"),
           ),
         ],
-        content: CodeViewer(
-          code: code,	// Code text
-          syntaxTheme: SyntaxTheme.vscodeLight(),	// Theme
-          fontSize: 14.0,	// Font size
+        content: ConstrainedBox(
+          constraints: const BoxConstraints.expand(),
+          child: CodeViewer(
+            code: code,
+            syntaxTheme: SyntaxTheme.vscodeLight(),
+            textStyle: GoogleFonts.inconsolata(
+              fontSize: 16,
+              height: 1.20,
+              fontFeatures: [const FontFeature.enable('dlig')],
+              // ^ doesn't work but should... maybe Google Fonts package's Inconsolata is outdated?
+            ),
+          ),
         ),
       ),
     );
