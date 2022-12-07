@@ -35,6 +35,9 @@ dependencies:
   # Parsing
   string_scanner: ^1.1.1
 
+  # Data processing
+  darq: ^1.2.1
+
 dev_dependencies:
   # Flutter framework
   flutter_test:
@@ -55,4 +58,3 @@ flutter:
   assets:
   - lib/solvers/advent_of_code_2021/
   - lib/solvers/advent_of_code_2022/
-
