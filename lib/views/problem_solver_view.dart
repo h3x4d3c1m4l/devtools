@@ -198,7 +198,7 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
           constraints: const BoxConstraints.expand(),
           child: CodeViewer(
             code: code,
-            syntaxTheme: SyntaxTheme.vscodeLight(),
+            syntaxTheme: MediaQuery.platformBrightnessOf(context) == Brightness.light ? SyntaxTheme.vscodeLight() : SyntaxTheme.vscodeDark(),
             textStyle: GoogleFonts.inconsolata(
               fontSize: 16,
               height: 1.20,

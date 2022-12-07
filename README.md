@@ -27,3 +27,4 @@ When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c
 - [ ] Link to problem web page
 - [ ] Dark mode (auto switch based on OS/browser settings and toggleable)
 - [ ] License registry
+- [ ] Settings menu (pick light/dark theme, language maybe)
