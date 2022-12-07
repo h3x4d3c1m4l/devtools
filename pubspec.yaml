@@ -58,3 +58,4 @@ flutter:
   assets:
   - lib/solvers/advent_of_code_2021/
   - lib/solvers/advent_of_code_2022/
+  - assets/google_fonts/

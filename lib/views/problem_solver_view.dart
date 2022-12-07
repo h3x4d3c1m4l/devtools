@@ -203,7 +203,6 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
               fontSize: 16,
               height: 1.20,
               fontFeatures: [const FontFeature.enable('dlig')],
-              // ^ doesn't work but should... maybe Google Fonts package's Inconsolata is outdated?
             ),
           ),
         ),
