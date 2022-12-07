@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:aoc22/solvers/solver.dart';
 import 'package:aoc22/views/code_viewer.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 
@@ -141,12 +142,12 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
         if (snapshot.hasData) {
           // success
           return Center(
-            child: Text(snapshot.data ?? ''),
+            child: material.SelectionArea(child: Text(snapshot.data ?? '')),
           );
         } else if (snapshot.hasError) {
           // exception
           return Center(
-            child: Text("Error: ${snapshot.error}"),
+            child: material.SelectionArea(child: Text("Error: ${snapshot.error}")),
           );
         } else if (_solutionFuture != null) {
           // solving
