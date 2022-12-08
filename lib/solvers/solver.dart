@@ -1,6 +1,8 @@
 abstract class Solver<TInput, TOutput> {
 
-  String get dartCodeFilename;
+  String get problemUrl;
+
+  String get solverCodeFilename;
 
   TOutput getSolution(TInput input);
 

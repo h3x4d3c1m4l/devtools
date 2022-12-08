@@ -8,6 +8,7 @@ import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ProblemSolverView extends StatefulWidget {
 
@@ -48,11 +49,16 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
     return ScaffoldPage.withPadding(
       header: PageHeader(
         title: Text(widget.title),
-        commandBar: Column(
+        commandBar: Row(
           children: [
             Tooltip(
+              message: "Open problem web page",
+              child: IconButton(icon: const Icon(FluentIcons.globe, size: 16), onPressed: () => _openUrl()),
+            ),
+            const SizedBox(width: 8),
+            Tooltip(
               message: "Show solver's Dart code",
-              child: IconButton(icon: const Icon(FluentIcons.code), onPressed: () => _showCode(context)),
+              child: IconButton(icon: const Icon(FluentIcons.code, size: 16), onPressed: () => _showCode(context)),
             ),
           ],
         ),
@@ -172,7 +178,7 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
 
     // find and read the code file asset
-    String solverCodeFilename = widget.solver.dartCodeFilename;
+    String solverCodeFilename = widget.solver.solverCodeFilename;
     String solverCodeAssetPath = manifestMap.entries.where((entry) => entry.key.contains(solverCodeFilename)).single.value.first;
     String code = await rootBundle.loadString(solverCodeAssetPath);
 
@@ -180,6 +186,8 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
       _openCodeDialog(context, code);
     }
   }
+
+  void _openUrl() => launchUrlString(widget.solver.problemUrl);
 
   void _openCodeDialog(BuildContext context, String code) async {
     await showDialog<String>(
