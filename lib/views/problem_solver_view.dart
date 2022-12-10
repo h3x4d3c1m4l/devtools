@@ -49,16 +49,18 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
     return ScaffoldPage.withPadding(
       header: PageHeader(
         title: Text(widget.title),
-        commandBar: Row(
-          children: [
-            Tooltip(
-              message: "Open problem web page",
-              child: IconButton(icon: const Icon(FluentIcons.globe, size: 16), onPressed: () => _openUrl()),
+        commandBar: CommandBar(
+          mainAxisAlignment: MainAxisAlignment.end,
+          primaryItems: [
+            CommandBarButton(
+              icon: const Icon(FluentIcons.globe),
+              label: const Text("Open problem description"),
+              onPressed: () => _openUrl(),
             ),
-            const SizedBox(width: 8),
-            Tooltip(
-              message: "Show solver's Dart code",
-              child: IconButton(icon: const Icon(FluentIcons.code, size: 16), onPressed: () => _showCode(context)),
+            CommandBarButton(
+              icon: const Icon(FluentIcons.code),
+              label: const Text("View solver code"),
+              onPressed: () => _showCode(context),
             ),
           ],
         ),
