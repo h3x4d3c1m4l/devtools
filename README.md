@@ -20,11 +20,12 @@ When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c
 - [X] Error handling
 - [X] Show solver code
 - [X] Dark mode
+- [X] Link to problem web page
 
 ### Planned
 
 - [ ] Run problem solver asynchronically
 - [ ] Custom problem/solution views (currently there's only support for string input/output)
-- [ ] Link to problem web page
 - [ ] About screen (link to GitHub, show licences using license registry)
 - [ ] Settings menu (pick light/dark theme, language maybe)
+- [ ] Connect to API to retrieve inputs
