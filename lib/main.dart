@@ -92,6 +92,7 @@ class _MyAppState extends State<MyApp> {
         _getAdventOfCodePaneItem(2022, 08, Year2022Day08Solver()),
         _getAdventOfCodePaneItem(2022, 09, Year2022Day09Solver()),
         _getAdventOfCodePaneItem(2022, 10, Year2022Day10Solver()),
+        _getAdventOfCodePaneItem(2022, 13, Year2022Day13Solver()),
       ],
     );
   }
