@@ -28,8 +28,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Detect Flutter version
+      uses: kuhnroyal/flutter-fvm-config-action@v1
+
     - name: Setup Flutter
       uses: subosito/flutter-action@v1
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: ${{ env.FLUTTER_CHANNEL }}
     
     - name: Flutter version
       run: flutter --version

@@ -14,11 +14,11 @@ dependencies:
     sdk: flutter
 
   # UI
-  fluent_ui:
-    git: https://github.com/bdlukaa/fluent_ui.git
+  fluent_ui: ^4.2.0
   cupertino_icons: ^1.0.2
   intl: ^0.17.0
-  google_fonts: ^3.0.1
+  google_fonts: ^4.0.1
+  go_router: ^6.0.0
   flutter_syntax_view: 
     git:
       url: https://github.com/YehudaKremer/flutter_syntax_view.git
@@ -63,6 +63,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  - lib/solvers/advent_of_code_2021/
-  - lib/solvers/advent_of_code_2022/
+  - lib/solvers/advent_of_code/2021/
+  - lib/solvers/advent_of_code/2022/
   - assets/google_fonts/
