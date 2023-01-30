@@ -1,7 +1,7 @@
-name: aoc22
-description: A new Flutter project.
+name: h3x_devtools
+description: h3x4d3c1m4l's Personal Dev Tools
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -39,7 +39,7 @@ dependencies:
   sealed_unions: ^3.0.3+1
 
   # Collections and querying
-  fast_immutable_collections: ^8.1.0
+  fast_immutable_collections: ^8.2.0
   darq: ^1.2.1
 
   # URL launching

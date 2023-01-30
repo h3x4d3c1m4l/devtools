@@ -1,13 +1,14 @@
-# h3x4d3c1m4l's Coding Challenges Tool
+# h3x4d3c1m4l's Personal Dev Tools
 
-This is my [Flutter](https://flutter.dev/) project with solutions for problems from some coding challenges I have done.
+This is my [Flutter](https://flutter.dev/) project that started as coding challenge (like AoC) solutions tool, but now also serves as personal dev tool for experimental stuff.
 
 Additionally I'd like this project to serve as a sample and demo for GitHub Actions, GitHub Pages and Flutter Web.
 
-When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c1m4l.github.io/AdventOfCode2022/
+When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c1m4l.github.io/devtools/
 
-## This tool currently contains solutions for
+## This tool currently contains (some) solutions for
 
+- [Advent of Code 2021](https://adventofcode.com/2021)
 - [Advent of Code 2022](https://adventofcode.com/2022)
 
 ## Features
@@ -29,3 +30,4 @@ When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c
 - [ ] About screen (link to GitHub, show licences using license registry)
 - [ ] Settings menu (pick light/dark theme, language maybe)
 - [ ] Connect to API to retrieve inputs
+- [ ] Improve solver code viewer
