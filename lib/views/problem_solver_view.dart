@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:aoc22/solvers/solver.dart';
-import 'package:aoc22/views/code_viewer.dart';
+import 'package:h3x_devtools/solvers/solver.dart';
+import 'package:h3x_devtools/views/code_viewer.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';

@@ -1,12 +1,12 @@
-import 'package:aoc22/solvers/solver.dart';
-import 'package:aoc22/views/problem_solver_view.dart';
+import 'package:h3x_devtools/solvers/solver.dart';
+import 'package:h3x_devtools/views/problem_solver_view.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-import 'package:aoc22/solvers/advent_of_code/2021/_all_solvers.dart' as aoc2021;
-import 'package:aoc22/solvers/advent_of_code/2022/_all_solvers.dart' as aoc2022;
+import 'package:h3x_devtools/solvers/advent_of_code/2021/_all_solvers.dart' as aoc2021;
+import 'package:h3x_devtools/solvers/advent_of_code/2022/_all_solvers.dart' as aoc2022;
 
 void main() {
   // add OFL for Inconsolata font
