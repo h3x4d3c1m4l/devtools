@@ -1,4 +1,4 @@
-import 'package:aoc22/solvers/solver.dart';
+import 'package:h3x_devtools/solvers/solver.dart';
 
 class Day06Solver extends Solver<String, String> {
 

@@ -1,7 +1,7 @@
 import 'dart:core';
 import 'dart:math';
 
-import 'package:aoc22/solvers/solver.dart';
+import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:darq/darq.dart' hide Tuple2;
 import 'package:petitparser/petitparser.dart';
 import 'package:tuple/tuple.dart';

@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.h3x4d3c1m4l" "\0"
-            VALUE "FileDescription", "aoc22" "\0"
+            VALUE "CompanyName", "com.example" "\0"
+            VALUE "FileDescription", "devtools" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "aoc22" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.h3x4d3c1m4l. All rights reserved." "\0"
-            VALUE "OriginalFilename", "aoc22.exe" "\0"
-            VALUE "ProductName", "aoc22" "\0"
+            VALUE "InternalName", "devtools" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
+            VALUE "OriginalFilename", "devtools.exe" "\0"
+            VALUE "ProductName", "devtools" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

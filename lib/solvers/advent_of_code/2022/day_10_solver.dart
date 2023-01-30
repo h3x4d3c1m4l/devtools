@@ -1,6 +1,6 @@
 import 'dart:core';
 
-import 'package:aoc22/solvers/solver.dart';
+import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:tuple/tuple.dart';
 
 class Day10Solver extends Solver<String, String> {

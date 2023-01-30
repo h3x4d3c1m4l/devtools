@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:aoc22/solvers/solver.dart';
+import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:string_scanner/string_scanner.dart';
 
 class Day05Solver extends Solver<String, String> {
