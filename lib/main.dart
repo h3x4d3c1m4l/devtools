@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return FluentApp(
       title: 'Coding Challenges Tool',
-      darkTheme: ThemeData.dark(),
+      darkTheme: FluentThemeData.dark(),
       home: NavigationView(
         appBar: const NavigationAppBar(
           title: Text('h3x4d3c1m4l\'s Coding Challenges Tool'),
