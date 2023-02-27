@@ -28,14 +28,21 @@ class ProblemSolverView extends StatefulWidget {
 
 class _ProblemSolverViewState extends State<ProblemSolverView> {
 
-  dynamic _value;
   Future<dynamic>? _solutionFuture;
   Duration? _solveDuration;
+  late TextEditingController _inputController;
+
+  @override
+  void initState() {
+    _inputController = TextEditingController();
+    super.initState();
+  }
 
   void _solve() {
     Stopwatch stopwatch = Stopwatch()..start();
     try {
-      _solutionFuture = Future.value(widget.solver.getSolution(_value));
+      String input = _inputController.text;
+      _solutionFuture = Future.value(widget.solver.getSolution(input));
     } catch (exception) {
       _solutionFuture = Future.error(exception);
     }
@@ -135,13 +142,8 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
 
   Widget get _inputWidget {
     return TextBox(
-      initialValue: _value ?? '',
+      controller: _inputController,
       maxLines: null,
-      onChanged: (value) {
-        setState(() {
-          _value = value;
-        });
-      },
     );
   }
 
@@ -218,6 +220,12 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _inputController.dispose();
+    super.dispose();
   }
 
 }
