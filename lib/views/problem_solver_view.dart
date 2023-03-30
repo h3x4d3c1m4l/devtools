@@ -28,6 +28,8 @@ class ProblemSolverView extends StatefulWidget {
 
 class _ProblemSolverViewState extends State<ProblemSolverView> {
 
+  final TextEditingController _inputEditingController = TextEditingController();
+
   dynamic _value;
   Future<dynamic>? _solutionFuture;
   Duration? _solveDuration;
@@ -135,7 +137,7 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
 
   Widget get _inputWidget {
     return TextBox(
-      initialValue: _value ?? '',
+      controller: _inputEditingController,
       maxLines: null,
       onChanged: (value) {
         setState(() {
@@ -218,6 +220,12 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _inputEditingController.dispose();
   }
 
 }
