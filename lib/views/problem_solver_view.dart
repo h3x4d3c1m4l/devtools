@@ -30,21 +30,13 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
 
   final TextEditingController _inputEditingController = TextEditingController();
 
-  dynamic _value;
   Future<dynamic>? _solutionFuture;
   Duration? _solveDuration;
-  late TextEditingController _inputController;
-
-  @override
-  void initState() {
-    _inputController = TextEditingController();
-    super.initState();
-  }
 
   void _solve() {
     Stopwatch stopwatch = Stopwatch()..start();
     try {
-      String input = _inputController.text;
+      String input = _inputEditingController.text;
       _solutionFuture = Future.value(widget.solver.getSolution(input));
     } catch (exception) {
       _solutionFuture = Future.error(exception);
