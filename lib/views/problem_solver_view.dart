@@ -30,14 +30,14 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
 
   final TextEditingController _inputEditingController = TextEditingController();
 
-  dynamic _value;
   Future<dynamic>? _solutionFuture;
   Duration? _solveDuration;
 
   void _solve() {
     Stopwatch stopwatch = Stopwatch()..start();
     try {
-      _solutionFuture = Future.value(widget.solver.getSolution(_value));
+      String input = _inputEditingController.text;
+      _solutionFuture = Future.value(widget.solver.getSolution(input));
     } catch (exception) {
       _solutionFuture = Future.error(exception);
     }
@@ -139,11 +139,6 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
     return TextBox(
       controller: _inputEditingController,
       maxLines: null,
-      onChanged: (value) {
-        setState(() {
-          _value = value;
-        });
-      },
     );
   }
 
@@ -201,7 +196,7 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
         constraints: const BoxConstraints.expand(),
         title: Text('Code - ${widget.title}'),
         actions: [
-          TextButton(
+          HyperlinkButton(
             onPressed: () => Navigator.pop(context),
             child: const Text("Close"),
           ),
