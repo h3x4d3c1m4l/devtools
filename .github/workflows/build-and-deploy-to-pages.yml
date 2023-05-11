@@ -32,10 +32,12 @@ jobs:
       uses: kuhnroyal/flutter-fvm-config-action@v1
 
     - name: Setup Flutter
-      uses: subosito/flutter-action@v1
+      uses: hrishikesh-kadam/setup-flutter@v1
       with:
-        flutter-version: ${{ env.FLUTTER_VERSION }}
-        channel: ${{ env.FLUTTER_CHANNEL }}
+        ref: ${{ env.FLUTTER_VERSION }}
+        setFlutterRootPath: 'true'
+        addPubCacheBinToPath: 'true'
+        flutterPrecache: '--linux'
     
     - name: Flutter version
       run: flutter --version

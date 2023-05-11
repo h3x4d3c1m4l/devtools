@@ -201,7 +201,7 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
         constraints: const BoxConstraints.expand(),
         title: Text('Code - ${widget.title}'),
         actions: [
-          TextButton(
+          HyperlinkButton(
             onPressed: () => Navigator.pop(context),
             child: const Text("Close"),
           ),
