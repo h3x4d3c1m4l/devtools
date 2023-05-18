@@ -52,10 +52,10 @@ dev_dependencies:
 
   # Code quality
   flutter_lints: ^2.0.0
-  dart_code_metrics: ^5.7.3
+  dart_code_metrics: ^5.7.4
 
   # Code generation
-  build_runner: ^2.4.2
+  build_runner: ^2.4.4
 
   # State management
   mobx_codegen: ^2.3.0
