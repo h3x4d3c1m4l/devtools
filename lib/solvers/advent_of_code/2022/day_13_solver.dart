@@ -2,11 +2,10 @@ import 'dart:core';
 import 'dart:math';
 
 import 'package:h3x_devtools/solvers/solver.dart';
-import 'package:darq/darq.dart' hide Tuple2;
+import 'package:darq/darq.dart';
 import 'package:petitparser/petitparser.dart';
-import 'package:tuple/tuple.dart';
 
-typedef PacketPair = Tuple2<List, List>;
+typedef PacketPair = (List, List);
 
 class Day13Solver extends Solver<String, String> {
 
@@ -25,14 +24,14 @@ class Day13Solver extends Solver<String, String> {
     int sumOfIndices = 0;
     for (int i = 0; i < pairs.length; i++) {
       PacketPair pair = pairs[i];
-      if (_testOrder(pair.item1, pair.item2) == true) {
+      if (_testOrder(pair.$1, pair.$2) == true) {
         sumOfIndices += i + 1;
       }
     }
   
     // part 2
     List allPacketsInOrder = [
-      ...pairs.map((pairTuple) => pairTuple.toList()).toList().flatten(),
+      ...pairs.map((pairTuple) => [pairTuple.$1, pairTuple.$2]).toList().flatten(),
       [[2]],
       [[6]],
     ]..sort((a, b) {
@@ -98,7 +97,7 @@ class Day13Solver extends Solver<String, String> {
 
     // packets
     final Parser<PacketPair> pairOfPackets =
-        (array & string('\n') & array).map((rawParsed) => PacketPair(rawParsed[0], rawParsed[2]));
+        (array & string('\n') & array).map((rawParsed) => (rawParsed[0], rawParsed[2]));
     final Parser<List<PacketPair>> pairsOfPackets = (pairOfPackets & (string('\n\n') | endOfInput()))
         .star()
         .map((rawParsedPairs) => rawParsedPairs.map((rawParsedPair) => rawParsedPair[0] as PacketPair).toList())

@@ -1,7 +1,6 @@
 import 'dart:core';
 
 import 'package:h3x_devtools/solvers/solver.dart';
-import 'package:tuple/tuple.dart';
 
 class Day10Solver extends Solver<String, String> {
 
@@ -13,25 +12,25 @@ class Day10Solver extends Solver<String, String> {
   
   @override
   String getSolution(String input) {
-    List<Tuple2<String, int?>> cpuInstructions = input
+    List<(String, int?)> cpuInstructions = input
         .split('\n')
         .where((line) => line.isNotEmpty)
         .map((rawInstructionLine) => rawInstructionLine.split(' '))
-        .map((rawInstruction) => Tuple2(rawInstruction[0], rawInstruction.length == 2 ? int.parse(rawInstruction[1]) : null))
+        .map((rawInstruction) => (rawInstruction[0], rawInstruction.length == 2 ? int.parse(rawInstruction[1]) : null))
         .toList(growable: false);
     
     // part 1
     int cycle = 0;
     int signalStrengthSum = 0;
     int xRegisterValue = 1;
-    for (Tuple2<String, int?> instruction in cpuInstructions) {
+    for (var (String instruction, int? count) in cpuInstructions) {
       cycle++;
       signalStrengthSum += getSignalStrengthSumForCycle(cycle, xRegisterValue);
       
-      if (instruction.item1 == 'addx') {
+      if (instruction == 'addx') {
         cycle++;
         signalStrengthSum += getSignalStrengthSumForCycle(cycle, xRegisterValue);
-        xRegisterValue += instruction.item2!;
+        xRegisterValue += count!;
       }
 
       if (cycle > 220) {
@@ -44,14 +43,14 @@ class Day10Solver extends Solver<String, String> {
     xRegisterValue = 1;
     List<String> pixelLines = List.filled(6, '........................................');
     updateCrtDisplay(pixelLines, cycle, xRegisterValue);
-    for (Tuple2<String, int?> instruction in cpuInstructions) {
+    for (var (String instruction, int? count) in cpuInstructions) {
       cycle++;
       
       updateCrtDisplay(pixelLines, cycle, xRegisterValue);
       
-      if (instruction.item1 == 'addx') {
+      if (instruction == 'addx') {
         cycle++;
-        xRegisterValue += instruction.item2!;
+        xRegisterValue += count!;
         updateCrtDisplay(pixelLines, cycle, xRegisterValue);
       }
 

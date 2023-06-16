@@ -14,11 +14,11 @@ dependencies:
     sdk: flutter
 
   # UI
-  fluent_ui: 4.6.1
+  fluent_ui: 4.6.2
   cupertino_icons: 1.0.5
   intl: 0.18.0
   google_fonts: 4.0.4
-  go_router: 7.1.1
+  go_router: 8.0.5
   flutter_syntax_view: 
     git:
       url: https://github.com/YehudaKremer/flutter_syntax_view.git
@@ -26,9 +26,6 @@ dependencies:
   # State management
   mobx: 2.2.0
   flutter_mobx: 2.0.6+5
-
-  # Tuples
-  tuple: 2.0.1
 
   # HTTP client
   http: 0.13.6
@@ -39,7 +36,7 @@ dependencies:
   sealed_unions: 3.0.3+1
 
   # Collections and querying
-  fast_immutable_collections: 9.1.1
+  fast_immutable_collections: 9.1.5
   darq: 2.0.0
 
   # URL launching
@@ -52,10 +49,10 @@ dev_dependencies:
 
   # Code quality
   flutter_lints: 2.0.1
-  dart_code_metrics: 5.7.4
+  dart_code_metrics: 5.7.5
 
   # Code generation
-  build_runner: 2.4.4
+  build_runner: 2.4.5
 
   # State management
   mobx_codegen: 2.3.0

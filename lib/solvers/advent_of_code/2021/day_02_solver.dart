@@ -1,5 +1,4 @@
 import 'package:h3x_devtools/solvers/solver.dart';
-import 'package:tuple/tuple.dart';
 
 class Day02Solver extends Solver<String, String> {
 
@@ -11,27 +10,24 @@ class Day02Solver extends Solver<String, String> {
   
   @override
   String getSolution(String input) {
-    List<Tuple2<String, int>> instructions = input
+    List<(String instruction, int count)> instructions = input
       .split('\n')
       .where((rawMeasurement) => rawMeasurement.isNotEmpty)
       .map((rawInstruction) => rawInstruction.split(' '))
-      .map((splittedInstruction) => Tuple2(splittedInstruction[0], int.parse(splittedInstruction[1])))
+      .map((splittedInstruction) => (splittedInstruction[0], int.parse(splittedInstruction[1])))
       .toList();
 
     // part 1
     int horizontalPosition = 0, depth = 0;
-    for (Tuple2<String, int> instruction in instructions) {
-      switch (instruction.item1) {
+    for (var (String instruction, int count) in instructions) {
+      switch (instruction) {
         
         case 'forward':
-          horizontalPosition += instruction.item2;
-          break;
+          horizontalPosition += count;
         case 'down':
-          depth += instruction.item2;
-          break;
+          depth += count;
         case 'up':
-          depth -= instruction.item2;
-          break;
+          depth -= count;
 
       }
     }
@@ -41,19 +37,16 @@ class Day02Solver extends Solver<String, String> {
     int aim = 0;
     horizontalPosition = 0;
     depth = 0;
-    for (Tuple2<String, int> instruction in instructions) {
-      switch (instruction.item1) {
+    for (var (String instruction, int count) in instructions) {
+      switch (instruction) {
         
         case 'forward':
-          horizontalPosition += instruction.item2;
-          depth += aim * instruction.item2;
-          break;
+          horizontalPosition += count;
+          depth += aim * count;
         case 'down':
-          aim += instruction.item2;
-          break;
+          aim += count;
         case 'up':
-          aim -= instruction.item2;
-          break;
+          aim -= count;
 
       }
     }

@@ -1,5 +1,4 @@
 import 'package:h3x_devtools/solvers/solver.dart';
-import 'package:tuple/tuple.dart';
 
 class Day04Solver extends Solver<String, String> {
 
@@ -11,19 +10,21 @@ class Day04Solver extends Solver<String, String> {
   
   @override
   String getSolution(String input) {
-    List<Tuple2<String, String>> rawAssignmentPairs = input
+    List<(String rawAssignment1, String rawAssignment2)> rawAssignmentPairs = input
         .split('\n')
         .where((rawAssignmentPair) => rawAssignmentPair.isNotEmpty)
-        .map((rawAssignmentPair) => Tuple2<String, String>.fromList(rawAssignmentPair.split(',')))
-        .toList();
+        .map((rawAssignmentPair) {
+          List<String> rawAssignments = rawAssignmentPair.split(',');
+          return (rawAssignments[0], rawAssignments[1]);
+        }).toList();
 
     // part 1
     int nAssignmentPairsFullOverlap = 0;
-    for (Tuple2<String, String> rawAssignmentpair in rawAssignmentPairs) {
+    for (var (String rawAssignment1, String rawAssignment2) in rawAssignmentPairs) {
       List<int> assignment1 =
-          rawAssignmentpair.item1.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
+          rawAssignment1.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
       List<int> assignment2 =
-          rawAssignmentpair.item2.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
+          rawAssignment2.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
 
       if ((assignment1[0] >= assignment2[0] && assignment1[1] <= assignment2[1]) ||
           (assignment2[0] >= assignment1[0] && assignment2[1] <= assignment1[1])) {
@@ -33,11 +34,11 @@ class Day04Solver extends Solver<String, String> {
 
     // part 2
     int nAssignmentPairsPartialOverlap = 0;
-    for (Tuple2<String, String> rawAssignmentPair in rawAssignmentPairs) {
+    for (var (String rawAssignment1, String rawAssignment2) in rawAssignmentPairs) {
       List<int> assignment1 =
-          rawAssignmentPair.item1.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
+          rawAssignment1.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
       List<int> assignment2 =
-          rawAssignmentPair.item2.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
+          rawAssignment2.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
 
       if ((assignment1[0] >= assignment2[0] && assignment1[0] <= assignment2[1]) ||
           (assignment1[1] >= assignment2[0] && assignment1[1] <= assignment2[1]) ||
