@@ -1,8 +1,8 @@
 import 'dart:core';
 import 'dart:math';
 
-import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:darq/darq.dart';
+import 'package:h3x_devtools/solvers/solver.dart';
 
 class Day14Solver extends Solver<String, String> {
 
@@ -67,7 +67,7 @@ class Day14Solver extends Solver<String, String> {
         } else if (point.y == lastPoint.y) {
           grid[point.y].fillRange(min(gridPointX, gridLastPointX), max(gridPointX + 1, gridLastPointX + 1), _Tile.rock);
         } else {
-          throw 'Points $point and $lastPoint expected to form a straight line';
+          throw Exception('Points $point and $lastPoint expected to form a straight line');
         }
 
         lastPoint = point;

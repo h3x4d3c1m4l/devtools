@@ -1,13 +1,14 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:h3x_devtools/solvers/solver.dart';
-import 'package:h3x_devtools/views/code_viewer.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:h3x_devtools/solvers/solver.dart';
+import 'package:h3x_devtools/views/code_viewer.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class ProblemSolverView extends StatefulWidget {
@@ -57,12 +58,12 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
             CommandBarButton(
               icon: const Icon(FluentIcons.globe),
               label: const Text("Open problem description"),
-              onPressed: () => _openUrl(),
+              onPressed: _openUrl,
             ),
             CommandBarButton(
               icon: const Icon(FluentIcons.code),
               label: const Text("View solver code"),
-              onPressed: () => _showCode(context),
+              onPressed: () => unawaited(_showCode(context)),
             ),
           ],
         ),
@@ -171,24 +172,26 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
     );
   }
 
-  void _showCode(BuildContext context) async {
+  Future<void> _showCode(BuildContext context) async {
     // load list of assets
     final manifestContent = await rootBundle.loadString('AssetManifest.json');
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
 
     // find and read the code file asset
     String solverCodeFilename = widget.solver.solverCodeFilename;
+
+    // ignore: avoid_dynamic_calls
     String solverCodeAssetPath = manifestMap.entries.where((entry) => entry.key.contains(solverCodeFilename)).single.value.first;
     String code = await rootBundle.loadString(solverCodeAssetPath);
 
     if (mounted) {
-      _openCodeDialog(context, code);
+      await _openCodeDialog(context, code);
     }
   }
 
-  void _openUrl() => launchUrlString(widget.solver.problemUrl);
+  Future<void> _openUrl() => launchUrlString(widget.solver.problemUrl);
 
-  void _openCodeDialog(BuildContext context, String code) async {
+  Future<void> _openCodeDialog(BuildContext context, String code) async {
     await showDialog<String>(
       context: context,
       barrierDismissible: true,

@@ -57,18 +57,19 @@ class Day05Solver extends Solver<String, String> {
       }
 
       // parse line
-      final scanner = StringScanner(inputLine);
-
-      scanner.expect('move ');
-      scanner.expect(numberRegExp);
+      final scanner = StringScanner(inputLine)
+        ..expect('move ')
+        ..expect(numberRegExp);
       int nCrates = int.parse(scanner.lastMatch![0]!);
 
-      scanner.expect(' from ');
-      scanner.expect(numberRegExp);
+      scanner
+        ..expect(' from ')
+        ..expect(numberRegExp);
       int fromCrateStack = int.parse(scanner.lastMatch![0]!);
 
-      scanner.expect(' to ');
-      scanner.expect(numberRegExp);
+      scanner
+        ..expect(' to ')
+        ..expect(numberRegExp);
       int toCrateStack = int.parse(scanner.lastMatch![0]!);
 
       instructions.add(_MoveCrateInstruction(nCrates, fromCrateStack, toCrateStack));

@@ -37,16 +37,12 @@ class Day09Solver extends Solver<String, String> {
         switch (instruction) {
           case 'L':
             knots[0] = (knots[0].$1 - 1, knots[0].$2);
-            break;
           case 'R':
             knots[0] = (knots[0].$1 + 1, knots[0].$2);
-            break;
           case 'U':
             knots[0] = (knots[0].$1, knots[0].$2 + 1);
-            break;
           case 'D':
             knots[0] = (knots[0].$1, knots[0].$2 - 1);
-            break;
         }
 
         // let tail follow

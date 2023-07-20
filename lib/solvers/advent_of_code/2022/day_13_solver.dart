@@ -1,8 +1,10 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'dart:core';
 import 'dart:math';
 
-import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:darq/darq.dart';
+import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:petitparser/petitparser.dart';
 
 typedef PacketPair = (List, List);

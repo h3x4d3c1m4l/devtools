@@ -13,7 +13,7 @@ class Day01Solver extends Solver<String, String> {
     List<int> measurements = input
       .split('\n')
       .where((rawMeasurement) => rawMeasurement.isNotEmpty)
-      .map((rawMeasurement) => int.parse(rawMeasurement))
+      .map(int.parse)
       .toList();
 
     // part 1

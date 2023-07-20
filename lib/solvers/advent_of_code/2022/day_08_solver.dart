@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:darq/darq.dart';
+import 'package:h3x_devtools/solvers/solver.dart';
 
 class Day08Solver extends Solver<String, String> {
 
@@ -22,7 +22,7 @@ class Day08Solver extends Solver<String, String> {
     for (int y = 1; y < (mapHeight - 1); y++) {
       List<int> rowCodeUnits = mapLines[y].codeUnits;
       for (int x = 1; x < (mapWidth - 1); x++) {
-        List<int> columnCodeUnits = mapLines.map(((row) => row[x])).join().codeUnits;
+        List<int> columnCodeUnits = mapLines.map((row) => row[x]).join().codeUnits;
         int currentCodeUnit = rowCodeUnits[x];
 
         bool visibleFromLeft = rowCodeUnits.sublist(0, x).all((codeUnit) => codeUnit < currentCodeUnit);
@@ -41,7 +41,7 @@ class Day08Solver extends Solver<String, String> {
     for (int y = 0; y < mapHeight; y++) {
       List<int> rowCodeUnits = mapLines[y].codeUnits;
       for (int x = 0; x < mapWidth; x++) {
-        List<int> columnCodeUnits = mapLines.map(((row) => row[x])).join().codeUnits;
+        List<int> columnCodeUnits = mapLines.map((row) => row[x]).join().codeUnits;
         int currentCodeUnit = rowCodeUnits[x];
 
         int treesVisibleLeft = treesVisibleNext(currentCodeUnit, rowCodeUnits.sublist(0, x).reversed);

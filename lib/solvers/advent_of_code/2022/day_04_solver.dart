@@ -22,9 +22,9 @@ class Day04Solver extends Solver<String, String> {
     int nAssignmentPairsFullOverlap = 0;
     for (var (String rawAssignment1, String rawAssignment2) in rawAssignmentPairs) {
       List<int> assignment1 =
-          rawAssignment1.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
+          rawAssignment1.split('-').map(int.parse).toList();
       List<int> assignment2 =
-          rawAssignment2.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
+          rawAssignment2.split('-').map(int.parse).toList();
 
       if ((assignment1[0] >= assignment2[0] && assignment1[1] <= assignment2[1]) ||
           (assignment2[0] >= assignment1[0] && assignment2[1] <= assignment1[1])) {
@@ -36,9 +36,9 @@ class Day04Solver extends Solver<String, String> {
     int nAssignmentPairsPartialOverlap = 0;
     for (var (String rawAssignment1, String rawAssignment2) in rawAssignmentPairs) {
       List<int> assignment1 =
-          rawAssignment1.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
+          rawAssignment1.split('-').map(int.parse).toList();
       List<int> assignment2 =
-          rawAssignment2.split('-').map((rawAssignment) => int.parse(rawAssignment)).toList();
+          rawAssignment2.split('-').map(int.parse).toList();
 
       if ((assignment1[0] >= assignment2[0] && assignment1[0] <= assignment2[1]) ||
           (assignment1[1] >= assignment2[0] && assignment1[1] <= assignment2[1]) ||

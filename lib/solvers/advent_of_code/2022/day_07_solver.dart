@@ -1,5 +1,5 @@
-import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:darq/darq.dart';
+import 'package:h3x_devtools/solvers/solver.dart';
 
 class Day07Solver extends Solver<String, String> {
 

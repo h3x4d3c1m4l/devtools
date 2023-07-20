@@ -18,7 +18,7 @@ class Day01Solver extends Solver<String, String> {
     for (String elfCaloriesStr in splitInput) {
       int elfCalories = elfCaloriesStr
           .split('\n')
-          .map((elfCalorieStr) => int.parse(elfCalorieStr))
+          .map(int.parse)
           .reduce((value, element) => value + element);
       allElfCalories.add(elfCalories);
 
