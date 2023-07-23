@@ -5,8 +5,6 @@ import 'dart:ui';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:live_background/live_background.dart';
 import 'package:live_background/widget/live_background_widget.dart';
-import 'package:particle_field/particle_field.dart';
-import 'package:rnd/rnd.dart';
 
 class OverlayEffects extends StatefulWidget {
   const OverlayEffects();
@@ -33,13 +31,13 @@ class _OverlayEffectsState extends State<OverlayEffects> {
                   fit: StackFit.passthrough,
                   children: [
                     Container(
-                      foregroundDecoration: BoxDecoration(color: Color(0x88000000)),
+                      foregroundDecoration: const BoxDecoration(color: Color(0x88000000)),
                       child: ImageFiltered(
                         imageFilter: ImageFilter.blur(sigmaY: 16, sigmaX: 16),
                         child: Image.asset("assets/christian-buehner-DItYlc26zVI-unsplash.jpg"),
                       ),
                     ),
-                    LiveBackgroundWidget(
+                    const LiveBackgroundWidget(
                       palette: Palette(colors: [Colors.white]),
                       particleCount: 10000,
                       velocityX: 1,
@@ -50,7 +48,7 @@ class _OverlayEffectsState extends State<OverlayEffects> {
                       blurSigmaY: 0,
                       clipBoundary: false,
                     ),
-                    LiveBackgroundWidget(
+                    const LiveBackgroundWidget(
                       palette: Palette(colors: [Colors.white]),
                       particleCount: 10000,
                       velocityX: 0.1,
@@ -61,7 +59,7 @@ class _OverlayEffectsState extends State<OverlayEffects> {
                       blurSigmaY: 0,
                       clipBoundary: false,
                     ),
-                    LiveBackgroundWidget(
+                    const LiveBackgroundWidget(
                       palette: Palette(colors: [Colors.white]),
                       particleCount: 10000,
                       velocityX: -0.5,
