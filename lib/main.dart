@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2021/_all_solvers.dart' as aoc2021;
 import 'package:h3x_devtools/solvers/advent_of_code/2022/_all_solvers.dart' as aoc2022;
 import 'package:h3x_devtools/solvers/solver.dart';
+import 'package:h3x_devtools/views/overlay_effects.dart';
 import 'package:h3x_devtools/views/problem_solver_view.dart';
 import 'package:intl/intl.dart';
 
@@ -64,6 +65,7 @@ class _MyAppState extends State<MyApp> {
       ),
       _adventOfCode2021PaneItem,
       _adventOfCode2022PaneItem,
+      _overlayEffectsItem,
     ];
   }
 
@@ -108,6 +110,15 @@ class _MyAppState extends State<MyApp> {
       icon: const Icon(FluentIcons.issue_solid),
       title: Text('Day $dayString'),
       body: ProblemSolverView(title: "AoC $year - Day $dayString", solver: solver),
+    );
+  }
+
+
+  PaneItem get _overlayEffectsItem {
+    return PaneItem(
+      icon: const Icon(FluentIcons.code),
+      title: const Text('Overlay effects'),
+      body: const Center(child: OverlayEffects()),
     );
   }
 
