@@ -1,12 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ui';
-
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
-import 'package:flutter_syntax_view/flutter_syntax_view.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:h3x_devtools/views/code_viewer.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -206,15 +202,7 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
         ],
         content: ConstrainedBox(
           constraints: const BoxConstraints.expand(),
-          child: CodeViewer(
-            code: code,
-            syntaxTheme: MediaQuery.platformBrightnessOf(context) == Brightness.light ? SyntaxTheme.vscodeLight() : SyntaxTheme.vscodeDark(),
-            textStyle: GoogleFonts.inconsolata(
-              fontSize: 16,
-              height: 1.20,
-              fontFeatures: [const FontFeature.enable('dlig')],
-            ),
-          ),
+          child: DartCodeViewer(code),
         ),
       ),
     );

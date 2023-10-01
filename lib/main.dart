@@ -7,13 +7,18 @@ import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:h3x_devtools/views/overlay_effects.dart';
 import 'package:h3x_devtools/views/problem_solver_view.dart';
 import 'package:intl/intl.dart';
+import 'package:syntax_highlight/syntax_highlight.dart';
 
-void main() {
+void main() async {
   // add OFL for Inconsolata font
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('google_fonts/OFL.txt');
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
   });
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Highlighter.initialize(['dart']);
 
   runApp(const MyApp());
 }

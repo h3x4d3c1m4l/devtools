@@ -14,19 +14,17 @@ dependencies:
     sdk: flutter
 
   # UI
-  fluent_ui: 4.7.4
+  fluent_ui: 4.7.5
   intl: 0.18.1
-  google_fonts: 6.0.0
-  go_router: 10.2.0
+  google_fonts: 6.1.0
+  go_router: 11.1.2
   particle_field: 1.0.0
   live_background: 0.1.3
-  flutter_syntax_view: 
-    git:
-      url: https://github.com/YehudaKremer/flutter_syntax_view.git
+  syntax_highlight: 0.2.0
 
   # State management
   mobx: 2.2.0
-  flutter_mobx: 2.0.6+5
+  flutter_mobx: 2.1.0
 
   # HTTP client
   http: 1.1.0
