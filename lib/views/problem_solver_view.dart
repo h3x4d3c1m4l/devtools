@@ -176,8 +176,11 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
     // find and read the code file asset
     String solverCodeFilename = widget.solver.solverCodeFilename;
 
+    // Dirty hack to avoid error on .single
+    var year = widget.solver.problemUrl.split('/')[3];
+
     // ignore: avoid_dynamic_calls
-    String solverCodeAssetPath = manifestMap.entries.where((entry) => entry.key.contains(solverCodeFilename)).single.value.first;
+    String solverCodeAssetPath = manifestMap.entries.where((entry) => entry.key.contains(solverCodeFilename) && entry.key.contains(year)).single.value.first;
     String code = await rootBundle.loadString(solverCodeAssetPath);
 
     if (mounted) {
