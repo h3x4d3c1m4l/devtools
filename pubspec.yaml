@@ -24,7 +24,7 @@ dependencies:
 
   # State management
   mobx: 2.2.1
-  flutter_mobx: 2.1.0+1
+  flutter_mobx: 2.1.1
 
   # HTTP client
   http: 1.1.0
@@ -39,7 +39,7 @@ dependencies:
   darq: 2.0.0
 
   # URL launching
-  url_launcher: 6.1.14
+  url_launcher: 6.2.1
 
   # Misc
   rnd: 0.2.0
