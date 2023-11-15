@@ -28,7 +28,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Detect Flutter version
       uses: kuhnroyal/flutter-fvm-config-action@v1
@@ -54,7 +54,7 @@ jobs:
       run: flutter analyze
 
     - name: Build web
-      run: flutter build web --release --base-href '/devtools/' --no-tree-shake-icons
+      run: flutter build web --release --base-href '/devtools/'
 
     - name: Fix permissions
       run: |
