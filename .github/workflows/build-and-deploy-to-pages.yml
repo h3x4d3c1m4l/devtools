@@ -54,7 +54,7 @@ jobs:
       run: flutter analyze
 
     - name: Build web
-      run: flutter build web --release --base-href '/devtools/' --web-renderer skwasm
+      run: flutter build web --release --base-href '/devtools/'
 
     - name: Fix permissions
       run: |
