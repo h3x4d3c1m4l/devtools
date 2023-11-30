@@ -1,14 +1,11 @@
 import 'dart:core';
 
-import 'package:h3x_devtools/solvers/solver.dart';
+import 'package:h3x_devtools/solvers/advent_of_code/2022/advent_of_code_2022_solver.dart';
 
-class Day09Solver extends Solver<String, String> {
-
-  @override
-  String get problemUrl => 'https://adventofcode.com/2022/day/9';
+class Day09Solver extends AdventOfCode2022Solver {
 
   @override
-  String get solverCodeFilename => 'day_09_solver.dart';
+  final int dayNumber = 9;
   
   @override
   String getSolution(String input) {

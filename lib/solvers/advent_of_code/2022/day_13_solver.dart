@@ -4,18 +4,15 @@ import 'dart:core';
 import 'dart:math';
 
 import 'package:darq/darq.dart';
-import 'package:h3x_devtools/solvers/solver.dart';
+import 'package:h3x_devtools/solvers/advent_of_code/2022/advent_of_code_2022_solver.dart';
 import 'package:petitparser/petitparser.dart';
 
 typedef PacketPair = (List, List);
 
-class Day13Solver extends Solver<String, String> {
+class Day13Solver extends AdventOfCode2022Solver {
 
   @override
-  String get problemUrl => 'https://adventofcode.com/2022/day/13';
-
-  @override
-  String get solverCodeFilename => 'day_13_solver.dart';
+  final int dayNumber = 13;
   
   @override
   String getSolution(String input) {

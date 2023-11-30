@@ -1,15 +1,12 @@
 import 'dart:collection';
 
-import 'package:h3x_devtools/solvers/solver.dart';
+import 'package:h3x_devtools/solvers/advent_of_code/2022/advent_of_code_2022_solver.dart';
 import 'package:string_scanner/string_scanner.dart';
 
-class Day05Solver extends Solver<String, String> {
+class Day05Solver extends AdventOfCode2022Solver {
 
   @override
-  String get problemUrl => 'https://adventofcode.com/2022/day/5';
-
-  @override
-  String get solverCodeFilename => 'day_05_solver.dart';
+  final int dayNumber = 5;
 
   static final RegExp numberRegExp = RegExp(r'\d+');
   
