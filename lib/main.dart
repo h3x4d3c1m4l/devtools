@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2021/_all_solvers.dart' as aoc2021;
 import 'package:h3x_devtools/solvers/advent_of_code/2022/_all_solvers.dart' as aoc2022;
+import 'package:h3x_devtools/solvers/advent_of_code/2023/_all_solvers.dart' as aoc2023;
 import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:h3x_devtools/views/overlay_effects.dart';
 import 'package:h3x_devtools/views/problem_solver_view.dart';
@@ -70,6 +71,7 @@ class _MyAppState extends State<MyApp> {
       ),
       _adventOfCode2021PaneItem,
       _adventOfCode2022PaneItem,
+      _adventOfCode2023PaneItem,
       _overlayEffectsItem,
     ];
   }
@@ -104,6 +106,17 @@ class _MyAppState extends State<MyApp> {
         _getAdventOfCodePaneItem(2022, 10, aoc2022.Day10Solver()),
         _getAdventOfCodePaneItem(2022, 13, aoc2022.Day13Solver()),
         _getAdventOfCodePaneItem(2022, 14, aoc2022.Day14Solver()),
+      ],
+    );
+  }
+
+  PaneItemExpander get _adventOfCode2023PaneItem {
+    return PaneItemExpander(
+      icon: const Icon(FluentIcons.code),
+      title: const Text('Advent of Code 2023'),
+      body: const Center(child: Text("Choose a day from the sub menu")),
+      items: [
+        _getAdventOfCodePaneItem(2021, 01, aoc2023.Day01Solver()),
       ],
     );
   }
