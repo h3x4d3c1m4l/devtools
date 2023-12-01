@@ -35,6 +35,7 @@ dependencies:
   sealed_unions: 3.0.3+1
 
   # Collections and querying
+  collection: 1.18.0
   fast_immutable_collections: 9.2.0
   darq: 2.0.0
 
