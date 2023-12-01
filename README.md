@@ -10,6 +10,7 @@ When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c
 
 - [Advent of Code 2021](https://adventofcode.com/2021)
 - [Advent of Code 2022](https://adventofcode.com/2022)
+- [Advent of Code 2023](https://adventofcode.com/2023)
 
 ## Features
 
@@ -19,7 +20,7 @@ When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c
 - [x] Simple [Fluent UI](https://pub.dev/packages/fluent_ui) based interface
 - [X] Track and show duration of solver run
 - [X] Error handling
-- [X] Show solver code
+- [X] Show solver code with code highlighting
 - [X] Dark mode
 - [X] Link to problem web page
 
@@ -29,5 +30,4 @@ When a PR is merged to the `main` branch, it gets deployed here: https://h3x4d3c
 - [ ] Custom problem/solution views (currently there's only support for string input/output)
 - [ ] About screen (link to GitHub, show licences using license registry)
 - [ ] Settings menu (pick light/dark theme, language maybe)
-- [ ] Connect to API to retrieve inputs
-- [ ] Improve solver code viewer
+- [ ] Connect to API to retrieve inputs (might not be possible for web due to CORS)
