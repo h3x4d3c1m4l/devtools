@@ -1,4 +1,4 @@
-import 'package:h3x_devtools/solvers/advent_of_code/2021/advent_of_code_2021_solver.dart';
+import 'package:h3x_devtools/solvers/advent_of_code/2021/aoc_2021_solver.dart';
 
 class Day02Solver extends AdventOfCode2021Solver {
 

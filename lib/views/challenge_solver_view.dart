@@ -4,26 +4,26 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
 import 'package:h3x_devtools/solvers/solver.dart';
-import 'package:h3x_devtools/views/code_viewer.dart';
+import 'package:h3x_devtools/views/dart_code_viewer.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-class ProblemSolverView extends StatefulWidget {
+class ChallengeSolverView extends StatefulWidget {
 
   final String title;
   final Solver solver;
 
-  const ProblemSolverView({
+  const ChallengeSolverView({
     super.key,
     required this.title,
     required this.solver,
   });
 
   @override
-  State<ProblemSolverView> createState() => _ProblemSolverViewState();
+  State<ChallengeSolverView> createState() => _ChallengeSolverViewState();
 
 }
 
-class _ProblemSolverViewState extends State<ProblemSolverView> {
+class _ChallengeSolverViewState extends State<ChallengeSolverView> {
 
   final TextEditingController _inputEditingController = TextEditingController();
 
@@ -52,9 +52,9 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
           mainAxisAlignment: MainAxisAlignment.end,
           primaryItems: [
             CommandBarButton(
-              icon: const Icon(FluentIcons.globe),
-              label: const Text("Open problem description"),
-              onPressed: _openUrl,
+              icon: const Icon(FluentIcons.link),
+              label: const Text("Open challenge page"),
+              onPressed: () => unawaited(launchUrlString(widget.solver.challengeUrl)),
             ),
             CommandBarButton(
               icon: const Icon(FluentIcons.code),
@@ -177,7 +177,7 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
     String solverCodeFilename = widget.solver.solverCodeFilename;
 
     // Dirty hack to avoid error on .single
-    var year = widget.solver.problemUrl.split('/')[3];
+    var year = widget.solver.challengeUrl.split('/')[3];
 
     // ignore: avoid_dynamic_calls
     String solverCodeAssetPath = manifestMap.entries.where((entry) => entry.key.contains(solverCodeFilename) && entry.key.contains(year)).single.value.first;
@@ -188,16 +188,18 @@ class _ProblemSolverViewState extends State<ProblemSolverView> {
     }
   }
 
-  Future<void> _openUrl() => launchUrlString(widget.solver.problemUrl);
-
   Future<void> _openCodeDialog(BuildContext context, String code) async {
-    await showDialog<String>(
+    await showDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) => ContentDialog(
         constraints: const BoxConstraints.expand(),
         title: Text('Code - ${widget.title}'),
         actions: [
+          HyperlinkButton(
+            onPressed: () => unawaited(launchUrlString(widget.solver.solverCodeGitHubUrl)),
+            child: const Text("Open on GitHub"),
+          ),
           HyperlinkButton(
             onPressed: () => Navigator.pop(context),
             child: const Text("Close"),

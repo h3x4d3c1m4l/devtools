@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:h3x_devtools/solvers/advent_of_code/2023/advent_of_code_2023_solver.dart';
+import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
 
 class Day02Solver extends AdventOfCode2023Solver {
 

@@ -65,6 +65,7 @@ flutter:
   assets:
   - lib/solvers/advent_of_code/2021/
   - lib/solvers/advent_of_code/2022/
+  - lib/solvers/advent_of_code/2023/
   - assets/google_fonts/
   - assets/christian-buehner-DItYlc26zVI-unsplash.jpg
 
