@@ -5,8 +5,8 @@ import 'package:h3x_devtools/solvers/advent_of_code/2021/_all_solvers.dart' as a
 import 'package:h3x_devtools/solvers/advent_of_code/2022/_all_solvers.dart' as aoc2022;
 import 'package:h3x_devtools/solvers/advent_of_code/2023/_all_solvers.dart' as aoc2023;
 import 'package:h3x_devtools/solvers/solver.dart';
+import 'package:h3x_devtools/views/challenge_solver_view.dart';
 import 'package:h3x_devtools/views/overlay_effects.dart';
-import 'package:h3x_devtools/views/problem_solver_view.dart';
 import 'package:intl/intl.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
 
@@ -128,7 +128,7 @@ class _MyAppState extends State<MyApp> {
     return PaneItem(
       icon: const Icon(FluentIcons.issue_solid),
       title: Text('Day $dayString'),
-      body: ProblemSolverView(title: "AoC $year - Day $dayString", solver: solver),
+      body: ChallengeSolverView(title: "AoC $year - Day $dayString", solver: solver),
     );
   }
 
