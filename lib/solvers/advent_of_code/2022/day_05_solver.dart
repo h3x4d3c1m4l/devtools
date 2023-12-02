@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:h3x_devtools/solvers/advent_of_code/2022/advent_of_code_2022_solver.dart';
+import 'package:h3x_devtools/solvers/advent_of_code/2022/aoc_2022_solver.dart';
 import 'package:string_scanner/string_scanner.dart';
 
 class Day05Solver extends AdventOfCode2022Solver {

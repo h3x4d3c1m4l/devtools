@@ -1,4 +1,4 @@
-import 'package:h3x_devtools/solvers/advent_of_code/advent_of_code_solver.dart';
+import 'package:h3x_devtools/solvers/advent_of_code/aoc_solver.dart';
 
 abstract class AdventOfCode2022Solver extends AdventOfCodeSolver {
 
