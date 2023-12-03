@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 int _calculateSelectedIndex(BuildContext context) {
-  final location = GoRouterState.of(context).uri.toString();
+  final location = GoRouterState.of(context).uri.path;
   return _routes.indexWhere((route) => route.path == location);
 }
 

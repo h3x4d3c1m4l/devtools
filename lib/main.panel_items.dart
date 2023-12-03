@@ -7,7 +7,7 @@ final List<NavigationPaneItem> _rootPainItems = [
     routePath: '/',
     icon: const Icon(FluentIcons.home),
     title: const Text('Home'),
-    routeBody: const Center(
+    routeBodyBuilder: (context, state) => const Center(
       child: Text("Welcome!"),
     ),
   ),
@@ -28,7 +28,7 @@ _RoutingPaneItemExpander get _adventOfCode2021PaneItem {
     routePath: '/aoc2021',
     icon: const Icon(FluentIcons.code),
     title: const Text('Advent of Code 2021'),
-    routeBody: const Center(child: Text("Choose a day from the sub menu")),
+    routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
     items: [
       _getAdventOfCodePaneItem(2021, 01, aoc2021.Day01Solver()),
       _getAdventOfCodePaneItem(2021, 02, aoc2021.Day02Solver()),
@@ -41,7 +41,7 @@ _RoutingPaneItemExpander get _adventOfCode2022PaneItem {
     routePath: '/aoc2022',
     icon: const Icon(FluentIcons.code),
     title: const Text('Advent of Code 2022'),
-    routeBody: const Center(child: Text("Choose a day from the sub menu")),
+    routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
     items: [
       _getAdventOfCodePaneItem(2022, 01, aoc2022.Day01Solver()),
       _getAdventOfCodePaneItem(2022, 02, aoc2022.Day02Solver()),
@@ -64,7 +64,7 @@ _RoutingPaneItemExpander get _adventOfCode2023PaneItem {
     routePath: '/aoc2023',
     icon: const Icon(FluentIcons.code),
     title: const Text('Advent of Code 2023'),
-    routeBody: const Center(child: Text("Choose a day from the sub menu")),
+    routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
     items: [
       _getAdventOfCodePaneItem(2023, 01, aoc2023.Day01Solver()),
       _getAdventOfCodePaneItem(2023, 02, aoc2023.Day02Solver()),
@@ -79,7 +79,11 @@ _RoutingPaneItem _getAdventOfCodePaneItem(int year, int day, Solver solver) {
     routePath: '/aoc$year/day$day',
     icon: const Icon(FluentIcons.issue_solid),
     title: Text('Day $dayString'),
-    routeBody: ChallengeSolverView(title: "AoC $year - Day $dayString", solver: solver),
+    routeBodyBuilder: (context, state) => ChallengeSolverView(
+      title: "AoC $year - Day $dayString",
+      solver: solver,
+      openCodeDialog: state.uri.queryParameters['openCodeView'] == 'true',
+    ),
   );
 }
 
@@ -88,21 +92,21 @@ _RoutingPaneItem get _overlayEffectsItem {
     routePath: '/overlayeffects',
     icon: const Icon(FluentIcons.code),
     title: const Text('Overlay effects'),
-    routeBody: const Center(child: OverlayEffects()),
+    routeBodyBuilder: (context, state) => const Center(child: OverlayEffects()),
   );
 }
 
 class _RoutingPaneItemExpander extends PaneItemExpander {
 
   final String routePath;
-  final Widget routeBody;
+  final GoRouterWidgetBuilder routeBodyBuilder;
 
   _RoutingPaneItemExpander({
     required super.icon,
     required super.title,
     required super.items,
     required this.routePath,
-    required this.routeBody,
+    required this.routeBodyBuilder,
   }) : super(
           key: ValueKey(routePath),
           body: const SizedBox.shrink(),
@@ -111,7 +115,7 @@ class _RoutingPaneItemExpander extends PaneItemExpander {
 
   GoRoute get goRoute => GoRoute(
         path: routePath,
-        builder: (context, state) => routeBody,
+        builder: routeBodyBuilder,
       );
 
   List<GoRoute> get itemGoRoutes => items.map((item) => switch (item) {
@@ -125,13 +129,13 @@ class _RoutingPaneItemExpander extends PaneItemExpander {
 class _RoutingPaneItem extends PaneItem {
 
   final String routePath;
-  final Widget routeBody;
+  final GoRouterWidgetBuilder routeBodyBuilder;
 
   _RoutingPaneItem({
     required super.icon,
     required super.title,
     required this.routePath,
-    required this.routeBody,
+    required this.routeBodyBuilder,
   }) : super(
           key: ValueKey(routePath),
           body: const SizedBox.shrink(),
@@ -140,7 +144,7 @@ class _RoutingPaneItem extends PaneItem {
 
   GoRoute get goRoute => GoRoute(
         path: routePath,
-        builder: (context, state) => routeBody,
+        builder: routeBodyBuilder,
       );
 
 }

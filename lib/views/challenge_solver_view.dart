@@ -11,11 +11,13 @@ class ChallengeSolverView extends StatefulWidget {
 
   final String title;
   final Solver solver;
+  final bool openCodeDialog;
 
   const ChallengeSolverView({
     super.key,
     required this.title,
     required this.solver,
+    required this.openCodeDialog,
   });
 
   @override
@@ -41,6 +43,14 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
     _solveDuration = stopwatch.elapsed;
 
     setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.openCodeDialog) {
+      unawaited(_showCode(context));
+    }
   }
 
   @override
