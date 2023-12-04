@@ -1,8 +1,10 @@
 import 'dart:core';
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:darq/darq.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2022/aoc_2022_solver.dart';
+import 'package:h3x_devtools/solvers/extensions.dart';
 
 class Day14Solver extends AdventOfCode2022Solver {
 
@@ -12,8 +14,7 @@ class Day14Solver extends AdventOfCode2022Solver {
   @override
   String getSolution(String input) {
     List<List<Point<int>>> pointGroups = input
-        .trim()
-        .split('\n')
+        .splitLines()
         .map(
           (rawLine) => rawLine.split(' -> ').map(
             (rawCoordinates) {
@@ -36,9 +37,9 @@ class Day14Solver extends AdventOfCode2022Solver {
   }
 
   List<List<_Tile>> _buildGrid(List<List<Point<int>>> pointGroups, [int? minX, int? maxX, bool addFloor = false, int sandStartPointX = 500]) {
-    int actualMinX = minX ?? pointGroups.flatten().min((point1, point2) => point1.x.compareTo(point2.x)).x;
-    int actualMaxX = maxX ?? pointGroups.flatten().max((point1, point2) => point1.x.compareTo(point2.x)).x;
-    int actualMaxY = pointGroups.flatten().max((point1, point2) => point1.y.compareTo(point2.y)).y + (addFloor ? 2 : 0);
+    int actualMinX = minX ?? pointGroups.flattened.min((point1, point2) => point1.x.compareTo(point2.x)).x;
+    int actualMaxX = maxX ?? pointGroups.flattened.max((point1, point2) => point1.x.compareTo(point2.x)).x;
+    int actualMaxY = pointGroups.flattened.max((point1, point2) => point1.y.compareTo(point2.y)).y + (addFloor ? 2 : 0);
     int gridWidth = actualMaxX - actualMinX + 1;
     int gridHeight = actualMaxY + 1;
 

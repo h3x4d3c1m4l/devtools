@@ -1,4 +1,5 @@
 import 'package:h3x_devtools/solvers/advent_of_code/2022/aoc_2022_solver.dart';
+import 'package:h3x_devtools/solvers/extensions.dart';
 
 class Day04Solver extends AdventOfCode2022Solver {
 
@@ -8,8 +9,7 @@ class Day04Solver extends AdventOfCode2022Solver {
   @override
   String getSolution(String input) {
     List<(String rawAssignment1, String rawAssignment2)> rawAssignmentPairs = input
-        .split('\n')
-        .where((rawAssignmentPair) => rawAssignmentPair.isNotEmpty)
+        .splitLines()
         .map((rawAssignmentPair) {
           List<String> rawAssignments = rawAssignmentPair.split(',');
           return (rawAssignments[0], rawAssignments[1]);

@@ -7,6 +7,7 @@ class Day01Solver extends AdventOfCode2022Solver {
   
   @override
   String getSolution(String input) {
+    // TODO: fix possible newline issue due to usage of \n\n.
     Iterable<String> splitInput = input.split('\n\n').where((elfCaloriesStr) => elfCaloriesStr.isNotEmpty);
 
     // part 1

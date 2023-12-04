@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:h3x_devtools/solvers/advent_of_code/2022/aoc_2022_solver.dart';
+import 'package:h3x_devtools/solvers/extensions.dart';
 
 class Day10Solver extends AdventOfCode2022Solver {
 
@@ -10,8 +11,7 @@ class Day10Solver extends AdventOfCode2022Solver {
   @override
   String getSolution(String input) {
     List<(String, int?)> cpuInstructions = input
-        .split('\n')
-        .where((line) => line.isNotEmpty)
+        .splitLines()
         .map((rawInstructionLine) => rawInstructionLine.split(' '))
         .map((rawInstruction) => (rawInstruction[0], rawInstruction.length == 2 ? int.parse(rawInstruction[1]) : null))
         .toList(growable: false);

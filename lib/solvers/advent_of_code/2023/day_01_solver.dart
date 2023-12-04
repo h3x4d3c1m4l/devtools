@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
+import 'package:h3x_devtools/solvers/extensions.dart';
 
 class Day01Solver extends AdventOfCode2023Solver {
 
@@ -20,10 +21,7 @@ class Day01Solver extends AdventOfCode2023Solver {
 
   @override
   String getSolution(String input) {
-    List<String> rawCalibrationLines = input
-      .split('\n')
-      .where((rawCalibrationLine) => rawCalibrationLine.isNotEmpty)
-      .toList();
+    List<String> rawCalibrationLines = input.splitLines().toList();
 
     // Part 1
     int totalCalibrationValuePart1 = 0;

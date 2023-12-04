@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:darq/darq.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2022/aoc_2022_solver.dart';
+import 'package:h3x_devtools/solvers/extensions.dart';
 
 class Day08Solver extends AdventOfCode2022Solver {
 
@@ -10,7 +11,7 @@ class Day08Solver extends AdventOfCode2022Solver {
   
   @override
   String getSolution(String input) {
-    List<String> mapLines = input.split('\n').where((line) => line.isNotEmpty).toList(growable: false);
+    List<String> mapLines = input.splitLines().toList(growable: false);
     int mapWidth = mapLines[0].length;
     int mapHeight = mapLines.length;
     

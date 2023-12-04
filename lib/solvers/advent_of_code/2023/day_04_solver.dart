@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:darq/darq.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
+import 'package:h3x_devtools/solvers/extensions.dart';
 
 typedef CardInput = ({List<int> myNumbers, List<int> winningNumbers});
 
@@ -15,8 +16,7 @@ class Day04Solver extends AdventOfCode2023Solver {
   String getSolution(String input) {
     // Parse input
     List<CardInput> cards = input
-        .split('\n')
-        .where((engineSchematicLine) => engineSchematicLine.isNotEmpty)
+        .splitLines()
         .map(
           (x) => (
             winningNumbers: List.generate(10, (index) => int.parse(x.substring(10 + 3 * index, 10 + 3 * index + 2).trimLeft())),
