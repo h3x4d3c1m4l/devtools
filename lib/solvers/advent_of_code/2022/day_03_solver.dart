@@ -1,4 +1,5 @@
 import 'package:h3x_devtools/solvers/advent_of_code/2022/aoc_2022_solver.dart';
+import 'package:h3x_devtools/solvers/extensions.dart';
 
 class Day03Solver extends AdventOfCode2022Solver {
 
@@ -7,7 +8,7 @@ class Day03Solver extends AdventOfCode2022Solver {
   
   @override
   String getSolution(String input) {
-    List<String> rawRucksacks = input.split('\n').where((rawRucksack) => rawRucksack.isNotEmpty).toList();
+    List<String> rawRucksacks = input.splitLines().toList();
 
     // part 1
     int totalCompartmentCommonItemPriorities = 0;
@@ -18,8 +19,7 @@ class Day03Solver extends AdventOfCode2022Solver {
       int halfOfList = rucksackContentCodeUnits.length ~/ 2;
       List<int> compartment1CodeUnits = rucksackContentCodeUnits.sublist(0, halfOfList);
       List<int> compartment2CodeUnits = rucksackContentCodeUnits.sublist(halfOfList);
-      int commonCodeUnit =
-          compartment1CodeUnits.where((c1CodeUnit) => compartment2CodeUnits.contains(c1CodeUnit)).first;
+      int commonCodeUnit = compartment1CodeUnits.firstWhere((c1CodeUnit) => compartment2CodeUnits.contains(c1CodeUnit));
       
       totalCompartmentCommonItemPriorities += _getRucksackItemPriority(commonCodeUnit);
     }
@@ -32,9 +32,9 @@ class Day03Solver extends AdventOfCode2022Solver {
       List<int> rucksack3CodeUnits = rawRucksacks[i + 2].codeUnits;
 
       // find the item that appears in all rucksacks
-      int commonCodeUnit = rucksack1CodeUnits
-          .where((c1CodeUnit) => rucksack2CodeUnits.contains(c1CodeUnit) && rucksack3CodeUnits.contains(c1CodeUnit))
-          .first;
+      int commonCodeUnit = rucksack1CodeUnits.firstWhere(
+        (c1CodeUnit) => rucksack2CodeUnits.contains(c1CodeUnit) && rucksack3CodeUnits.contains(c1CodeUnit),
+      );
 
       totalBadgePriorities += _getRucksackItemPriority(commonCodeUnit);
     }

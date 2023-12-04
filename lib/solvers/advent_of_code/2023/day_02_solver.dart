@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
+import 'package:h3x_devtools/solvers/extensions.dart';
 
 class Day02Solver extends AdventOfCode2023Solver {
 
@@ -10,8 +11,7 @@ class Day02Solver extends AdventOfCode2023Solver {
   String getSolution(String input) {
     // Parse input
     var games = input
-      .split('\n') // Split on games
-      .where((rawGameLine) => rawGameLine.isNotEmpty)
+      .splitLines() // Split on games
       .map((rawGameLine) {
         List<String> gameLineSplit = rawGameLine.split(':'); // Split game no and cube sets
         return (
@@ -46,7 +46,7 @@ class Day02Solver extends AdventOfCode2023Solver {
             ),
           ),
         )
-        .map((x) => x.gameId).sum;
+        .sumBy((obj) => obj.gameId);
 
     // Part 2
     var sumOfPower = games.map(
@@ -54,9 +54,9 @@ class Day02Solver extends AdventOfCode2023Solver {
       (game) {
         var cubeCounts = game.cubeCountSets.flattened.toList();
         return (
-          minimumRedCubes: cubeCounts.where((cubeCount) => cubeCount.color == 'red').map((cubeCount) => cubeCount.cubeCount).max,
-          minimumGreenCubes: cubeCounts.where((cubeCount) => cubeCount.color == 'green').map((cubeCount) => cubeCount.cubeCount).max,
-          minimumBlueCubes: cubeCounts.where((cubeCount) => cubeCount.color == 'blue').map((cubeCount) => cubeCount.cubeCount).max,
+          minimumRedCubes: cubeCounts.where((cubeCount) => cubeCount.color == 'red').maxBy((cubeCount) => cubeCount.cubeCount),
+          minimumGreenCubes: cubeCounts.where((cubeCount) => cubeCount.color == 'green').maxBy((cubeCount) => cubeCount.cubeCount),
+          minimumBlueCubes: cubeCounts.where((cubeCount) => cubeCount.color == 'blue').maxBy((cubeCount) => cubeCount.cubeCount),
         );
       },
     ).fold(

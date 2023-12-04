@@ -1,4 +1,5 @@
 import 'package:h3x_devtools/solvers/advent_of_code/2022/aoc_2022_solver.dart';
+import 'package:h3x_devtools/solvers/extensions.dart';
 
 class Day02Solver extends AdventOfCode2022Solver {
 
@@ -7,18 +8,18 @@ class Day02Solver extends AdventOfCode2022Solver {
   
   @override
   String getSolution(String input) {
-    List<String> intructions = input.split('\n').where((instruction) => instruction.isNotEmpty).toList();
+    List<String> instructions = input.splitLines().toList();
 
     // part 1
     int totalAssumedStrategyGuidePoints = 0;
-    for (String instruction in intructions) {
+    for (String instruction in instructions) {
       List<String> instructionArguments = instruction.split(' ');
       totalAssumedStrategyGuidePoints += _getAssumedPoints(instructionArguments[0], instructionArguments[1]);
     }
 
     // part 2
     int totalActualStrategyGuidePoints = 0;
-    for (String instruction in intructions) {
+    for (String instruction in instructions) {
       List<String> instructionArguments = instruction.split(' ');
       totalActualStrategyGuidePoints += _getActualPoints(instructionArguments[0], instructionArguments[1]);
     }

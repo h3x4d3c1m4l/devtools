@@ -11,10 +11,7 @@ class Day03Solver extends AdventOfCode2023Solver {
   @override
   String getSolution(String input) {
     // Parse input
-    var engineSchematicLines = input
-      .split('\r\n')
-      .where((engineSchematicLine) => engineSchematicLine.isNotEmpty)
-      .toList();
+    var engineSchematicLines = input.splitLines().toList();
 
     // Part 1 and 2 combined
     int sumOfPartNumbers = 0;

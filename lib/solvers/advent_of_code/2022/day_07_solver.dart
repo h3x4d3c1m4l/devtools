@@ -1,5 +1,5 @@
-import 'package:darq/darq.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2022/aoc_2022_solver.dart';
+import 'package:h3x_devtools/solvers/extensions.dart';
 
 class Day07Solver extends AdventOfCode2022Solver {
 
@@ -8,7 +8,7 @@ class Day07Solver extends AdventOfCode2022Solver {
   
   @override
   String getSolution(String input) {
-    List<String> terminalInputOutput = input.split('\n').where((line) => line.isNotEmpty).toList(growable: false);
+    List<String> terminalInputOutput = input.splitLines().toList(growable: false);
 
     // parse terminal input/output to file system structure
     List<_Folder> folders = [];
@@ -42,17 +42,12 @@ class Day07Solver extends AdventOfCode2022Solver {
     
     // part 1
     int totalFolderSize = folders
-        .map((folder) => folder.size)
-        .where((size) => size <= 100000)
-        .fold(0, (value, element) => value += element);
+        .where((folder) => folder.size <= 100000)
+        .sumBy((folder) => folder.size);
 
     // part 2
     int spaceNeeded = 30000000 - (70000000 - rootFolder!.size);
-    int largeEnoughFolderSize = folders
-        .map((folder) => folder.size)
-        .where((size) => size >= spaceNeeded)
-        .orderBy((size) => size)
-        .first;
+    int largeEnoughFolderSize = folders.where((folder) => folder.size >= spaceNeeded).minBy((folder) => folder.size);
 
     return 'Total folder size: $totalFolderSize\nLarge enough folder size: $largeEnoughFolderSize';
   }
@@ -66,7 +61,7 @@ class _Folder extends _FileSystemObject {
   _Folder(super.parent, super.name, this.children);
 
   @override
-  int get size => children.map((e) => e.size).fold(0, (value, element) => value + element);
+  int get size => children.sumBy((folder) => folder.size);
 
 }
 

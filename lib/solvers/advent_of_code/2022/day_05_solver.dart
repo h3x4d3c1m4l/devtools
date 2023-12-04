@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:h3x_devtools/solvers/advent_of_code/2022/aoc_2022_solver.dart';
+import 'package:h3x_devtools/solvers/extensions.dart';
 import 'package:string_scanner/string_scanner.dart';
 
 class Day05Solver extends AdventOfCode2022Solver {
@@ -12,7 +13,7 @@ class Day05Solver extends AdventOfCode2022Solver {
   
   @override
   String getSolution(String input) {
-    List<String> lines = input.split('\n').where((line) => line.isNotEmpty).toList(growable: false);
+    List<String> lines = input.splitLines().where((line) => line.isNotEmpty).toList(growable: false);
     List<ListQueue<String>> crateStacks;
     List<_MoveCrateInstruction> instructions = _parseInstructions(lines);
 

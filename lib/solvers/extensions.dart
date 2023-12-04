@@ -8,7 +8,7 @@ extension StringExtension on String {
   bool get isDigit1to9 => length == 1 && codeUnits[0].isDigit1to9;
   bool get isDot => length == 1 && codeUnits[0].isDot;
 
-  Iterable<String> splitByNewline() => LineSplitter.split(this);
+  Iterable<String> splitLines() => LineSplitter.split(this);
 
 }
 

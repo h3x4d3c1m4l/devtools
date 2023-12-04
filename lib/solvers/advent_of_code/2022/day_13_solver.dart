@@ -3,7 +3,7 @@
 import 'dart:core';
 import 'dart:math';
 
-import 'package:darq/darq.dart';
+import 'package:collection/collection.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2022/aoc_2022_solver.dart';
 import 'package:petitparser/petitparser.dart';
 
@@ -30,7 +30,7 @@ class Day13Solver extends AdventOfCode2022Solver {
   
     // part 2
     List allPacketsInOrder = [
-      ...pairs.map((pairTuple) => [pairTuple.$1, pairTuple.$2]).toList().flatten(),
+      ...pairs.map((pairTuple) => [pairTuple.$1, pairTuple.$2]).flattened,
       [[2]],
       [[6]],
     ]..sort((a, b) {
