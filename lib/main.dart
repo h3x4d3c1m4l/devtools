@@ -7,9 +7,12 @@ import 'package:h3x_devtools/solvers/advent_of_code/2021/_all_solvers.dart' as a
 import 'package:h3x_devtools/solvers/advent_of_code/2022/_all_solvers.dart' as aoc2022;
 import 'package:h3x_devtools/solvers/advent_of_code/2023/_all_solvers.dart' as aoc2023;
 import 'package:h3x_devtools/solvers/solver.dart';
+import 'package:h3x_devtools/storage.dart';
 import 'package:h3x_devtools/views/challenge_solver_view.dart';
 import 'package:h3x_devtools/views/overlay_effects.dart';
+import 'package:h3x_devtools/views/settings_screen.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
 
 part 'main.panel_items.dart';
@@ -24,6 +27,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Highlighter.initialize(['dart']);
+  prefs = await SharedPreferences.getInstance();
 
   runApp(const MyApp());
 }
@@ -69,7 +73,8 @@ final _router = GoRouter(navigatorKey: _rootNavigatorKey, routes: [
         ),
         pane: NavigationPane(
           selected: _calculateSelectedIndex(context),
-          items: _rootPainItems,
+          items: _rootPaneItems,
+          footerItems: _footerPaneItems,
         ),
         paneBodyBuilder: (item, _) {
           final name = item?.key is ValueKey ? (item!.key! as ValueKey).value : null;

@@ -2,7 +2,11 @@ part of 'main.dart';
 
 final NumberFormat _dayNumberFormat = NumberFormat('00');
 
-final List<NavigationPaneItem> _rootPainItems = [
+// ////////// //
+// Root items //
+// ////////// //
+
+final List<NavigationPaneItem> _rootPaneItems = [
   _RoutingPaneItem(
     routePath: '/',
     icon: const Icon(FluentIcons.home),
@@ -17,11 +21,14 @@ final List<NavigationPaneItem> _rootPainItems = [
   _overlayEffectsItem,
 ];
 
-final List<GoRoute> _routes = _rootPainItems.map((item) => switch (item) {
-    _RoutingPaneItem() => [item.goRoute],
-    _RoutingPaneItemExpander() => [item.goRoute, ...item.itemGoRoutes],
-    _ => throw Exception('Cannot convert unsupported type <${item.runtimeType}> to GoRoute')
-  }).flattened.toList();
+final List<GoRoute> _routes = [
+  ..._rootPaneItems.map(_navigationPaneItemToGoRoutes).flattened,
+  ..._footerPaneItems.map(_navigationPaneItemToGoRoutes).flattened,
+];
+
+// ////////////// //
+// Advent of Code //
+// ////////////// //
 
 _RoutingPaneItemExpander get _adventOfCode2021PaneItem {
   return _RoutingPaneItemExpander(
@@ -91,6 +98,10 @@ _RoutingPaneItem _getAdventOfCodePaneItem(int year, int day, Solver solver) {
   );
 }
 
+// ///// //
+// Other //
+// ///// //
+
 _RoutingPaneItem get _overlayEffectsItem {
   return _RoutingPaneItem(
     routePath: '/overlayeffects',
@@ -99,6 +110,29 @@ _RoutingPaneItem get _overlayEffectsItem {
     routeBodyBuilder: (context, state) => const Center(child: OverlayEffects()),
   );
 }
+
+// ////// //
+// Footer //
+// ////// //
+
+final List<NavigationPaneItem> _footerPaneItems = [
+  _RoutingPaneItem(
+    routePath: '/settings',
+    icon: const Icon(FluentIcons.settings),
+    title: const Text('Settings'),
+    routeBodyBuilder: (context, state) => const SettingsScreen(),
+  ),
+];
+
+// /////// //
+// Helpers //
+// /////// //
+
+List<GoRoute> _navigationPaneItemToGoRoutes(NavigationPaneItem item) => switch (item) {
+      _RoutingPaneItem() => [item.goRoute],
+      _RoutingPaneItemExpander() => [item.goRoute, ...item.itemGoRoutes],
+      _ => throw Exception('Cannot convert unsupported type <${item.runtimeType}> to GoRoute')
+    };
 
 class _RoutingPaneItemExpander extends PaneItemExpander {
 

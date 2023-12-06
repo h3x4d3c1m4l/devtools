@@ -4,6 +4,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:h3x_devtools/solvers/advent_of_code/aoc_solver.dart';
 import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:h3x_devtools/views/dart_code_viewer.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -62,6 +63,12 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
         commandBar: CommandBar(
           mainAxisAlignment: MainAxisAlignment.end,
           primaryItems: [
+            if (widget.solver is AdventOfCodeSolver)
+              CommandBarButton(
+                icon: const Icon(FluentIcons.puzzle),
+                label: const Text("Get puzzle input"),
+                onPressed: _loadPuzzleInput,
+              ),
             CommandBarButton(
               icon: const Icon(FluentIcons.link),
               label: const Text("Open challenge page"),
@@ -113,16 +120,16 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
     );
   }
 
-    Widget _getInfoBar(InfoBarSeverity severity, String title, String content) {
-      return SizedBox(
-        width: double.infinity,
-        child: InfoBar(
-          title: Text(title),
-          severity: severity,
-          content: Text(content),
-        ),
-      );
-    }
+  Widget _getInfoBar(InfoBarSeverity severity, String title, String content) {
+    return SizedBox(
+      width: double.infinity,
+      child: InfoBar(
+        title: Text(title),
+        severity: severity,
+        content: Text(content),
+      ),
+    );
+  }
 
   Widget get _dividerWidget {
     return Row(
@@ -232,6 +239,28 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
   void dispose() {
     super.dispose();
     _inputEditingController.dispose();
+  }
+
+  Future<void> _loadPuzzleInput() async {
+    try {
+      final puzzleInput = await (widget.solver as AdventOfCodeSolver).getPuzzleInput();
+      _inputEditingController.text = puzzleInput;
+    } catch (exception) {
+      if (!mounted) return;
+      unawaited(showDialog(
+        context: context,
+        builder: (context) => ContentDialog(
+          title: const Text('Could not retrieve puzzle input'),
+          content: const Text('An error occured while trying to download your puzzle input, maybe your token is invalid?'),
+          actions: [
+            Button(
+              child: const Text('Ok'),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      ));
+    }
   }
 
 }

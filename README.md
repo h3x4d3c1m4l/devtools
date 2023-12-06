@@ -23,6 +23,7 @@ When a commit has been pushed to the `main` branch, it gets deployed here: <http
 - [X] Show solver code with code highlighting
 - [X] Dark mode
 - [X] Link to challenge web page
+- [X] Connect to API to retrieve inputs (may not work on web due to CORS limitations)
 
 ### Planned
 
@@ -30,4 +31,3 @@ When a commit has been pushed to the `main` branch, it gets deployed here: <http
 - [ ] Custom solver input/solution views (currently there's only support for string input/output)
 - [ ] About screen (link to GitHub, show licences using license registry)
 - [ ] Settings menu (pick light/dark theme, language maybe)
-- [ ] Connect to API to retrieve inputs (might not be possible for web due to CORS)
