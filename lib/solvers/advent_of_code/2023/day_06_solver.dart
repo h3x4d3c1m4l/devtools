@@ -33,7 +33,7 @@ class Day06Solver extends AdventOfCode2023Solver {
     int time = int.parse(inputLines[0].split(' ').skip(1).where((s) => s.isNotEmpty).join(''));
     int recordDistance = int.parse(inputLines[1].split(' ').skip(1).where((s) => s.isNotEmpty).join(''));
     var buttonPressTimeMinAndMax = abcFormula(-1, time, -recordDistance);
-    int part2 = (buttonPressTimeMinAndMax.$1 - buttonPressTimeMinAndMax.$2).abs().floor();
+    int part2 = buttonPressTimeMinAndMax.$2.floor() - buttonPressTimeMinAndMax.$1.floor();
 
     return 'Part 1: $part1\nPart 2: $part2';
   }
