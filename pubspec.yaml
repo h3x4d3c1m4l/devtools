@@ -23,7 +23,7 @@ dependencies:
   syntax_highlight: 0.3.0
 
   # State management
-  mobx: 2.2.1
+  mobx: 2.2.3
   flutter_mobx: 2.2.0
 
   # HTTP client
