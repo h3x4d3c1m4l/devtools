@@ -66,6 +66,12 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
             if (widget.solver is AdventOfCodeSolver)
               CommandBarButton(
                 icon: const Icon(FluentIcons.puzzle),
+                label: const Text("Get sample input"),
+                onPressed: _loadSampleInput,
+              ),
+            if (widget.solver is AdventOfCodeSolver)
+              CommandBarButton(
+                icon: const Icon(FluentIcons.puzzle),
                 label: const Text("Get puzzle input"),
                 onPressed: _loadPuzzleInput,
               ),
@@ -239,6 +245,11 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
   void dispose() {
     super.dispose();
     _inputEditingController.dispose();
+  }
+
+  Future<void> _loadSampleInput() async {
+    final puzzleInput = await (widget.solver as AdventOfCodeSolver).getSampleInput();
+    _inputEditingController.text = puzzleInput;
   }
 
   Future<void> _loadPuzzleInput() async {
