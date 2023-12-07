@@ -39,7 +39,7 @@ jobs:
       run: flutter analyze
 
     - name: Build web
-      run: flutter build web --release --base-href '/devtools/'
+      run: flutter build web --release --base-href '/devtools/' --web-renderer canvaskit
 
     - name: Fix permissions
       run: |
