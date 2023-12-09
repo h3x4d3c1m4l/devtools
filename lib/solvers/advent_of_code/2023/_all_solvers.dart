@@ -5,3 +5,4 @@ export 'day_04_solver.dart';
 export 'day_05_solver.dart';
 export 'day_06_solver.dart';
 export 'day_07_solver.dart';
+export 'day_08_solver.dart';
