@@ -7,3 +7,5 @@ export 'day_06_solver.dart';
 export 'day_07_solver.dart';
 export 'day_08_solver.dart';
 export 'day_09_solver.dart';
+export 'day_10_solver.dart';
+export 'day_11_solver.dart';

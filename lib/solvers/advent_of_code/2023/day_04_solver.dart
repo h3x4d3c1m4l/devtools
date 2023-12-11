@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:darq/darq.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
-import 'package:h3x_devtools/solvers/extensions.dart';
+import 'package:h3x_devtools/solvers/helpers/extensions.dart';
 
 typedef CardInput = ({List<int> myNumbers, List<int> winningNumbers});
 
