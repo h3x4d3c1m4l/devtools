@@ -12,6 +12,9 @@ extension StringExtension on String {
   bool get isDot => length == 1 && codeUnits[0].isDot;
 
   Iterable<String> splitLines() => LineSplitter.split(this);
+  List<String> linesToList() => LineSplitter.split(this).toList();
+  String insert(String string, int position) => '${substring(0, position)}$string${substring(position)}';
+  String repeat(int times, [String joinString = '']) => List.filled(times, this).join(joinString);
 
 }
 

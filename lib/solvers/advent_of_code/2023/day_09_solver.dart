@@ -1,6 +1,5 @@
-import 'package:darq/darq.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
-import 'package:h3x_devtools/solvers/extensions.dart';
+import 'package:h3x_devtools/solvers/helpers/extensions.dart';
 
 class Day09Solver extends AdventOfCode2023Solver {
 
@@ -26,7 +25,7 @@ class Day09Solver extends AdventOfCode2023Solver {
       List<List<int>> numberIncreaseSequences = [lineNumbers.toList()];
 
       // Prepare interpolation
-      while (!numberIncreaseSequences.last.all((number) => number == 0)) {
+      while (!numberIncreaseSequences.last.every((number) => number == 0)) {
         List<int> numberIncreaseSequence = [];
 
         var lastSeq = numberIncreaseSequences.last;
