@@ -12,9 +12,10 @@ extension StringExtension on String {
   bool get isDot => length == 1 && codeUnits[0].isDot;
 
   Iterable<String> splitLines() => LineSplitter.split(this);
-  List<String> linesToList() => LineSplitter.split(this).toList();
+  List<String> toListOfLines() => splitLines().toList();
   String insert(String string, int position) => '${substring(0, position)}$string${substring(position)}';
   String repeat(int times, [String joinString = '']) => List.filled(times, this).join(joinString);
+  List<String> toCharacterList() => split('');
 
 }
 
@@ -22,6 +23,8 @@ extension StringIterableExtension on Iterable<String> {
 
   Iterable<int> get parsedAsInts => map(int.parse);
   Iterable<BigInt> get parsedAsBigInts => map(BigInt.parse);
+  List<int> toIntList() => parsedAsInts.toList();
+  List<BigInt> toBigIntList() => parsedAsBigInts.toList();
 
 }
 

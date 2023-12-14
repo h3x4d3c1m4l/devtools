@@ -9,7 +9,7 @@ class Day10Solver extends AdventOfCode2023Solver {
 
   @override
   String getSolution(String input) {
-    List<String> lines = input.linesToList().reversed.toList(); // Simple coordinate system where (0, 0) is "bottom left"
+    List<String> lines = input.toListOfLines().reversed.toList(); // Simple coordinate system where (0, 0) is "bottom left"
     Grid<_Tile> grid = Grid<_Tile>.generated(width: lines.first.length, height: lines.length, getValue: (x, y) {
       String character = lines[y][x];
       return _Tile.fromCharacter(character);

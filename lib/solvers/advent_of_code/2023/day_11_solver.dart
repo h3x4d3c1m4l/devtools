@@ -9,7 +9,7 @@ class Day11Solver extends AdventOfCode2023Solver {
 
   @override
   String getSolution(String input) {
-    List<String> lines = input.linesToList().toList(); // Simple coordinate system where (0, 0) is "bottom left"
+    List<String> lines = input.toListOfLines().toList(); // Simple coordinate system where (0, 0) is "bottom left"
 
     // Detect which column and rows are expanding
     List<int> columnDuplications = [];
