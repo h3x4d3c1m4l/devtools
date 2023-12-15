@@ -1,4 +1,6 @@
-class Grid<T> {
+import 'package:equatable/equatable.dart';
+
+class Grid<T> extends Equatable {
 
   final int width, height;
   final List<T> _grid;
@@ -11,6 +13,9 @@ class Grid<T> {
           final (:int x, :int y) = _getCoordinates(width: width, arrayIndex: index);
           return getValue(x, y);
         });
+
+  const Grid.fromList({required this.width, required this.height, required List<T> cells})
+      : _grid = cells;
 
   // ////////////// //
   // Static helpers //
@@ -66,9 +71,22 @@ class Grid<T> {
   // Misc //
   // //// //
 
+  Grid<T> clone() => Grid<T>.fromList(width: width, height: height, cells: [..._grid]);
+
+  @override
+  List<Object> get props => [width, height, _grid];
+
   @override
   String toString() {
-    return 'Grid<$T> ($width x $height)'; // TODO scanout of values
+    StringBuffer sb = StringBuffer('Grid<$T> ($width x $height)')
+      ..writeln();
+
+    for (int y = 0; y < height; y++) {
+      String gridLine = _grid.skip(y * width).take(width).join();
+      sb.writeln(gridLine);
+    }
+
+    return sb.toString();
   }
 
 }

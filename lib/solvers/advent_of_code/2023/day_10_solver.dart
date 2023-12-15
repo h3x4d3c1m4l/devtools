@@ -1,4 +1,5 @@
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
+import 'package:h3x_devtools/solvers/helpers/enums.dart';
 import 'package:h3x_devtools/solvers/helpers/extensions.dart';
 import 'package:h3x_devtools/solvers/helpers/grid.dart';
 
@@ -20,7 +21,7 @@ class Day10Solver extends AdventOfCode2023Solver {
     final (:int x, :int y) = grid.getCoordinatesOf(_Tile.startingPosition);
 
     int currentX = x, currentY = y;
-    _Direction? currentDirection;
+    CardinalDirection? currentDirection;
     int steps = 0;
 
     while (true) {
@@ -30,18 +31,18 @@ class Day10Solver extends AdventOfCode2023Solver {
       mainLoopTiles[(currentX, currentY)] = true;
       
       // Evaluation of possible steps based on grid bounds
-      List<(int x, int y, _Direction direction, _Tile tile)> possibleNextSteps = [
-        if (currentX > 0 && tile.allowedDirections.contains(_Direction.west))
-          (currentX - 1, currentY, _Direction.west, grid.getValue(x: currentX - 1, y: currentY)),
-        if (currentY > 0 && tile.allowedDirections.contains(_Direction.south))
-          (currentX, currentY - 1, _Direction.south, grid.getValue(x: currentX, y: currentY - 1)),
-        if (currentX < (grid.width - 1) && tile.allowedDirections.contains(_Direction.east))
-          (currentX + 1, currentY, _Direction.east, grid.getValue(x: currentX + 1, y: currentY)),
-        if (currentY < (grid.height - 1) && tile.allowedDirections.contains(_Direction.north))
-          (currentX, currentY + 1, _Direction.north, grid.getValue(x: currentX, y: currentY + 1)),
+      List<(int x, int y, CardinalDirection direction, _Tile tile)> possibleNextSteps = [
+        if (currentX > 0 && tile.allowedDirections.contains(CardinalDirection.west))
+          (currentX - 1, currentY, CardinalDirection.west, grid.getValue(x: currentX - 1, y: currentY)),
+        if (currentY > 0 && tile.allowedDirections.contains(CardinalDirection.south))
+          (currentX, currentY - 1, CardinalDirection.south, grid.getValue(x: currentX, y: currentY - 1)),
+        if (currentX < (grid.width - 1) && tile.allowedDirections.contains(CardinalDirection.east))
+          (currentX + 1, currentY, CardinalDirection.east, grid.getValue(x: currentX + 1, y: currentY)),
+        if (currentY < (grid.height - 1) && tile.allowedDirections.contains(CardinalDirection.north))
+          (currentX, currentY + 1, CardinalDirection.north, grid.getValue(x: currentX, y: currentY + 1)),
       ];
 
-      final (int x, int y, _Direction direction, _Tile _) = possibleNextSteps.firstWhere((obj) {
+      final (int x, int y, CardinalDirection direction, _Tile _) = possibleNextSteps.firstWhere((obj) {
         return 
           // Either we are on the 'start' tile and everything is possible except 'ground'
           (currentDirection == null && obj.$4 != _Tile.ground) ||
@@ -66,17 +67,17 @@ class Day10Solver extends AdventOfCode2023Solver {
 
 enum _Tile {
 
-  verticalPipe('|', [_Direction.north, _Direction.south]),
-  horizontalPipe('-', [_Direction.east, _Direction.west]),
-  northEastBend('L', [_Direction.north, _Direction.east]),
-  northWestBend('J', [_Direction.north, _Direction.west]),
-  southWestBend('7', [_Direction.south, _Direction.west]),
-  southEastBend('F', [_Direction.south, _Direction.east]),
+  verticalPipe('|', [CardinalDirection.north, CardinalDirection.south]),
+  horizontalPipe('-', [CardinalDirection.east, CardinalDirection.west]),
+  northEastBend('L', [CardinalDirection.north, CardinalDirection.east]),
+  northWestBend('J', [CardinalDirection.north, CardinalDirection.west]),
+  southWestBend('7', [CardinalDirection.south, CardinalDirection.west]),
+  southEastBend('F', [CardinalDirection.south, CardinalDirection.east]),
   ground('.', []),
-  startingPosition('S', [_Direction.north, _Direction.east, _Direction.south, _Direction.west]);
+  startingPosition('S', [CardinalDirection.north, CardinalDirection.east, CardinalDirection.south, CardinalDirection.west]);
 
   final String character;
-  final List<_Direction> allowedDirections;
+  final List<CardinalDirection> allowedDirections;
 
   const _Tile(this.character, this.allowedDirections);
 
@@ -96,21 +97,5 @@ enum _Tile {
 
   @override
   String toString() => character;
-
-}
-
-enum _Direction {
-
-  north,
-  east,
-  south,
-  west;
-
-  _Direction get opposing => switch (this) {
-    _Direction.north => south,
-    _Direction.east => west,
-    _Direction.south => north,
-    _Direction.west => east,
-  };
 
 }
