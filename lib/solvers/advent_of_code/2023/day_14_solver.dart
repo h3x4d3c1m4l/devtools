@@ -1,4 +1,5 @@
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
+import 'package:h3x_devtools/solvers/helpers/enums.dart';
 import 'package:h3x_devtools/solvers/helpers/extensions.dart';
 import 'package:h3x_devtools/solvers/helpers/grid.dart';
 
@@ -23,55 +24,48 @@ class Day14Solver extends AdventOfCode2023Solver {
     // Part 1
     int part1 = _gridNorthValue(_gridNorth(grid));
 
-
     // Part 2
     List<Grid<_Tile>> grids = [grid];
     int neededCycles = 1000000000;
     int neededTilts = neededCycles * 4;
 
     // Determine loop
+    int part2 = 0;
     int loopStart = -1, loopLength = 0;
-    while (loopStart == -1) {
-      var n = _gridNorth(grids.last);
-      if (loopStart == -1) {
-        loopStart = grids.indexWhere((grid) => grid == n);
+    Grid<_Tile> currentGrid = grid;
+    CardinalDirection lastDirection = CardinalDirection.east;
+    while (loopStart < 0) {
+      currentGrid = switch (lastDirection) {
+        CardinalDirection.east => _gridNorth(grids.last),
+        CardinalDirection.north => _gridWest(grids.last),
+        CardinalDirection.west => _gridSouth(grids.last),
+        CardinalDirection.south => _gridEast(grids.last),
+      };
+      lastDirection = lastDirection.previousClockwise;
+      
+      if (loopStart < 0) {
+        loopStart = grids.indexWhere((grid) => grid == currentGrid);
         loopLength = grids.length - loopStart;
-        break;
       }
-      grids.add(n);
-
-      var w = _gridWest(grids.last);
-      if (loopStart == -1) {
-        loopStart = grids.indexWhere((grid) => grid == w);
-        loopLength = grids.length - loopStart;
-        break;
-      }
-      grids.add(w);
-
-      var s = _gridSouth(grids.last);
-      if (loopStart == -1) {
-        loopStart = grids.indexWhere((grid) => grid == s);
-        loopLength = grids.length - loopStart;
-        break;
-      }
-      grids.add(s);
-
-      var e = _gridEast(grids.last);
-      if (loopStart == -1) {
-        loopStart = grids.indexWhere((grid) => grid == e);
-        loopLength = grids.length - loopStart;
-        break;
-      }
-      grids.add(e);
+      grids.add(currentGrid);
     }
 
-    var x = ((neededTilts - loopStart) / loopLength) % (loopLength + loopStart) * 2;
+    var x = (((neededTilts - loopStart) / loopLength) % loopLength - loopStart).ceil();
 
-    var curGrid = grids[loopStart];
+    int count = x;
+    while (count > 0) {
+      currentGrid = switch (lastDirection) {
+        CardinalDirection.east => _gridNorth(grids.last),
+        CardinalDirection.north => _gridWest(grids.last),
+        CardinalDirection.west => _gridSouth(grids.last),
+        CardinalDirection.south => _gridEast(grids.last),
+      };
+      lastDirection = lastDirection.previousClockwise;
+      grids.add(currentGrid);
+      count--;
+    }
 
-    int part2 = _gridNorthValue(curGrid);
-
-    return 'Part 1: $part1\nPart 2: $part2';
+    return 'Part 1: $part1\nPart 2: ${_gridNorthValue(currentGrid)}';
   }
 
   int _gridNorthValue(Grid<_Tile> grid) {
