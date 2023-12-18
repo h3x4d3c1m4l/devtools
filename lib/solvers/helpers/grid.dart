@@ -74,7 +74,7 @@ class Grid<T> {
     return (start.x - end.x).abs() + (start.y - end.y).abs();
   }
 
-  List<Coordinates> aStar({required Coordinates start, required Coordinates end, required int Function (Coordinates neighbor, List<Coordinates> path) getTentativeGScore}) {
+  List<Coordinates> aStar({required Coordinates start, required Coordinates end, required int Function (Coordinates neighbor, List<Coordinates> path) getStepCost}) {
     // Use a collection that doesn't allow multiple of the same value
     // or change the `openSet.add(neighbor);` line
     Set<Coordinates> openSet = {start}; // TODO: Use PriorityQueue from collection
@@ -100,7 +100,7 @@ class Grid<T> {
           (x: current.x, y: current.y + 1),
       ];
       for (Coordinates neighbor in neighbors) {
-        int tentativeGScore = gScore[current]! + getTentativeGScore(neighbor, reconstructPath(cameFrom, current));
+        int tentativeGScore = gScore[current]! + getStepCost(neighbor, reconstructPath(cameFrom, current));
         int? neighborGScore = gScore[neighbor];
         if (neighborGScore == null || tentativeGScore < neighborGScore) {
           cameFrom[neighbor] = current;

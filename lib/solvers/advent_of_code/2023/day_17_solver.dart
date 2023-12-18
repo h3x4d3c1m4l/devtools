@@ -18,7 +18,7 @@ class Day17Solver extends AdventOfCode2023Solver {
     var path = grid.aStar(
       start: (x: 0, y: 0),
       end: (x: grid.width - 1, y: grid.height - 1),
-      getTentativeGScore: (neighbor, path) {
+      getStepCost: (neighbor, path) {
         int value = grid.getValue(x: neighbor.x, y: neighbor.y);
         if (path.length < 5) return value;
 
