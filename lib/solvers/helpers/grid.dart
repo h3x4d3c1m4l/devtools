@@ -84,7 +84,7 @@ class Grid<T> {
     Map<Coordinates, int> fScore = {start: getH(start, end)};
 
     while (openSet.isNotEmpty) {
-      var current = fScore.entries.orderByThenFirst((element) => getH(element.key, end)).key; // TODO: can get this from fScore I guess?
+      var current = fScore.entries.orderByThenFirst((element) => getH(element.key, end)).key;
       if (current == end) return reconstructPath(cameFrom, current);
 
       openSet.remove(current);
