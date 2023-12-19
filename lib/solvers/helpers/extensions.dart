@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:characters/characters.dart';
 import 'package:collection/collection.dart';
 
 // ///////////////// //
@@ -15,7 +16,8 @@ extension StringExtension on String {
   List<String> toListOfLines() => splitLines().toList();
   String insert(String string, int position) => '${substring(0, position)}$string${substring(position)}';
   String repeat(int times, [String joinString = '']) => List.filled(times, this).join(joinString);
-  List<String> toCharacterList() => split('');
+  Characters toCharacters() => Characters(this);
+  List<String> toListOfCharacters() => Characters(this).toList();
 
 }
 
@@ -73,7 +75,7 @@ extension NumIterableExtension on Iterable<num> {
 
 }
 
-extension IterableExtension<T> on Iterable<T> {
+extension IterableHelpers<T> on Iterable<T> {
 
   int gcdBy(int Function(T element) valueSelector) => map(valueSelector).gcd;
 

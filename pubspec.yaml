@@ -33,6 +33,7 @@ dependencies:
   string_scanner: 1.2.0
   petitparser: 6.0.2
   sealed_unions: 3.0.3+1
+  characters: 1.3.0
 
   # Collections and querying
   collection: 1.18.0

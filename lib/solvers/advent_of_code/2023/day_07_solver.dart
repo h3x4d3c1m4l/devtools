@@ -1,8 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
-import 'package:h3x_devtools/solvers/helpers/extensions.dart';
 
-typedef HandAndBid = ({int bid, List<String> hand});
+typedef _HandAndBid = ({int bid, List<String> hand});
 
 class Day07Solver extends AdventOfCode2023Solver {
 
@@ -17,7 +15,7 @@ class Day07Solver extends AdventOfCode2023Solver {
   @override
   String getSolution(String input) {
     List<String> inputLines = input.splitLines().toList();
-    List<HandAndBid> handsAndBids = inputLines.map((line) {
+    List<_HandAndBid> handsAndBids = inputLines.map((line) {
       var rawHandAndBid = line.split(' ');
       return (hand: rawHandAndBid[0].split(''), bid: int.parse(rawHandAndBid[1]));
     }).toList();
@@ -111,6 +109,7 @@ class Day07Solver extends AdventOfCode2023Solver {
 }
 
 enum _HandType {
+
   fiveOfAKind,
   fourOfAKind,
   fullHouse,
@@ -118,4 +117,5 @@ enum _HandType {
   twoPair,
   onePair,
   highCard,
+
 }

@@ -1,11 +1,8 @@
-import 'dart:math';
 
-import 'package:collection/collection.dart';
 import 'package:darq/darq.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
-import 'package:h3x_devtools/solvers/helpers/extensions.dart';
 
-typedef CardInput = ({List<int> myNumbers, List<int> winningNumbers});
+typedef _CardInput = ({List<int> myNumbers, List<int> winningNumbers});
 
 class Day04Solver extends AdventOfCode2023Solver {
 
@@ -15,7 +12,7 @@ class Day04Solver extends AdventOfCode2023Solver {
   @override
   String getSolution(String input) {
     // Parse input
-    List<CardInput> cards = input
+    List<_CardInput> cards = input
         .splitLines()
         .map(
           (x) => (
@@ -41,7 +38,7 @@ class Day04Solver extends AdventOfCode2023Solver {
     // Part 2
     Map<int, int> cardDuplications = {};
     for (int i = 0; i < cards.length; i++) {
-      CardInput card = cards[i];
+      _CardInput card = cards[i];
       int winningNumberCount = card.myNumbers.intersect(card.winningNumbers).count();
 
       // Keep into account that the card may have copies

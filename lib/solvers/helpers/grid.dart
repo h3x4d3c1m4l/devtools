@@ -72,16 +72,3 @@ class Grid<T> {
   }
 
 }
-
-enum Directions {
-
-  north,
-  northEast,
-  east,
-  southEast,
-  south,
-  southWest,
-  west,
-  northWest,
-
-}

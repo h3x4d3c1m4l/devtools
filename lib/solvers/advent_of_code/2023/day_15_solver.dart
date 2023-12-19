@@ -1,8 +1,7 @@
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
 
 class Day15Solver extends AdventOfCode2023Solver {
+
   @override
   final int dayNumber = 15;
 
@@ -18,7 +17,7 @@ class Day15Solver extends AdventOfCode2023Solver {
     // Part 2
     List<List<(String, int)>> lensBoxes = List.generate(256, (index) => <(String, int)>[]);
     for (var rawInstruction in rawInstructions) {
-      String lensLabel = rawInstruction.characters.takeWhile((char) => char != '=' && char != '-').join();
+      String lensLabel = rawInstruction.toCharacters().takeWhile((char) => char != '=' && char != '-').join();
 
       // Find box by hash
       int boxIndex = _holidayAsciiStringHelperAlgorithm(lensLabel);
@@ -56,4 +55,5 @@ class Day15Solver extends AdventOfCode2023Solver {
   int _holidayAsciiStringHelperAlgorithm(String str) {
     return str.codeUnits.fold(0, (previousValue, element) => ((previousValue + element) * 17) % 256);
   }
+
 }

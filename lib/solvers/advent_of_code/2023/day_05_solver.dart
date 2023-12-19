@@ -1,7 +1,6 @@
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
-import 'package:h3x_devtools/solvers/helpers/extensions.dart';
 
-typedef ObjectMap = ({int destination, int length, int source});
+typedef _ObjectMap = ({int destination, int length, int source});
 
 class Day05Solver extends AdventOfCode2023Solver {
 
@@ -78,14 +77,14 @@ class Day05Solver extends AdventOfCode2023Solver {
     return 'Part 1: $part1\nPart 2: $part2';
   }
 
-  List<ObjectMap> _lineSetToMap(String y) {
+  List<_ObjectMap> _lineSetToMap(String y) {
     return y.splitLines().skip(1).map((line) {
         var s = line.split(' ');
         return (destination: int.parse(s[0]), source: int.parse(s[1]), length: int.parse(s[2]));
       }).toList();
   }
 
-  int _resolveSourceToDestination(int source, List<ObjectMap> map) {
+  int _resolveSourceToDestination(int source, List<_ObjectMap> map) {
     for (var mapLines in map) {
       if (source >= mapLines.source && source < (mapLines.source + mapLines.length)) {
         return source - mapLines.source + mapLines.destination;
@@ -94,7 +93,7 @@ class Day05Solver extends AdventOfCode2023Solver {
     return source;
   }
 
-  int _resolveDestinationToSource(int destination, List<ObjectMap> map) {
+  int _resolveDestinationToSource(int destination, List<_ObjectMap> map) {
     for (var mapLines in map) {
       if (destination >= mapLines.destination && destination < (mapLines.destination + mapLines.length)) {
         return destination - mapLines.destination + mapLines.source;

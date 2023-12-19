@@ -1,10 +1,6 @@
-import 'dart:math';
-
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
-import 'package:h3x_devtools/solvers/helpers/extensions.dart';
-import 'package:h3x_devtools/solvers/helpers/grid.dart';
 
-typedef RayState = ({int x, int y, Directions direction});
+typedef _RayState = ({int x, int y, CardinalDirection direction});
 
 class Day16Solver extends AdventOfCode2023Solver {
 
@@ -19,30 +15,30 @@ class Day16Solver extends AdventOfCode2023Solver {
     });
 
     // Part 1
-    int part1 = _getEnergizedTileCount(grid, 0, 0, Directions.east);
+    int part1 = _getEnergizedTileCount(grid, 0, 0, CardinalDirection.east);
 
     // Part 2
     int part2 = 0;
     for (int x = 0; x < grid.width; x++) {
-      part2 = max(part2, _getEnergizedTileCount(grid, x, 0, Directions.south));
-      part2 = max(part2, _getEnergizedTileCount(grid, x, grid.height - 1, Directions.north));
+      part2 = max(part2, _getEnergizedTileCount(grid, x, 0, CardinalDirection.south));
+      part2 = max(part2, _getEnergizedTileCount(grid, x, grid.height - 1, CardinalDirection.north));
     }
     for (int y = 1; y < grid.height - 1; y++) {
-      part2 = max(part2, _getEnergizedTileCount(grid, 0, y, Directions.east));
-      part2 = max(part2, _getEnergizedTileCount(grid, grid.width - 1, y, Directions.west));
+      part2 = max(part2, _getEnergizedTileCount(grid, 0, y, CardinalDirection.east));
+      part2 = max(part2, _getEnergizedTileCount(grid, grid.width - 1, y, CardinalDirection.west));
     }
 
     return 'Part 1: $part1\nPart 2: $part2';
   }
 
-  int _getEnergizedTileCount(Grid<_Tile> grid, int xStart, int yStart, Directions startDirection) {
-    List<RayState> currentBeams = [(x: xStart, y: yStart, direction: startDirection)];
+  int _getEnergizedTileCount(Grid<_Tile> grid, int xStart, int yStart, CardinalDirection startDirection) {
+    List<_RayState> currentBeams = [(x: xStart, y: yStart, direction: startDirection)];
     Set<({int x, int y})> energizedTiles = {};
-    Set<RayState> followedUpRayStates = {};
+    Set<_RayState> followedUpRayStates = {};
 
     while (currentBeams.isNotEmpty) {
-      List<RayState> beamsToAdd = [];
-      for (RayState beam in currentBeams) {
+      List<_RayState> beamsToAdd = [];
+      for (_RayState beam in currentBeams) {
         energizedTiles.add((x: beam.x, y: beam.y));
 
         bool canGoNorth = beam.y > 0, canGoSouth = beam.y < grid.height - 1;
@@ -50,42 +46,42 @@ class Day16Solver extends AdventOfCode2023Solver {
 
         switch (grid.getValue(x: beam.x, y: beam.y)) {
           // Handle '|' and '.'
-          case _Tile.vSplitter when beam.direction == Directions.north:
-          case _Tile.empty when beam.direction == Directions.north:
-            if (canGoNorth) beamsToAdd.add((x: beam.x, y: beam.y - 1, direction: Directions.north));
-          case _Tile.vSplitter when beam.direction == Directions.south:
-          case _Tile.empty when beam.direction == Directions.south:
-            if (canGoSouth) beamsToAdd.add((x: beam.x, y: beam.y + 1, direction: Directions.south));
-          case _Tile.vSplitter when beam.direction == Directions.east:
-          case _Tile.vSplitter when beam.direction == Directions.west:
-            if (canGoNorth) beamsToAdd.add((x: beam.x, y: beam.y - 1, direction: Directions.north));
-            if (canGoSouth) beamsToAdd.add((x: beam.x, y: beam.y + 1, direction: Directions.south));
+          case _Tile.vSplitter when beam.direction == CardinalDirection.north:
+          case _Tile.empty when beam.direction == CardinalDirection.north:
+            if (canGoNorth) beamsToAdd.add((x: beam.x, y: beam.y - 1, direction: CardinalDirection.north));
+          case _Tile.vSplitter when beam.direction == CardinalDirection.south:
+          case _Tile.empty when beam.direction == CardinalDirection.south:
+            if (canGoSouth) beamsToAdd.add((x: beam.x, y: beam.y + 1, direction: CardinalDirection.south));
+          case _Tile.vSplitter when beam.direction == CardinalDirection.east:
+          case _Tile.vSplitter when beam.direction == CardinalDirection.west:
+            if (canGoNorth) beamsToAdd.add((x: beam.x, y: beam.y - 1, direction: CardinalDirection.north));
+            if (canGoSouth) beamsToAdd.add((x: beam.x, y: beam.y + 1, direction: CardinalDirection.south));
 
           // Handle '-' and '.'
-          case _Tile.hSplitter when beam.direction == Directions.east:
-          case _Tile.empty when beam.direction == Directions.east:
-            if (canGoEast) beamsToAdd.add((x: beam.x + 1, y: beam.y, direction: Directions.east));
-          case _Tile.hSplitter when beam.direction == Directions.west:
-          case _Tile.empty when beam.direction == Directions.west:
-            if (canGoWest) beamsToAdd.add((x: beam.x - 1, y: beam.y, direction: Directions.west));
-          case _Tile.hSplitter when beam.direction == Directions.north:
-          case _Tile.hSplitter when beam.direction == Directions.south:
-            if (canGoWest) beamsToAdd.add((x: beam.x - 1, y: beam.y, direction: Directions.west));
-            if (canGoEast) beamsToAdd.add((x: beam.x + 1, y: beam.y, direction: Directions.east));
+          case _Tile.hSplitter when beam.direction == CardinalDirection.east:
+          case _Tile.empty when beam.direction == CardinalDirection.east:
+            if (canGoEast) beamsToAdd.add((x: beam.x + 1, y: beam.y, direction: CardinalDirection.east));
+          case _Tile.hSplitter when beam.direction == CardinalDirection.west:
+          case _Tile.empty when beam.direction == CardinalDirection.west:
+            if (canGoWest) beamsToAdd.add((x: beam.x - 1, y: beam.y, direction: CardinalDirection.west));
+          case _Tile.hSplitter when beam.direction == CardinalDirection.north:
+          case _Tile.hSplitter when beam.direction == CardinalDirection.south:
+            if (canGoWest) beamsToAdd.add((x: beam.x - 1, y: beam.y, direction: CardinalDirection.west));
+            if (canGoEast) beamsToAdd.add((x: beam.x + 1, y: beam.y, direction: CardinalDirection.east));
 
           // Handle '\' and '/'
-          case _Tile.bMirror when beam.direction == Directions.north:
-          case _Tile.fMirror when beam.direction == Directions.south:
-            if (canGoWest) beamsToAdd.add((x: beam.x - 1, y: beam.y, direction: Directions.west));
-          case _Tile.bMirror when beam.direction == Directions.east:
-          case _Tile.fMirror when beam.direction == Directions.west:
-            if (canGoSouth) beamsToAdd.add((x: beam.x, y: beam.y + 1, direction: Directions.south));
-          case _Tile.bMirror when beam.direction == Directions.south:
-          case _Tile.fMirror when beam.direction == Directions.north:
-            if (canGoEast) beamsToAdd.add((x: beam.x + 1, y: beam.y, direction: Directions.east));
-          case _Tile.bMirror when beam.direction == Directions.west:
-          case _Tile.fMirror when beam.direction == Directions.east:
-            if (canGoNorth) beamsToAdd.add((x: beam.x, y: beam.y - 1, direction: Directions.north));
+          case _Tile.bMirror when beam.direction == CardinalDirection.north:
+          case _Tile.fMirror when beam.direction == CardinalDirection.south:
+            if (canGoWest) beamsToAdd.add((x: beam.x - 1, y: beam.y, direction: CardinalDirection.west));
+          case _Tile.bMirror when beam.direction == CardinalDirection.east:
+          case _Tile.fMirror when beam.direction == CardinalDirection.west:
+            if (canGoSouth) beamsToAdd.add((x: beam.x, y: beam.y + 1, direction: CardinalDirection.south));
+          case _Tile.bMirror when beam.direction == CardinalDirection.south:
+          case _Tile.fMirror when beam.direction == CardinalDirection.north:
+            if (canGoEast) beamsToAdd.add((x: beam.x + 1, y: beam.y, direction: CardinalDirection.east));
+          case _Tile.bMirror when beam.direction == CardinalDirection.west:
+          case _Tile.fMirror when beam.direction == CardinalDirection.east:
+            if (canGoNorth) beamsToAdd.add((x: beam.x, y: beam.y - 1, direction: CardinalDirection.north));
 
           default:
             throw Exception("This is impossible");

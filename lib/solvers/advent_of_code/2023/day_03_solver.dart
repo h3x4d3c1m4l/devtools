@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:h3x_devtools/solvers/advent_of_code/2023/aoc_2023_solver.dart';
-import 'package:h3x_devtools/solvers/helpers/extensions.dart';
 
 class Day03Solver extends AdventOfCode2023Solver {
 
