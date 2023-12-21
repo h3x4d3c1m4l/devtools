@@ -465,18 +465,18 @@ packages:
     dependency: "direct main"
     description:
       name: mobx
-      sha256: "537bee828f30a971ffd7d29d8e22bbdec5c9f5899ad4b01f3206a21eeb5c75de"
+      sha256: "1226c02cdb2a5f321be977a9a0d5cc0c9e6e395b72be3bca90b2299ff0845198"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.3"
+    version: "2.2.3+1"
   mobx_codegen:
     dependency: "direct dev"
     description:
       name: mobx_codegen
-      sha256: "52a6904b93fa1ceadc5ed4cd67e24fd05a21340d39cff0a213179fc83e179dba"
+      sha256: "375df14ff39b708f942a7c1fbb3b83619e71733f6142089fc42d0c16b71edb74"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0"
+    version: "2.4.1"
   nested:
     dependency: transitive
     description:

@@ -23,7 +23,7 @@ dependencies:
   syntax_highlight: 0.3.0
 
   # State management
-  mobx: 2.2.3
+  mobx: 2.2.3+1
   flutter_mobx: 2.2.0+1
 
   # HTTP client
@@ -61,7 +61,7 @@ dev_dependencies:
   build_runner: 2.4.7
 
   # State management
-  mobx_codegen: 2.4.0
+  mobx_codegen: 2.4.1
 
 flutter:
   uses-material-design: true
