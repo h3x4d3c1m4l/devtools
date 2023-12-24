@@ -89,4 +89,6 @@ extension IterableHelpers<T> on Iterable<T> {
   T orderByThenLast<TOrderKey extends Comparable>(TOrderKey Function(T element) valueSelector) => reduce(
       (value, element) => Comparable.compare(valueSelector(element), valueSelector(value)) > 0 ? element : value);
 
+  List<T> toUnmodifiableList() => List.unmodifiable(this);
+
 }

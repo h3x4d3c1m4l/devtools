@@ -15,7 +15,7 @@ class Day10Solver extends AdventOfCode2023Solver {
   
     // Part 1
     Map<(int x, int y), bool> mainLoopTiles = {};
-    final (:int x, :int y) = grid.getCoordinatesOf(_Tile.startingPosition);
+    final (:int x, :int y) = grid.getCoordinatesOf(_Tile.startingPosition)!;
 
     int currentX = x, currentY = y;
     CardinalDirection? currentDirection;

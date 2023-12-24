@@ -1,50 +1,40 @@
+import 'package:h3x_devtools/solvers/helpers/extensions.dart';
+
 class Grid<T> {
 
-  final int width, height;
-  final List<T> _grid;
+  late final List<List<Cell<T>>> rows;
+  late final List<List<Cell<T>>> columns;
 
-  Grid.filled({required this.width, required this.height, required T initialValue})
-      : _grid = List.filled(width * height, initialValue);
+  int get width => columns.length;
+  int get height => rows.length;
 
-  Grid.generated({required this.width, required this.height, required T Function(int x, int y) getValue})
-      : _grid = List.generate(width * height, (index) {
-          final (:int x, :int y) = _getCoordinates(width: width, arrayIndex: index);
-          return getValue(x, y);
-        });
-
-  // ////////////// //
-  // Static helpers //
-  // ////////////// //
-
-  static int _getBackingArrayIndex({required int width, required int x, required int y}) {
-    return width * y + x;
+  Grid.filled({required int width, required int height, required T initialValue}) {
+    rows = List.generate(
+      height,
+      (rIndex) => List.generate(width, (cIndex) => Cell(initialValue)).toUnmodifiableList(),
+    ).toUnmodifiableList();
+    columns = Iterable.generate(width).map((cIndex) => rows.map((row) => row[cIndex]).toUnmodifiableList()).toUnmodifiableList();
   }
 
-  static ({int x, int y}) _getCoordinates({required int width, required int arrayIndex}) {
-    return (
-      x: arrayIndex % width,
-      y: arrayIndex ~/ width,
-    );
+  Grid.generated({required int width, required int height, required T Function(int x, int y) getValue}) {
+    rows = List.generate(
+      height,
+      (rIndex) => List.generate(width, (cIndex) => Cell(getValue(cIndex, rIndex))).toUnmodifiableList(),
+    ).toUnmodifiableList();
+    columns = Iterable.generate(width).map((cIndex) => rows.map((row) => row[cIndex]).toUnmodifiableList()).toUnmodifiableList();
   }
 
   // //////////////// //
   // Get/Set by index //
   // //////////////// //
 
-  T getValue({required int x, required int y}) {
-    int arrayIndex = _getBackingArrayIndex(width: width, x: x, y: y);
-    return _grid[arrayIndex];
-  }
+  T getValue({required int x, required int y}) => columns[x][y].obj;
 
-  void setValue({required int x, required int y, required T value}) {
-    int arrayIndex = _getBackingArrayIndex(width: width, x: x, y: y);
-    _grid[arrayIndex] = value;
-  }
+  void setValue({required int x, required int y, required T value}) => columns[x][y].obj = value;
   
   T replaceValue({required int x, required int y, required T newValue}) {
-    int arrayIndex = _getBackingArrayIndex(width: width, x: x, y: y);
-    T oldValue = _grid[arrayIndex];
-    _grid[arrayIndex] = newValue;
+    T oldValue = columns[x][y].obj;
+    columns[x][y].obj = newValue;
     return oldValue;
   }
 
@@ -52,14 +42,22 @@ class Grid<T> {
   // Find //
   // //// //
 
-  ({int x, int y}) getCoordinatesOfFirstWhere(bool Function(T) test) {
-    int index = _grid.indexWhere(test);
-    return _getCoordinates(width: width, arrayIndex: index);
+  ({int x, int y})? getCoordinatesOfFirstWhere(bool Function(T) test) {
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
+        if (test(rows[y][x].obj)) return (x: x, y: y);
+      } 
+    }
+    return null;
   }
 
-  ({int x, int y}) getCoordinatesOf(T item) {
-    int index = _grid.indexOf(item);
-    return _getCoordinates(width: width, arrayIndex: index);
+  ({int x, int y})? getCoordinatesOf(T item) {
+     for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
+        if (rows[y][x].obj == item) return (x: x, y: y);
+      }
+    }
+    return null;
   }
 
   // //// //
@@ -70,5 +68,16 @@ class Grid<T> {
   String toString() {
     return 'Grid<$T> ($width x $height)'; // TODO scanout of values
   }
+
+}
+
+class Cell<T> {
+
+  T obj;
+
+  Cell(this.obj);
+
+  @override
+  String toString() => obj.toString();
 
 }
