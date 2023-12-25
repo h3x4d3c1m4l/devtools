@@ -22,7 +22,8 @@ class Day14Solver extends AdventOfCode2023Solver {
     int part1 = 0;
     for (int y = 0; y < grid.height; y++) {
       for (int x = 0; x < grid.width; x++) {
-        _Tile tile = grid.getValue(x: x, y: y);
+        Coordinates coordinates = Coordinates(x, y);
+        _Tile tile = grid.getValue(coordinates);
         if (tile == _Tile.roundRock) {
           part1 += grid.height - y;
           continue;
@@ -32,7 +33,8 @@ class Day14Solver extends AdventOfCode2023Solver {
 
         // Check if rock can fall
         for (int y2 = y + 1; y2 < grid.height; y2++) {
-          _Tile otherTile = grid.getValue(x: x, y: y2);
+          Coordinates otherCoordinates = Coordinates(x, y2);
+          _Tile otherTile = grid.getValue(otherCoordinates);
           if (otherTile == _Tile.squareRock) {
             break;
           } else if (otherTile == _Tile.sand) {
@@ -40,8 +42,8 @@ class Day14Solver extends AdventOfCode2023Solver {
           }
 
           grid
-            ..setValue(x: x, y: y2, value: _Tile.sand)
-            ..setValue(x: x, y: y, value: _Tile.roundRock);
+            ..setValue(otherCoordinates, _Tile.sand)
+            ..setValue(coordinates, _Tile.roundRock);
 
           part1 += grid.height - y;
           break;

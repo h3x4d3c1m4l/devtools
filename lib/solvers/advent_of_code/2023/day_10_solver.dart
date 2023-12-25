@@ -14,41 +14,40 @@ class Day10Solver extends AdventOfCode2023Solver {
     });
   
     // Part 1
-    Map<(int x, int y), bool> mainLoopTiles = {};
-    final (:int x, :int y) = grid.getCoordinatesOf(_Tile.startingPosition)!;
+    Map<Coordinates, bool> mainLoopTiles = {};
 
-    int currentX = x, currentY = y;
+    Coordinates current = grid.getCoordinatesOf(_Tile.startingPosition)!;
     CardinalDirection? currentDirection;
     int steps = 0;
 
     while (true) {
-      final _Tile tile = grid.getValue(x: currentX, y: currentY);
+      final _Tile tile = grid.getValue(current);
       if (tile == _Tile.startingPosition && steps > 0) break;
 
-      mainLoopTiles[(currentX, currentY)] = true;
+      mainLoopTiles[current] = true;
       
       // Evaluation of possible steps based on grid bounds
-      List<(int x, int y, CardinalDirection direction, _Tile tile)> possibleNextSteps = [
-        if (currentX > 0 && tile.allowedDirections.contains(CardinalDirection.west))
-          (currentX - 1, currentY, CardinalDirection.west, grid.getValue(x: currentX - 1, y: currentY)),
-        if (currentY > 0 && tile.allowedDirections.contains(CardinalDirection.south))
-          (currentX, currentY - 1, CardinalDirection.south, grid.getValue(x: currentX, y: currentY - 1)),
-        if (currentX < (grid.width - 1) && tile.allowedDirections.contains(CardinalDirection.east))
-          (currentX + 1, currentY, CardinalDirection.east, grid.getValue(x: currentX + 1, y: currentY)),
-        if (currentY < (grid.height - 1) && tile.allowedDirections.contains(CardinalDirection.north))
-          (currentX, currentY + 1, CardinalDirection.north, grid.getValue(x: currentX, y: currentY + 1)),
+      List<(Coordinates coordinates, CardinalDirection direction, _Tile tile)> possibleNextSteps = [
+        if (current.canGoWest && tile.allowedDirections.contains(CardinalDirection.west))
+          (current.goWest(), CardinalDirection.west, grid.getValue(current.goWest())),
+        if (current.canGoNorth && tile.allowedDirections.contains(CardinalDirection.south))
+          (current.goNorth(), CardinalDirection.south, grid.getValue(current.goNorth())),
+        if (current.canGoEast && tile.allowedDirections.contains(CardinalDirection.east))
+          (current.goEast(), CardinalDirection.east, grid.getValue(current.goEast())),
+        if (current.canGoSouth && tile.allowedDirections.contains(CardinalDirection.north))
+          (current.goSouth(), CardinalDirection.north, grid.getValue(current.goSouth())),
       ];
 
-      final (int x, int y, CardinalDirection direction, _Tile _) = possibleNextSteps.firstWhere((obj) {
+      final (Coordinates coordinates, CardinalDirection direction, _Tile _) = possibleNextSteps.firstWhere((obj) {
         return 
           // Either we are on the 'start' tile and everything is possible except 'ground'
-          (currentDirection == null && obj.$4 != _Tile.ground) ||
+          (currentDirection == null && obj.$3 != _Tile.ground) ||
 
           // Or we are on any other tile and we need to make sure we don't accidentally reverse direction
-          (currentDirection != null && obj.$3 != currentDirection.opposing);
+          (currentDirection != null && obj.$2 != currentDirection.opposing);
       });
 
-      currentX = x; currentY = y; currentDirection = direction;
+      current = coordinates; currentDirection = direction;
       steps++;
     }
 
