@@ -88,6 +88,7 @@ _RoutingPaneItemExpander get _adventOfCode2023PaneItem {
       _getAdventOfCodePaneItem(2023, 14, aoc2023.Day14Solver()),
       _getAdventOfCodePaneItem(2023, 15, aoc2023.Day15Solver()),
       _getAdventOfCodePaneItem(2023, 16, aoc2023.Day16Solver()),
+      _getAdventOfCodePaneItem(2023, 18, aoc2023.Day18Solver()),
     ],
   );
 }
