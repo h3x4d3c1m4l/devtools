@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:h3x_devtools/solvers/helpers/enums.dart';
 import 'package:h3x_devtools/solvers/helpers/extensions.dart';
 
@@ -62,12 +64,84 @@ class Grid<T> {
   }
 
   // //// //
+  // Fill //
+  // //// //
+
+  // Algorithm: https://en.wikipedia.org/wiki/Flood_fill#Moving_the_recursion_into_a_data_structure
+  void floodFill4Way(Coordinates start, T replace, T replaceWith) {
+    Queue<Coordinates> q = Queue()..add(start);
+    while (q.isNotEmpty) {
+      Coordinates n = q.removeFirst();
+      if (getValue(n) != replace) continue;
+
+      setValue(n, replaceWith);
+      if (n.canGoWest) q.addLast(n.goWest());
+      if (n.canGoEast) q.addLast(n.goEast());
+      if (n.canGoNorth) q.addLast(n.goNorth());
+      if (n.canGoSouth) q.addLast(n.goSouth());
+    }
+  }
+
+  // Algorithm: https://en.wikipedia.org/wiki/Flood_fill#Span_filling
+  // For some reason it skips some parts. Also in its current form,
+  // it is not faster than floodFill4Way() at all.
+  void spanFillOptimizedNotWorking(Coordinates start, T replace, T replaceWith) {
+    if (getValue(start) != replace) return;
+    
+    int x = start.x, y = start.y;
+
+    Queue<(int, int, int, int)> s = Queue()
+      ..add((x, x, y, 1))
+      ..add((x, x, y - 1, -1));
+
+    while (s.isNotEmpty) {
+      var (x1, x2, y, dy) = s.removeFirst();
+      x = x1;
+      if (getValue(Coordinates(x, y)) == replace) {
+        while (getValue(Coordinates(x - 1, y)) == replace) {
+          setValue(Coordinates(x - 1, y), replaceWith);
+          x = x - 1;
+        }
+        if (x < x1) {
+          s.addLast((x1, x1 - 1, y - dy, -dy));
+        }
+      }
+      while (x1 <= x2) {
+        while (getValue(Coordinates(x1, y)) == replace) {
+          setValue(Coordinates(x1, y), replaceWith);
+          x1 = x1 + 1;
+        }
+        if (x1 > x) {
+          s.addLast((x, x1 - 1, y + dy, dy));
+        }
+        if (x1 - 1 > x2) {
+          s.addLast((x2 + 1, x1 - 1, y - dy, -dy));
+        }
+        x1 = x1 + 1;
+        while (x1 < x2 && getValue(Coordinates(x1, y)) != replace) {
+          x1 = x1 + 1;
+        }
+        x = x1;
+      }
+    }
+  }
+
+  // //// //
   // Misc //
   // //// //
 
   @override
   String toString() {
     return 'Grid<$T> ($width x $height)'; // TODO scanout of values
+  }
+
+  String toStringDense() {
+    return rows.fold("Grid<$T> ($width x $height)\n", (oldValue, item) {
+      return '$oldValue\n${item.map((item) {
+        // Shorten string representation to 1 char
+        return item.toString().padLeft(1).substring(0, 1);
+      }).join()}';
+    });
   }
 
 }
