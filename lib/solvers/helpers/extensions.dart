@@ -27,6 +27,7 @@ extension StringIterableExtension on Iterable<String> {
   Iterable<BigInt> get parsedAsBigInts => map(BigInt.parse);
   List<int> toIntList() => parsedAsInts.toList();
   List<BigInt> toBigIntList() => parsedAsBigInts.toList();
+  Iterable<String> whereNotEmpty() => where((str) => str.isNotEmpty);
 
 }
 
