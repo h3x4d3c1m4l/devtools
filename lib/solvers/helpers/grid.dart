@@ -16,7 +16,10 @@ class Grid<T> {
       height,
       (rIndex) => Iterable.generate(width, (cIndex) => Cell(initialValue)).toUnmodifiableList(),
     ).toUnmodifiableList();
-    columns = Iterable.generate(width).map((cIndex) => rows.map((row) => row[cIndex]).toUnmodifiableList()).toUnmodifiableList();
+
+    columns = Iterable.generate(width)
+      .map((cIndex) => rows.map((row) => row[cIndex]).toUnmodifiableList())
+      .toUnmodifiableList();
   }
 
   Grid.generated({required int width, required int height, required T Function(int x, int y) getValue}) {
@@ -24,7 +27,24 @@ class Grid<T> {
       height,
       (rIndex) => Iterable.generate(width, (cIndex) => Cell(getValue(cIndex, rIndex))).toUnmodifiableList(),
     ).toUnmodifiableList();
-    columns = Iterable.generate(width).map((cIndex) => rows.map((row) => row[cIndex]).toUnmodifiableList()).toUnmodifiableList();
+
+    columns = Iterable.generate(width)
+      .map((cIndex) => rows.map((row) => row[cIndex]).toUnmodifiableList())
+      .toUnmodifiableList();
+  }
+
+  Grid.fromStringGrid(String grid, T Function (String value) valueConverter) {
+    List<String> lines = grid.splitLines().toList();
+    int calculatedWidth = lines.first.length, calculatedHeight = lines.length;
+
+    rows = Iterable.generate(
+      calculatedHeight,
+      (rIndex) => Iterable.generate(calculatedWidth, (cIndex) => Cell<T>(valueConverter(lines[rIndex][cIndex]))).toUnmodifiableList(),
+    ).toUnmodifiableList();
+
+    columns = Iterable.generate(calculatedWidth)
+        .map((cIndex) => rows.map((row) => row[cIndex]).toUnmodifiableList())
+        .toUnmodifiableList();
   }
 
   // //////////////// //

@@ -9,10 +9,7 @@ class Day16Solver extends AdventOfCode2023Solver {
 
   @override
   String getSolution(String input) {
-    List<String> rawGridLines = input.splitLines().toList();
-    Grid<_Tile> grid = Grid.generated(width: rawGridLines.first.length, height: rawGridLines.length, getValue: (x, y) {
-      return _Tile.parseFromCharacter(rawGridLines[y][x]);
-    });
+    Grid<_Tile> grid = Grid.fromStringGrid(input, _Tile.parseFromCharacter);
 
     // Part 1
     int part1 = _getEnergizedTileCount(grid, 0, 0, CardinalDirection.east);
@@ -32,7 +29,7 @@ class Day16Solver extends AdventOfCode2023Solver {
   }
 
   int _getEnergizedTileCount(Grid<_Tile> grid, int xStart, int yStart, CardinalDirection startDirection) {
-    List<_RayState> currentBeams = [(coordinates: Coordinates(xStart, yStart), direction: startDirection)];
+    List<_RayState> currentBeams = [(coordinates: Coordinates(xStart, yStart, grid), direction: startDirection)];
     Set<Coordinates> energizedTiles = {};
     Set<_RayState> followedUpRayStates = {};
 
