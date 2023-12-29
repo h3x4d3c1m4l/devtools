@@ -7,11 +7,7 @@ class Day10Solver extends AdventOfCode2023Solver {
 
   @override
   String getSolution(String input) {
-    List<String> lines = input.toListOfLines().reversed.toList(); // Simple coordinate system where (0, 0) is "bottom left"
-    Grid<_Tile> grid = Grid<_Tile>.generated(width: lines.first.length, height: lines.length, getValue: (x, y) {
-      String character = lines[y][x];
-      return _Tile.fromCharacter(character);
-    });
+    Grid<_Tile> grid = Grid<_Tile>.fromString(input, _Tile.fromCharacter)..flipVertically();
   
     // Part 1
     Map<Coordinates, bool> mainLoopTiles = {};
@@ -77,18 +73,8 @@ enum _Tile {
 
   const _Tile(this.character, this.allowedDirections);
 
-  static _Tile fromCharacter(String character) {
-    return switch (character) {
-      '|' => _Tile.verticalPipe,
-      '-' => _Tile.horizontalPipe,
-      'L' => _Tile.northEastBend,
-      'J' => _Tile.northWestBend,
-      '7' => _Tile.southWestBend,
-      'F' => _Tile.southEastBend,
-      '.' => _Tile.ground,
-      'S' => _Tile.startingPosition,
-      _ => throw Exception("Cannot parse '$character' into Tile"),
-    };
+  factory _Tile.fromCharacter(String character) {
+    return values.firstWhere((tile) => tile.character == character);
   }
 
   @override

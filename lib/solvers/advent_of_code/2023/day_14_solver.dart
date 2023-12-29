@@ -8,15 +8,7 @@ class Day14Solver extends AdventOfCode2023Solver {
   @override
   String getSolution(String input) {
     // Parse input
-    var lines = input.splitLines().toList();
-    Grid<_Tile> grid = Grid.generated(width: lines[0].length, height: lines.length, getValue: (x, y) {
-      return switch (lines[y][x]) {
-        '#' => _Tile.squareRock,
-        'O' => _Tile.roundRock,
-        '.' => _Tile.sand,
-        _ => throw Exception("Could not parse input character")
-      };
-    });
+    Grid<_Tile> grid = Grid.fromString(input, _Tile.fromCharacter);
 
     // Part 1
     int part1 = 0;
@@ -60,7 +52,17 @@ class Day14Solver extends AdventOfCode2023Solver {
 }
 
 enum _Tile {
-  roundRock,
-  squareRock,
-  sand,
+
+  roundRock('O'),
+  squareRock('#'),
+  sand('.');
+
+  final String character;
+
+  const _Tile(this.character);
+
+  factory _Tile.fromCharacter(String character) {
+    return values.firstWhere((tile) => tile.character == character);
+  }
+
 }

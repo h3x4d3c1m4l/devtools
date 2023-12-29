@@ -5,8 +5,8 @@ import 'package:h3x_devtools/solvers/helpers/extensions.dart';
 
 class Grid<T> {
 
-  late final List<List<Cell<T>>> rows;
-  late final List<List<Cell<T>>> columns;
+  late List<List<Cell<T>>> rows;
+  late List<List<Cell<T>>> columns;
 
   int get width => columns.length;
   int get height => rows.length;
@@ -18,8 +18,8 @@ class Grid<T> {
     ).toUnmodifiableList();
 
     columns = Iterable.generate(width)
-      .map((cIndex) => rows.map((row) => row[cIndex]).toUnmodifiableList())
-      .toUnmodifiableList();
+        .map((cIndex) => rows.map((row) => row[cIndex]).toUnmodifiableList())
+        .toUnmodifiableList();
   }
 
   Grid.generated({required int width, required int height, required T Function(int x, int y) getValue}) {
@@ -29,11 +29,11 @@ class Grid<T> {
     ).toUnmodifiableList();
 
     columns = Iterable.generate(width)
-      .map((cIndex) => rows.map((row) => row[cIndex]).toUnmodifiableList())
-      .toUnmodifiableList();
+        .map((cIndex) => rows.map((row) => row[cIndex]).toUnmodifiableList())
+        .toUnmodifiableList();
   }
 
-  Grid.fromStringGrid(String grid, T Function (String value) valueConverter) {
+  Grid.fromString(String grid, T Function (String value) valueConverter) {
     List<String> lines = grid.splitLines().toList();
     int calculatedWidth = lines.first.length, calculatedHeight = lines.length;
 
@@ -81,6 +81,26 @@ class Grid<T> {
       }
     }
     return null;
+  }
+
+  // //// //
+  // Flip //
+  // //// //
+
+  void flipVertically() {
+    rows = rows.reversed.toUnmodifiableList();
+    columns = columns.map((column) => column.reversed.toUnmodifiableList()).toUnmodifiableList();
+  }
+
+  void flipHorizontally() {
+    columns = columns.reversed.toUnmodifiableList();
+    rows = rows.map((row) => row.reversed.toUnmodifiableList()).toUnmodifiableList();
+  }
+
+  void transpose() {
+    var rows = this.rows;
+    this.rows = columns;
+    columns = rows;
   }
 
   // //// //

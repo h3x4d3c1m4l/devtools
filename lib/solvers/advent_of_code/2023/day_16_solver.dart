@@ -9,7 +9,7 @@ class Day16Solver extends AdventOfCode2023Solver {
 
   @override
   String getSolution(String input) {
-    Grid<_Tile> grid = Grid.fromStringGrid(input, _Tile.parseFromCharacter);
+    Grid<_Tile> grid = Grid.fromString(input, _Tile.parseFromCharacter);
 
     // Part 1
     int part1 = _getEnergizedTileCount(grid, 0, 0, CardinalDirection.east);
