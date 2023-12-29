@@ -16,3 +16,4 @@ export 'day_16_solver.dart';
 export 'day_18_solver.dart';
 export 'day_19_solver.dart';
 export 'day_21_solver.dart';
+export 'day_23_solver.dart';
