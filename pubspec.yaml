@@ -13,7 +13,7 @@ dependencies:
   flutter: { sdk: flutter }
 
   # UI
-  fluent_ui: 4.8.4
+  fluent_ui: 4.8.5
   intl: 0.18.1
   google_fonts: 6.1.0
   go_router: 13.0.1
@@ -56,7 +56,7 @@ dev_dependencies:
   flutter_lints: 3.0.1
 
   # Code generation
-  build_runner: 2.4.7
+  build_runner: 2.4.8
 
   # State management
   mobx_codegen: 2.6.0+1
