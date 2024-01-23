@@ -39,7 +39,7 @@ dependencies:
   darq: 2.0.0
 
   # URL launching
-  url_launcher: 6.2.3
+  url_launcher: 6.2.4
   
   # Persistence
   flutter_secure_storage: 9.0.0
