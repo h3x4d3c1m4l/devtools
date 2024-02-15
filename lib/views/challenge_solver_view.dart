@@ -211,7 +211,7 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
     String solverCodeAssetPath = manifestMap.entries.where((entry) => entry.key.contains(solverCodeFilename) && entry.key.contains(year)).single.value.first;
     String code = await rootBundle.loadString(solverCodeAssetPath);
 
-    if (mounted) {
+    if (context.mounted) {
       await _openCodeDialog(context, code);
     }
   }
