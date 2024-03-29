@@ -16,7 +16,7 @@ dependencies:
   fluent_ui: 4.8.6
   intl: 0.18.1
   google_fonts: 6.2.1
-  go_router: 13.2.1
+  go_router: 13.2.2
   particle_field: 1.0.0
   live_background: 0.1.3
   syntax_highlight: 0.4.0
@@ -56,7 +56,7 @@ dev_dependencies:
   flutter_lints: 3.0.2
 
   # Code generation
-  build_runner: 2.4.8
+  build_runner: 2.4.9
 
   # State management
   mobx_codegen: 2.6.1
