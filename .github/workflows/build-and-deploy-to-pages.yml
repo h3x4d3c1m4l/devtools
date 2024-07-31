@@ -54,7 +54,7 @@ jobs:
       run: flutter analyze
 
     - name: Build web
-      run: flutter build web --release --wasm --base-href '/devtools/' --web-renderer canvaskit
+      run: flutter build web --release --wasm --base-href '/devtools/'
 
     - name: Fix permissions
       run: |
