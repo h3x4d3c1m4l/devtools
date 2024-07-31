@@ -43,7 +43,7 @@ dependencies:
 
   # Persistence
   flutter_secure_storage: 9.2.2
-  shared_preferences: 2.2.3
+  shared_preferences: 2.3.0
 
   # Misc
   rnd: 0.2.0
