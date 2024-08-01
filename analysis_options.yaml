@@ -1,11 +1,17 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
+  # More info: https://dart.dev/tools/analysis
   exclude:
+    - 'build/**'
     - '**/*.g.dart'
     - '**/*.freezed.dart'
     - '**/*.generated.dart'
     - '**/*.json.dart'
+  language:
+    # TODO... fix dynamic usage :-(
+    # strict-casts: true
+    # strict-raw-types: true
 
 linter:
   # More info: https://dart.dev/tools/linter-rules
@@ -15,7 +21,7 @@ linter:
     - annotate_redeclares
     - avoid_bool_literals_in_conditional_expressions
     - avoid_dynamic_calls
-    - avoid_field_initializers_in_const_classes 
+    - avoid_field_initializers_in_const_classes
     - avoid_private_typedef_functions
     - avoid_slow_async_io
     - avoid_type_to_string
@@ -63,4 +69,3 @@ linter:
     - use_named_constants
     - use_string_buffers
     - use_to_and_as_if_applicable
-
