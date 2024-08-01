@@ -49,6 +49,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Coding Challenges Tool',
       darkTheme: FluentThemeData.dark(),
       routerConfig: _router,
+      debugShowCheckedModeBanner: false,
     );
   }
 
@@ -70,6 +71,13 @@ final _router = GoRouter(navigatorKey: _rootNavigatorKey, routes: [
         appBar: const NavigationAppBar(
           title: Text('h3x4d3c1m4l\'s Coding Challenges Tool'),
           automaticallyImplyLeading: false,
+          actions: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text("Running on ${kIsWasm ? 'WASM' : kIsWeb ? 'JS' : 'desktop/mobile'}"),
+            ),
+          ),
         ),
         pane: NavigationPane(
           selected: _calculateSelectedIndex(context),
