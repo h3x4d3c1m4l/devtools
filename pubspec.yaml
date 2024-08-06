@@ -16,7 +16,7 @@ dependencies:
   fluent_ui: 4.9.0
   intl: any
   google_fonts: 6.2.1
-  go_router: 14.2.2
+  go_router: 14.2.3
   particle_field: 1.0.0
   live_background: 0.1.3
   syntax_highlight: 0.4.0
