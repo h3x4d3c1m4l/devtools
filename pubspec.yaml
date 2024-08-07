@@ -6,14 +6,14 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: '>=3.5.0 <4.0.0'
 
 dependencies:
   # Flutter framework
   flutter: { sdk: flutter }
 
   # UI
-  fluent_ui: 4.9.0
+  fluent_ui: 4.9.1
   intl: any
   google_fonts: 6.2.1
   go_router: 14.2.3
@@ -59,7 +59,7 @@ dev_dependencies:
   flutter_lints: 4.0.0
 
   # Code generation
-  build_runner: 2.4.11
+  build_runner: 2.4.12
 
   # State management
   mobx_codegen: 2.6.1
