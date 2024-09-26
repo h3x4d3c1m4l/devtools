@@ -56,7 +56,7 @@ dev_dependencies:
   flutter_test: { sdk: flutter }
 
   # Code quality
-  flutter_lints: 4.0.0
+  flutter_lints: 5.0.0
 
   # Code generation
   build_runner: 2.4.12
