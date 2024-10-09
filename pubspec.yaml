@@ -13,7 +13,7 @@ dependencies:
   flutter: { sdk: flutter }
 
   # UI
-  fluent_ui: 4.9.1
+  fluent_ui: 4.9.2
   intl: any
   google_fonts: 6.2.1
   go_router: 14.3.0
