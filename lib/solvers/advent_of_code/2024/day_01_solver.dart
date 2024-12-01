@@ -13,13 +13,10 @@ class Day01Solver extends AdventOfCode2024Solver {
     List<int> list1Sorted = locationIdGroups.map((group) => group[0]).toList()..sort();
     List<int> list2Sorted = locationIdGroups.map((group) => group[1]).toList()..sort();
 
-    int totalDistance = list1Sorted.foldIndexed(0, (index, previous, element) => previous + (element - list2Sorted[index]).abs());
+    int totalDistance = list1Sorted.foldIndexed(0, (i, prev, elem) => prev + (elem - list2Sorted[i]).abs());
 
     // Part 2
-    List<int> list1 = locationIdGroups.map((group) => group[0]).toList();
-    List<int> list2 = locationIdGroups.map((group) => group[1]).toList();
-
-    int totalSimilarity = list1.foldIndexed(0, (index, previous, element) => previous + element * list2.countValueOccurances(element));
+    int totalSimilarity = list1Sorted.foldIndexed(0, (_, prev, elem) => prev + elem * list2Sorted.countValueOccurances(elem));
 
     return 'Total distance: $totalDistance, total similarity: $totalSimilarity';
   }
