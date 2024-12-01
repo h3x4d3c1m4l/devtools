@@ -19,7 +19,7 @@ class Day01Solver extends AdventOfCode2024Solver {
     List<int> list1 = locationIdGroups.map((group) => group[0]).toList();
     List<int> list2 = locationIdGroups.map((group) => group[1]).toList();
 
-    double totalSimilarity = list1.foldIndexed(0, (index, previous, element) => previous + element * list2.countValueOccurances(element));
+    int totalSimilarity = list1.foldIndexed(0, (index, previous, element) => previous + element * list2.countValueOccurances(element));
 
     return 'Total distance: $totalDistance, total similarity: $totalSimilarity';
   }

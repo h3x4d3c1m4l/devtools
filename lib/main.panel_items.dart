@@ -38,8 +38,8 @@ _RoutingPaneItemExpander get _adventOfCode2021PaneItem {
     title: const Text('Advent of Code 2021'),
     routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
     items: [
-      _getAdventOfCodePaneItem(2021, 01, aoc2021.Day01Solver()),
-      _getAdventOfCodePaneItem(2021, 02, aoc2021.Day02Solver()),
+      _getAdventOfCodePaneItem(aoc2021.Day01Solver()),
+      _getAdventOfCodePaneItem(aoc2021.Day02Solver()),
     ],
   );
 }
@@ -51,18 +51,18 @@ _RoutingPaneItemExpander get _adventOfCode2022PaneItem {
     title: const Text('Advent of Code 2022'),
     routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
     items: [
-      _getAdventOfCodePaneItem(2022, 01, aoc2022.Day01Solver()),
-      _getAdventOfCodePaneItem(2022, 02, aoc2022.Day02Solver()),
-      _getAdventOfCodePaneItem(2022, 03, aoc2022.Day03Solver()),
-      _getAdventOfCodePaneItem(2022, 04, aoc2022.Day04Solver()),
-      _getAdventOfCodePaneItem(2022, 05, aoc2022.Day05Solver()),
-      _getAdventOfCodePaneItem(2022, 06, aoc2022.Day06Solver()),
-      _getAdventOfCodePaneItem(2022, 07, aoc2022.Day07Solver()),
-      _getAdventOfCodePaneItem(2022, 08, aoc2022.Day08Solver()),
-      _getAdventOfCodePaneItem(2022, 09, aoc2022.Day09Solver()),
-      _getAdventOfCodePaneItem(2022, 10, aoc2022.Day10Solver()),
-      _getAdventOfCodePaneItem(2022, 13, aoc2022.Day13Solver()),
-      _getAdventOfCodePaneItem(2022, 14, aoc2022.Day14Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day01Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day02Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day03Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day04Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day05Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day06Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day07Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day08Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day09Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day10Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day13Solver()),
+      _getAdventOfCodePaneItem(aoc2022.Day14Solver()),
     ],
   );
 }
@@ -74,25 +74,25 @@ _RoutingPaneItemExpander get _adventOfCode2023PaneItem {
     title: const Text('Advent of Code 2023'),
     routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
     items: [
-      _getAdventOfCodePaneItem(2023, 01, aoc2023.Day01Solver()),
-      _getAdventOfCodePaneItem(2023, 02, aoc2023.Day02Solver()),
-      _getAdventOfCodePaneItem(2023, 03, aoc2023.Day03Solver()),
-      _getAdventOfCodePaneItem(2023, 04, aoc2023.Day04Solver()),
-      _getAdventOfCodePaneItem(2023, 05, aoc2023.Day05Solver()),
-      _getAdventOfCodePaneItem(2023, 06, aoc2023.Day06Solver()),
-      _getAdventOfCodePaneItem(2023, 07, aoc2023.Day07Solver()),
-      _getAdventOfCodePaneItem(2023, 08, aoc2023.Day08Solver()),
-      _getAdventOfCodePaneItem(2023, 09, aoc2023.Day09Solver()),
-      _getAdventOfCodePaneItem(2023, 10, aoc2023.Day10Solver()),
-      _getAdventOfCodePaneItem(2023, 11, aoc2023.Day11Solver()),
-      _getAdventOfCodePaneItem(2023, 13, aoc2023.Day13Solver()),
-      _getAdventOfCodePaneItem(2023, 14, aoc2023.Day14Solver()),
-      _getAdventOfCodePaneItem(2023, 15, aoc2023.Day15Solver()),
-      _getAdventOfCodePaneItem(2023, 16, aoc2023.Day16Solver()),
-      _getAdventOfCodePaneItem(2023, 18, aoc2023.Day18Solver()),
-      _getAdventOfCodePaneItem(2023, 19, aoc2023.Day19Solver()),
-      _getAdventOfCodePaneItem(2023, 21, aoc2023.Day21Solver()),
-      _getAdventOfCodePaneItem(2023, 23, aoc2023.Day23Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day01Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day02Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day03Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day04Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day05Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day06Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day07Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day08Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day09Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day10Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day11Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day13Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day14Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day15Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day16Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day18Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day19Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day21Solver()),
+      _getAdventOfCodePaneItem(aoc2023.Day23Solver()),
     ],
   );
 }
@@ -104,20 +104,20 @@ _RoutingPaneItemExpander get _adventOfCode2024PaneItem {
     title: const Text('Advent of Code 2024'),
     routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
     items: [
-      _getAdventOfCodePaneItem(2024, 01, aoc2024.Day01Solver()),
+      _getAdventOfCodePaneItem(aoc2024.Day01Solver()),
     ],
   );
 }
 
-_RoutingPaneItem _getAdventOfCodePaneItem(int year, int day, Solver solver) {
-  String dayString = _dayNumberFormat.format(day);
+_RoutingPaneItem _getAdventOfCodePaneItem(AdventOfCodeSolver solver) {
+  String dayString = _dayNumberFormat.format(solver.dayNumber);
 
   return _RoutingPaneItem(
-    routePath: '/aoc$year/day$day',
+    routePath: '/aoc${solver.yearNumber}/day${solver.dayNumber}',
     icon: const Icon(FluentIcons.issue_solid),
     title: Text('Day $dayString'),
     routeBodyBuilder: (context, state) => ChallengeSolverView(
-      title: "AoC $year - Day $dayString",
+      title: "AoC ${solver.yearNumber} - Day $dayString",
       solver: solver,
       openCodeDialog: state.uri.queryParameters['openCodeView'] == 'true',
     ),
