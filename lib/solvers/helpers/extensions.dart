@@ -80,6 +80,8 @@ extension IterableHelpers<T> on Iterable<T> {
 
   int gcdBy(int Function(T element) valueSelector) => map(valueSelector).gcd;
 
+  int countOccurances(bool Function(T element) valueSelector) => where(valueSelector).length;
+  int countValueOccurances(T value) => countOccurances((iterableValue) => iterableValue == value);
   TNum sumBy<TNum extends num>(TNum Function(T element) valueSelector) => map(valueSelector).sum as TNum;
   TNum minBy<TNum extends num>(TNum Function(T element) valueSelector) => map(valueSelector).min as TNum;
   TNum maxBy<TNum extends num>(TNum Function(T element) valueSelector) => map(valueSelector).max as TNum;

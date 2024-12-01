@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/2021/_all_solvers.dart' as aoc2021;
 import 'package:h3x_devtools/solvers/advent_of_code/2022/_all_solvers.dart' as aoc2022;
 import 'package:h3x_devtools/solvers/advent_of_code/2023/_all_solvers.dart' as aoc2023;
+import 'package:h3x_devtools/solvers/advent_of_code/2024/_all_solvers.dart' as aoc2024;
 import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:h3x_devtools/storage.dart';
 import 'package:h3x_devtools/views/challenge_solver_view.dart';

@@ -18,6 +18,7 @@ final List<NavigationPaneItem> _rootPaneItems = [
   _adventOfCode2021PaneItem,
   _adventOfCode2022PaneItem,
   _adventOfCode2023PaneItem,
+  _adventOfCode2024PaneItem,
   _overlayEffectsItem,
 ];
 
@@ -92,6 +93,18 @@ _RoutingPaneItemExpander get _adventOfCode2023PaneItem {
       _getAdventOfCodePaneItem(2023, 19, aoc2023.Day19Solver()),
       _getAdventOfCodePaneItem(2023, 21, aoc2023.Day21Solver()),
       _getAdventOfCodePaneItem(2023, 23, aoc2023.Day23Solver()),
+    ],
+  );
+}
+
+_RoutingPaneItemExpander get _adventOfCode2024PaneItem {
+  return _RoutingPaneItemExpander(
+    routePath: '/aoc2024',
+    icon: const Icon(FluentIcons.code),
+    title: const Text('Advent of Code 2024'),
+    routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
+    items: [
+      _getAdventOfCodePaneItem(2024, 01, aoc2024.Day01Solver()),
     ],
   );
 }
