@@ -15,10 +15,10 @@ final List<NavigationPaneItem> _rootPaneItems = [
       child: Text("Welcome!"),
     ),
   ),
-  _adventOfCode2021PaneItem,
-  _adventOfCode2022PaneItem,
-  _adventOfCode2023PaneItem,
-  _adventOfCode2024PaneItem,
+  _getAdventOfCodePaneItems(2021),
+  _getAdventOfCodePaneItems(2022),
+  _getAdventOfCodePaneItems(2023),
+  _getAdventOfCodePaneItems(2024),
   _overlayEffectsItem,
 ];
 
@@ -31,80 +31,24 @@ final List<GoRoute> _routes = [
 // Advent of Code //
 // ////////////// //
 
-_RoutingPaneItemExpander get _adventOfCode2021PaneItem {
-  return _RoutingPaneItemExpander(
-    routePath: '/aoc2021',
-    icon: const Icon(FluentIcons.code),
-    title: const Text('Advent of Code 2021'),
-    routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
-    items: [
-      _getAdventOfCodePaneItem(aoc2021.Day01Solver()),
-      _getAdventOfCodePaneItem(aoc2021.Day02Solver()),
-    ],
-  );
-}
+_RoutingPaneItemExpander _getAdventOfCodePaneItems(int year) {
+  // First find all AoC $year classes through reflection.
+  String baseClassName = 'AdventOfCode${year}Solver';
+  TypeMirror baseClassMirror = reflector.annotatedClasses.firstWhere((classMirror) => classMirror.simpleName == baseClassName);
+  List<ClassMirror> solverClassMirrors = reflector.annotatedClasses.where((classMirror) {
+    // Accessing `superclass` will throw an error when it's not supported. Just skip those.
+    try { return classMirror.superclass == baseClassMirror; } catch (_) {  return false; }
+  }).toList();
 
-_RoutingPaneItemExpander get _adventOfCode2022PaneItem {
-  return _RoutingPaneItemExpander(
-    routePath: '/aoc2022',
+   return _RoutingPaneItemExpander(
+    routePath: '/aoc$year',
     icon: const Icon(FluentIcons.code),
-    title: const Text('Advent of Code 2022'),
+    title: Text('Advent of Code $year'),
     routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
     items: [
-      _getAdventOfCodePaneItem(aoc2022.Day01Solver()),
-      _getAdventOfCodePaneItem(aoc2022.Day02Solver()),
-      _getAdventOfCodePaneItem(aoc2022.Day03Solver()),
-      _getAdventOfCodePaneItem(aoc2022.Day04Solver()),
-      _getAdventOfCodePaneItem(aoc2022.Day05Solver()),
-      _getAdventOfCodePaneItem(aoc2022.Day06Solver()),
-      _getAdventOfCodePaneItem(aoc2022.Day07Solver()),
-      _getAdventOfCodePaneItem(aoc2022.Day08Solver()),
-      _getAdventOfCodePaneItem(aoc2022.Day09Solver()),
-      _getAdventOfCodePaneItem(aoc2022.Day10Solver()),
-      _getAdventOfCodePaneItem(aoc2022.Day13Solver()),
-      _getAdventOfCodePaneItem(aoc2022.Day14Solver()),
-    ],
-  );
-}
-
-_RoutingPaneItemExpander get _adventOfCode2023PaneItem {
-  return _RoutingPaneItemExpander(
-    routePath: '/aoc2023',
-    icon: const Icon(FluentIcons.code),
-    title: const Text('Advent of Code 2023'),
-    routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
-    items: [
-      _getAdventOfCodePaneItem(aoc2023.Day01Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day02Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day03Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day04Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day05Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day06Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day07Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day08Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day09Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day10Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day11Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day13Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day14Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day15Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day16Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day18Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day19Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day21Solver()),
-      _getAdventOfCodePaneItem(aoc2023.Day23Solver()),
-    ],
-  );
-}
-
-_RoutingPaneItemExpander get _adventOfCode2024PaneItem {
-  return _RoutingPaneItemExpander(
-    routePath: '/aoc2024',
-    icon: const Icon(FluentIcons.code),
-    title: const Text('Advent of Code 2024'),
-    routeBodyBuilder: (context, state) => const Center(child: Text("Choose a day from the sub menu")),
-    items: [
-      _getAdventOfCodePaneItem(aoc2024.Day01Solver()),
+      // Create new solver instances using reflection.
+      for (var solverClassMirror in solverClassMirrors)
+        _getAdventOfCodePaneItem(solverClassMirror.newInstance('', const []) as AdventOfCodeSolver),
     ],
   );
 }

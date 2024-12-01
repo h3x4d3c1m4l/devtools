@@ -3,10 +3,12 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:h3x_devtools/main.dart';
 import 'package:h3x_devtools/solvers/solver.dart';
 import 'package:h3x_devtools/storage.dart';
 import 'package:http/http.dart' as http;
 
+@reflector
 abstract class AdventOfCodeSolver extends Solver<String, String> {
 
   int get dayNumber;
@@ -25,7 +27,7 @@ abstract class AdventOfCodeSolver extends Solver<String, String> {
     // First check if the input is already cached
     final input = readAdventOfCodeInput(yearNumber, dayNumber);
     if (input != null) return input;
-    
+
     // It seems it isn't, let's try to download it
     final inputUrl = Uri.https('adventofcode.com', '$yearNumber/day/$dayNumber/input');
     final sessionCookieValue = await getAdventOfCodeSession();

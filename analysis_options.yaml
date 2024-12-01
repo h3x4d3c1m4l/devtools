@@ -8,6 +8,7 @@ analyzer:
     - '**/*.freezed.dart'
     - '**/*.generated.dart'
     - '**/*.json.dart'
+    - '**/*.reflectable.dart'
   language:
     # TODO... fix dynamic usage :-(
     # strict-casts: true

@@ -3,22 +3,28 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:h3x_devtools/solvers/advent_of_code/2021/_all_solvers.dart' as aoc2021;
-import 'package:h3x_devtools/solvers/advent_of_code/2022/_all_solvers.dart' as aoc2022;
-import 'package:h3x_devtools/solvers/advent_of_code/2023/_all_solvers.dart' as aoc2023;
-import 'package:h3x_devtools/solvers/advent_of_code/2024/_all_solvers.dart' as aoc2024;
+import 'package:h3x_devtools/main.reflectable.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/aoc_solver.dart';
 import 'package:h3x_devtools/storage.dart';
 import 'package:h3x_devtools/views/challenge_solver_view.dart';
 import 'package:h3x_devtools/views/overlay_effects.dart';
 import 'package:h3x_devtools/views/settings_screen.dart';
 import 'package:intl/intl.dart';
+import 'package:reflectable/reflectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
 
 part 'main.panel_items.dart';
 
+class Reflector extends Reflectable {
+  const Reflector() : super(subtypeQuantifyCapability, newInstanceCapability, typeRelationsCapability);
+}
+
+const reflector = Reflector();
+
 void main() async {
+  initializeReflectable();
+
   // add OFL for Inconsolata font
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('google_fonts/OFL.txt');
