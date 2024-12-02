@@ -14,6 +14,17 @@ import 'package:reflectable/reflectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
 
+// Imports needed for Reflectable to find the solvers:
+
+// ignore: unused_import, directives_ordering
+import 'package:h3x_devtools/solvers/advent_of_code/2021/_all_solvers.dart' as aoc2021;
+// ignore: unused_import, directives_ordering
+import 'package:h3x_devtools/solvers/advent_of_code/2022/_all_solvers.dart' as aoc2022;
+// ignore: unused_import, directives_ordering
+import 'package:h3x_devtools/solvers/advent_of_code/2023/_all_solvers.dart' as aoc2023;
+// ignore: unused_import, directives_ordering
+import 'package:h3x_devtools/solvers/advent_of_code/2024/_all_solvers.dart' as aoc2024;
+
 part 'main.panel_items.dart';
 
 class Reflector extends Reflectable {
