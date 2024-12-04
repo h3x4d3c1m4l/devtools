@@ -11,6 +11,8 @@ class Grid<T> {
   int get width => columns.length;
   int get height => rows.length;
 
+  Cell<T> operator [](Coordinates coordinates) => rows[coordinates.y][coordinates.x];
+
   Grid.filled({required int width, required int height, required T initialValue}) {
     rows = Iterable.generate(
       height,
@@ -54,11 +56,20 @@ class Grid<T> {
   T getValue(Coordinates coordinates) => columns[coordinates.x][coordinates.y].obj;
 
   void setValue(Coordinates coordinates, T value) => columns[coordinates.x][coordinates.y].obj = value;
-  
+
   T replaceValue(Coordinates coordinates, T newValue) {
     T oldValue = columns[coordinates.x][coordinates.y].obj;
     columns[coordinates.x][coordinates.y].obj = newValue;
     return oldValue;
+  }
+
+  List<T> getValues(Coordinates start, Direction direction, int count) {
+    return count == 0
+        ? const []
+        : [
+            getValue(start),
+            ...getValues(start.goToDirection(direction), direction, count - 1),
+          ];
   }
 
   // //// //
@@ -69,7 +80,7 @@ class Grid<T> {
     for (var y = 0; y < height; y++) {
       for (var x = 0; x < width; x++) {
         if (test(rows[y][x].obj)) return Coordinates(x, y, this);
-      } 
+      }
     }
     return null;
   }
@@ -127,7 +138,7 @@ class Grid<T> {
   // it is not faster than floodFill4Way() at all.
   void spanFillOptimizedNotWorking(Coordinates start, T replace, T replaceWith) {
     if (getValue(start) != replace) return;
-    
+
     int x = start.x, y = start.y;
 
     Queue<(int, int, int, int)> s = Queue()
@@ -204,43 +215,74 @@ class Coordinates {
 
   const Coordinates(this.x, this.y, [this.grid]);
 
-  bool get canGoWest => x > 0;
-  bool get canGoEast => x < grid!.width - 1;
-  bool get canGoNorth => y > 0;
-  bool get canGoNorthWest => canGoNorth && canGoWest;
-  bool get canGoNorthEast => canGoNorth && canGoEast;
-  bool get canGoSouth => y < grid!.height - 1;
-  bool get canGoSouthWest => canGoSouth && canGoWest;
-  bool get canGoSouthEast => canGoSouth && canGoEast;
+  bool get canGoNorth => canGoNorthFor(1);
+  bool get canGoNorthEast => canGoNorthEastFor(1);
+  bool get canGoEast => canGoEastFor(1);
+  bool get canGoSouthEast => canGoSouthEastFor(1);
+  bool get canGoSouth => canGoSouthFor(1);
+  bool get canGoSouthWest => canGoSouthWestFor(1);
+  bool get canGoWest => canGoWestFor(1);
+  bool get canGoNorthWest => canGoNorthWestFor(1);
 
-  Coordinates goNorth() => copyWith(y: y - 1);
-  Coordinates goNorthWest() => copyWith(x: x - 1, y: y - 1);
-  Coordinates goNorthEast() => copyWith(x: x + 1, y: y - 1);
-  Coordinates goSouth() => copyWith(y: y + 1);
-  Coordinates goSouthWest() => copyWith(x: x - 1, y: y + 1);
-  Coordinates goSouthEast() => copyWith(x: x + 1, y: y + 1);
-  Coordinates goWest() => copyWith(x: x - 1);
-  Coordinates goEast() => copyWith(x: x + 1);
+  bool canGoNorthFor(int steps) => y - steps >= 0;
+  bool canGoNorthEastFor(int steps) => canGoNorthFor(steps) && canGoEastFor(steps);
+  bool canGoEastFor(int steps) => x + steps < grid!.width;
+  bool canGoSouthEastFor(int steps) => canGoSouthFor(steps) && canGoEastFor(steps);
+  bool canGoSouthFor(int steps) => y + steps < grid!.height;
+  bool canGoSouthWestFor(int steps) => canGoSouthFor(steps) && canGoWestFor(steps);
+  bool canGoWestFor(int steps) => x - steps >= 0;
+  bool canGoNorthWestFor(int steps) => canGoNorthFor(steps) && canGoWestFor(steps);
 
-  Coordinates goToDirection(Direction direction) {
+  Coordinates goNorth([int steps = 1]) => copyWith(y: y - steps);
+  Coordinates goNorthEast([int steps = 1]) => copyWith(x: x + steps, y: y - steps);
+  Coordinates goEast([int steps = 1]) => copyWith(x: x + steps);
+  Coordinates goSouthEast([int steps = 1]) => copyWith(x: x + steps, y: y + steps);
+  Coordinates goSouth([int steps = 1]) => copyWith(y: y + steps);
+  Coordinates goSouthWest([int steps = 1]) => copyWith(x: x - steps, y: y + steps);
+  Coordinates goWest([int steps = 1]) => copyWith(x: x - steps);
+  Coordinates goNorthWest([int steps = 1]) => copyWith(x: x - steps, y: y - steps);
+
+  bool canGoDirection(Direction direction, [int steps = 1]) {
     return switch (direction) {
-      Direction.north => goNorth(),
-      Direction.northEast => goNorthEast(),
-      Direction.east => goEast(),
-      Direction.southEast => goSouthEast(),
-      Direction.south => goSouth(),
-      Direction.southWest => goSouthWest(),
-      Direction.west => goWest(),
-      Direction.northWest => goNorthWest(),
+      Direction.north => canGoNorthFor(steps),
+      Direction.northEast => canGoNorthEastFor(steps),
+      Direction.east => canGoEastFor(steps),
+      Direction.southEast => canGoSouthEastFor(steps),
+      Direction.south => canGoSouthFor(steps),
+      Direction.southWest => canGoSouthWestFor(steps),
+      Direction.west => canGoWestFor(steps),
+      Direction.northWest => canGoNorthWestFor(steps),
     };
   }
 
-  Coordinates goToCDirection(CardinalDirection direction) {
+  Coordinates goToDirection(Direction direction, [int steps = 1]) {
     return switch (direction) {
-      CardinalDirection.north => goNorth(),
-      CardinalDirection.east => goEast(),
-      CardinalDirection.south => goSouth(),
-      CardinalDirection.west => goWest(),
+      Direction.north => goNorth(steps),
+      Direction.northEast => goNorthEast(steps),
+      Direction.east => goEast(steps),
+      Direction.southEast => goSouthEast(steps),
+      Direction.south => goSouth(steps),
+      Direction.southWest => goSouthWest(steps),
+      Direction.west => goWest(steps),
+      Direction.northWest => goNorthWest(steps),
+    };
+  }
+
+  bool canGoCDirection(CardinalDirection direction, [int steps = 1]) {
+    return switch (direction) {
+      CardinalDirection.north => canGoNorthFor(steps),
+      CardinalDirection.east => canGoEastFor(steps),
+      CardinalDirection.south => canGoSouthFor(steps),
+      CardinalDirection.west => canGoWestFor(steps),
+    };
+  }
+
+  Coordinates goToCDirection(CardinalDirection direction, [int steps = 1]) {
+    return switch (direction) {
+      CardinalDirection.north => goNorth(steps),
+      CardinalDirection.east => goEast(steps),
+      CardinalDirection.south => goSouth(steps),
+      CardinalDirection.west => goWest(steps),
     };
   }
 
