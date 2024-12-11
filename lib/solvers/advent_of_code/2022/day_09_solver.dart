@@ -7,7 +7,7 @@ class Day09Solver extends AdventOfCode2022Solver {
 
   @override
   final int dayNumber = 9;
-  
+
   @override
   String getSolution(String input) {
     List<(String instruction, int count)> movementInstructions = input
@@ -15,7 +15,7 @@ class Day09Solver extends AdventOfCode2022Solver {
         .map((rawInstructionLine) => rawInstructionLine.split(' '))
         .map((rawInstruction) => (rawInstruction[0], int.parse(rawInstruction[1])))
         .toList(growable: false);
-    
+
     // part 1
     int positionsVisitedByTail = getAmountOfPositionsVisitedByTail(movementInstructions, 2);
 
@@ -31,16 +31,13 @@ class Day09Solver extends AdventOfCode2022Solver {
     for (var (String instruction, int count) in movementInstructions) {
       for (int i = 0; i < count; i++) {
         // move head
-        switch (instruction) {
-          case 'L':
-            knots[0] = (knots[0].$1 - 1, knots[0].$2);
-          case 'R':
-            knots[0] = (knots[0].$1 + 1, knots[0].$2);
-          case 'U':
-            knots[0] = (knots[0].$1, knots[0].$2 + 1);
-          case 'D':
-            knots[0] = (knots[0].$1, knots[0].$2 - 1);
-        }
+        knots[0] = switch (instruction) {
+          'L' => (knots[0].$1 - 1, knots[0].$2),
+          'R' => (knots[0].$1 + 1, knots[0].$2),
+          'U' => (knots[0].$1, knots[0].$2 + 1),
+          'D' => (knots[0].$1, knots[0].$2 - 1),
+          _ => throw Exception('Unknown instruction [$instruction]'),
+        };
 
         // let tail follow
         for (int i = 1; i < knots.length; i++) {

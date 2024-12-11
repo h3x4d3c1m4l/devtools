@@ -29,18 +29,12 @@ class Day18Solver extends AdventOfCode2023Solver {
     Coordinates lastCoordinates = Coordinates(500, 500, grid);
     for (DigPlanLine digPlanLine in rawDigPlanLines) {
       for (int i = 0; i < digPlanLine.meters; i++) {
-        switch (digPlanLine.direction) {
-          case CardinalDirection.north:
-            lastCoordinates = lastCoordinates.goNorth();
-          case CardinalDirection.east:
-            lastCoordinates = lastCoordinates.goEast();
-          case CardinalDirection.south:
-            lastCoordinates = lastCoordinates.goSouth();
-          case CardinalDirection.west:
-            lastCoordinates = lastCoordinates.goWest();
-          default:
-            throw Exception('Direction ${digPlanLine.direction} unsupported');
-        }
+        lastCoordinates = switch (digPlanLine.direction) {
+          CardinalDirection.north => lastCoordinates.goNorth(),
+          CardinalDirection.east => lastCoordinates.goEast(),
+          CardinalDirection.south => lastCoordinates.goSouth(),
+          CardinalDirection.west => lastCoordinates.goWest()
+        };
         grid.setValue(lastCoordinates, _Tile.diggedSand);
       }
     }
