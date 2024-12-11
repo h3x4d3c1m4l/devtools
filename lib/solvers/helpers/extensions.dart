@@ -40,6 +40,9 @@ extension IntExtension on int {
   bool get isDigit => this >= 48 && this <= 57;
   bool get isDigit1to9 => this >= 49 && this <= 58;
   bool get isDot => this == 46;
+  int get digitCount => toString().length;
+  List<int> get digits => toString().characters.map(int.parse).toList();
+
   int lcm(int other) => (this * other).abs() ~/ gcd(other);
 
 }
