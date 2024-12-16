@@ -94,6 +94,22 @@ class Grid<T> {
     return null;
   }
 
+  Iterable<Coordinates> coordinatesOf(T item) sync* {
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
+        if (rows[y][x].obj == item) yield Coordinates(x, y, this);
+      }
+    }
+  }
+
+  Iterable<Coordinates> coordinatesWhere(bool Function(T) test) sync* {
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
+        if (test(rows[y][x].obj)) yield Coordinates(x, y, this);
+      }
+    }
+  }
+
   // //// //
   // Flip //
   // //// //
