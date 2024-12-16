@@ -218,10 +218,10 @@ packages:
     dependency: "direct main"
     description:
       name: fluent_ui
-      sha256: e7804bf3bbb3ecf9e77d5498181dc36375f5ca736ccfb3862fea17c50050eb89
+      sha256: "069dc196e093864ba7252a3ed5cc4e28039f04fc9cb687f35aeaa2e2b265dd7e"
       url: "https://pub.dev"
     source: hosted
-    version: "4.9.2"
+    version: "4.10.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -244,10 +244,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_mobx
-      sha256: "859fbf452fa9c2519d2700b125dd7fb14c508bbdd7fb65e26ca8ff6c92280e2e"
+      sha256: "14b3565517194a9192f31335d30bd3f4c7244feabf47122a2f47ab4b15aed147"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.1+1"
+    version: "2.2.2"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -502,18 +502,18 @@ packages:
     dependency: "direct main"
     description:
       name: mobx
-      sha256: "1f01a429529ac55e5e80c0fcad62c60112fb91df3dec11a9113d71cf0c2e2c4c"
+      sha256: bf1a90e5bcfd2851fc6984e20eef69557c65d9e4d0a88f5be4cf72c9819ce6b0
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0"
+    version: "2.5.0"
   mobx_codegen:
     dependency: "direct dev"
     description:
       name: mobx_codegen
-      sha256: f605e04444c5dbf8503f354577e7ad1e06887cff30ba20f147365d6130d580f7
+      sha256: "990da80722f7d7c0017dec92040b31545d625b15d40204c36a1e63d167c73cdc"
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.2"
+    version: "2.7.0"
   nested:
     dependency: transitive
     description:
