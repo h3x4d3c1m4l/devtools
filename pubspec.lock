@@ -244,10 +244,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_mobx
-      sha256: "14b3565517194a9192f31335d30bd3f4c7244feabf47122a2f47ab4b15aed147"
+      sha256: ba5e93467866a2991259dc51cffd41ef45f695c667c2b8e7b087bf24118b50fe
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.2"
+    version: "2.3.0"
   flutter_secure_storage:
     dependency: "direct main"
     description:
