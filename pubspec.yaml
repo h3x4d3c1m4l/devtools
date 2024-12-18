@@ -23,7 +23,7 @@ dependencies:
 
   # State management
   mobx: 2.5.0
-  flutter_mobx: 2.2.2
+  flutter_mobx: 2.3.0
 
   # HTTP client
   http: 1.2.2
@@ -43,7 +43,7 @@ dependencies:
 
   # Persistence
   flutter_secure_storage: 9.2.2
-  shared_preferences: 2.3.3
+  shared_preferences: 2.3.4
 
   # Misc
   rnd: 0.2.0
