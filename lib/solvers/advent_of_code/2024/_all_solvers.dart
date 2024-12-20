@@ -13,3 +13,4 @@ export 'day_13_solver.dart';
 export 'day_14_solver.dart';
 export 'day_15_solver.dart';
 export 'day_17_solver.dart';
+export 'day_19_solver.dart';
