@@ -16,7 +16,7 @@ dependencies:
   fluent_ui: 4.10.0
   intl: any
   google_fonts: 6.2.1
-  go_router: 14.6.3
+  go_router: 14.7.1
   particle_field: 1.0.0
   live_background: 0.1.3
   syntax_highlight: 0.4.0
@@ -43,7 +43,7 @@ dependencies:
 
   # Persistence
   flutter_secure_storage: 9.2.4
-  shared_preferences: 2.3.5
+  shared_preferences: 2.4.0
 
   # Misc
   rnd: 0.2.0
