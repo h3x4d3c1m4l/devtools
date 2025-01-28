@@ -49,9 +49,6 @@ dependencies:
   rnd: 0.2.0
   reflectable: 4.0.12
 
-dependency_overrides:
-  flutter_secure_storage_web: ^2.0.0-beta.1
-
 dev_dependencies:
   # Flutter framework
   flutter_test: { sdk: flutter }
