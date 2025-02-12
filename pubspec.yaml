@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.6.0'
+  sdk: '>=3.7.0'
 
 dependencies:
   # Flutter framework
@@ -30,9 +30,9 @@ dependencies:
 
   # Parsing
   string_scanner: any
-  petitparser: 6.0.2
+  petitparser: 6.1.0
   sealed_unions: 3.0.3+1
-  characters: 1.3.0
+  characters: any
 
   # Collections and querying
   collection: any
