@@ -93,7 +93,7 @@ final _router = GoRouter(navigatorKey: _rootNavigatorKey, routes: [
             padding: EdgeInsets.all(16.0),
             child: Align(
               alignment: Alignment.centerRight,
-              child: Text("Running on ${kIsWasm ? 'WASM' : kIsWeb ? 'JS' : 'desktop/mobile'}"),
+              child: Text("Running on Flutter ${FlutterVersion.version} (${kIsWasm ? 'WASM' : kIsWeb ? 'JS' : 'desktop/mobile'})"),
             ),
           ),
         ),
