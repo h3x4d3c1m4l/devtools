@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.7.0'
+  sdk: '>=3.9.0'
 
 dependencies:
   # Flutter framework
@@ -47,7 +47,7 @@ dependencies:
 
   # Misc
   rnd: 0.2.0
-  reflectable: 4.0.13
+  reflectable: 4.0.6
 
 dev_dependencies:
   # Flutter framework
@@ -57,10 +57,10 @@ dev_dependencies:
   flutter_lints: 6.0.0
 
   # Code generation
-  build_runner: 2.4.15
+  build_runner: 2.4.13
 
   # State management
-  mobx_codegen: 2.7.1
+  mobx_codegen: 2.7.0
 
 flutter:
   uses-material-design: true
