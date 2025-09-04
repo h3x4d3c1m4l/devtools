@@ -689,10 +689,10 @@ packages:
     dependency: "direct main"
     description:
       name: reflectable
-      sha256: c6fd6048b20d31c8e42f32b62e67e8a63a006fff8413875394c779d1bc272c66
+      sha256: "8deaa83f6bc6bba6360a2778e6c1330fc331663251b82fbfd186096f16e35228"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.14"
+    version: "4.0.15"
   rnd:
     dependency: "direct main"
     description:
