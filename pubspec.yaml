@@ -15,7 +15,7 @@ dependencies:
   # UI
   fluent_ui: 4.13.0
   intl: 0.20.2
-  google_fonts: 6.3.1
+  google_fonts: 6.3.2
   go_router: 16.2.4
   particle_field: 1.0.0
   live_background: 0.1.3
@@ -47,7 +47,7 @@ dependencies:
 
   # Misc
   rnd: 0.2.0
-  reflectable: 4.0.15
+  reflectable: 5.0.1
 
 dev_dependencies:
   # Flutter framework
@@ -57,10 +57,10 @@ dev_dependencies:
   flutter_lints: 6.0.0
 
   # Code generation
-  build_runner: 2.4.15
+  build_runner: 2.9.0
 
   # State management
-  mobx_codegen: 2.7.1
+  mobx_codegen: 2.7.4
 
 flutter:
   uses-material-design: true
