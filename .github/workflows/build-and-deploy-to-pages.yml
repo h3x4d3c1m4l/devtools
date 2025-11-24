@@ -28,7 +28,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Detect Flutter version
       uses: kuhnroyal/flutter-fvm-config-action@v3
