@@ -1,5 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'dart:ui';
 
 import 'package:fluent_ui/fluent_ui.dart';
@@ -7,13 +5,16 @@ import 'package:live_background/live_background.dart';
 import 'package:live_background/widget/live_background_widget.dart';
 
 class OverlayEffects extends StatefulWidget {
-  const OverlayEffects();
+
+  const OverlayEffects({super.key});
 
   @override
   State<StatefulWidget> createState() => _OverlayEffectsState();
+
 }
 
 class _OverlayEffectsState extends State<OverlayEffects> {
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -79,4 +80,5 @@ class _OverlayEffectsState extends State<OverlayEffects> {
       ),
     );
   }
+
 }

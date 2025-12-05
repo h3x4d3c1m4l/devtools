@@ -1,7 +1,3 @@
-// ignore_for_file: avoid_dynamic_calls
-
-import 'dart:convert';
-
 import 'package:flutter/services.dart';
 import 'package:h3x_devtools/main.dart';
 import 'package:h3x_devtools/solvers/solver.dart';

@@ -13,7 +13,7 @@ class Day13Solver extends AdventOfCode2022Solver {
 
   @override
   final int dayNumber = 13;
-  
+
   @override
   String getSolution(String input) {
     String inputTrimmed = input.trim();
@@ -27,7 +27,7 @@ class Day13Solver extends AdventOfCode2022Solver {
         sumOfIndices += i + 1;
       }
     }
-  
+
     // part 2
     List allPacketsInOrder = [
       ...pairs.map((pairTuple) => [pairTuple.$1, pairTuple.$2]).flattened,
