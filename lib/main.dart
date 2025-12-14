@@ -24,6 +24,8 @@ import 'package:h3x_devtools/solvers/advent_of_code/2022/_all_solvers.dart' as a
 import 'package:h3x_devtools/solvers/advent_of_code/2023/_all_solvers.dart' as aoc2023;
 // ignore: unused_import, directives_ordering
 import 'package:h3x_devtools/solvers/advent_of_code/2024/_all_solvers.dart' as aoc2024;
+// ignore: unused_import, directives_ordering
+import 'package:h3x_devtools/solvers/advent_of_code/2025/_all_solvers.dart' as aoc2025;
 
 part 'main.panel_items.dart';
 

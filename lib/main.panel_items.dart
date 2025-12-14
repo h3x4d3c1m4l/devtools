@@ -19,6 +19,7 @@ final List<NavigationPaneItem> _rootPaneItems = [
   _getAdventOfCodePaneItems(2022),
   _getAdventOfCodePaneItems(2023),
   _getAdventOfCodePaneItems(2024),
+  _getAdventOfCodePaneItems(2025),
   _overlayEffectsItem,
 ];
 
