@@ -32,7 +32,7 @@ dependencies:
   string_scanner: any
   petitparser: 6.1.0 # >= 7.0.0 causes compile error.
   sealed_unions: 3.0.3+1
-  characters: any
+  characters: 1.4.1
 
   # Collections and querying
   collection: any
