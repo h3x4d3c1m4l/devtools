@@ -24,7 +24,7 @@ class Day02Solver extends AdventOfCode2023Solver {
               );
             }).toList();
           }).toList(),
-        ); 
+        );
       })
       .toList();
 
@@ -59,7 +59,7 @@ class Day02Solver extends AdventOfCode2023Solver {
       },
     ).fold(
       0,
-      (previousValue, game) => previousValue += game.minimumRedCubes * game.minimumGreenCubes * game.minimumBlueCubes,
+      (previousValue, game) => previousValue + game.minimumRedCubes * game.minimumGreenCubes * game.minimumBlueCubes,
     );
 
     return 'Sum of game IDs: $sumOfGameIds\nSum of power: $sumOfPower';
