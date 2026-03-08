@@ -88,14 +88,16 @@ final _router = GoRouter(navigatorKey: _rootNavigatorKey, routes: [
     routes: _routes,
     builder: (context, state, child) {
       return NavigationView(
-        appBar: const NavigationAppBar(
-          title: Text('h3x4d3c1m4l\'s Coding Challenges Tool'),
-          automaticallyImplyLeading: false,
-          actions: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text("Running on Flutter ${FlutterVersion.version} (${kIsWasm ? 'WASM' : kIsWeb ? 'JS' : 'desktop/mobile'})"),
+        titleBar: TitleBar(
+          title: Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Text('h3x4d3c1m4l\'s Coding Challenges Tool', style: TextStyle(fontWeight: FontWeight.bold)),
+          ),
+          isBackButtonVisible: false,
+          captionControls: Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: Text(
+              "Running on Flutter ${FlutterVersion.version} (${kIsWasm ? 'WASM' : kIsWeb ? 'JS' : 'desktop/mobile'})",
             ),
           ),
         ),
