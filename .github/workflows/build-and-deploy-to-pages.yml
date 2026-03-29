@@ -108,6 +108,13 @@ jobs:
           # Inspired by: https://dev.to/it-wibrc/guide-to-containerizing-a-modern-javascript-spa-vuevitereact-with-a-multi-stage-nginx-build-1lma
           events {}
           http {
+            include       /etc/nginx/mime.types;
+            default_type  application/octet-stream;
+
+            types {
+              application/javascript mjs;
+            }
+
             server {
               listen 80;
               root /usr/share/nginx/html;
