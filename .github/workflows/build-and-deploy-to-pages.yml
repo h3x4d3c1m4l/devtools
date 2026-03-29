@@ -1,21 +1,16 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Build and deploy to GH Pages
+name: Build and deploy
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
+  packages: write
 
-# Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -23,61 +18,65 @@ concurrency:
 jobs:
   build:
     name: Build
-
     runs-on: ubuntu-24.04
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v6
+      - name: Checkout
+        uses: actions/checkout@v6
 
-    - name: Detect Flutter version
-      uses: kuhnroyal/flutter-fvm-config-action@v3
+      - name: Detect Flutter version
+        uses: kuhnroyal/flutter-fvm-config-action@v3
 
-    - name: Setup Flutter
-      uses: flutter-actions/setup-flutter@v4
-      with:
-        channel: stable
-        version: ${{ env.FLUTTER_VERSION }}
-        cache: true
-        cache-sdk: true
+      - name: Setup Flutter
+        uses: flutter-actions/setup-flutter@v4
+        with:
+          channel: stable
+          version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+          cache-sdk: true
 
-    - name: Disable Flutter analytics and CLI animations
-      run: flutter config --no-analytics --no-cli-animations
+      - name: Disable Flutter analytics and CLI animations
+        run: flutter config --no-analytics --no-cli-animations
 
-    - name: Flutter SDK precache
-      run: flutter precache --web
+      - name: Flutter SDK precache
+        run: flutter precache --web
 
-    - name: Flutter version
-      run: flutter --version
+      - name: Flutter version
+        run: flutter --version
 
-    - name: Install dependencies
-      run: flutter packages get
-      
-    - name: Run code generation
-      run: dart run build_runner build
-      
-    - name: Flutter analyze
-      run: flutter analyze
+      - name: Install dependencies
+        run: flutter packages get
 
-    - name: Build web
-      run: flutter build web --release --wasm --base-href '/devtools/'
+      - name: Run code generation
+        run: dart run build_runner build
 
-    - name: Fix permissions
-      run: |
-        chmod -c -R +rX "build/web/" | while read line; do
-          echo "::warning title=Invalid file permissions automatically fixed::$line"
-        done
+      - name: Flutter analyze
+        run: flutter analyze
 
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v4
-      with:
-        path: 'build/web'
+      # --- GH Pages build (with base-href) ---
+      - name: Build web (GH Pages)
+        run: flutter build web --release --wasm --base-href '/devtools/'
 
-  deploy:
-    name: Deploy
+      - name: Upload artifact for Pages
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: 'build/web'
 
+      # --- Docker build (no base-href) ---
+      - name: Build web (Docker)
+        run: |
+          rm -rf build/web
+          flutter build web --release --wasm
+
+      - name: Upload web build artifact (Docker)
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: build/web
+
+  Deploy-GHPages:
+    name: Deploy-GHPages
     needs: build
-
     runs-on: ubuntu-latest
 
     environment:
@@ -88,3 +87,82 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  Deploy-Dokploy:
+    name: Deploy-Dokploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download web build
+        uses: actions/download-artifact@v4
+        with:
+          name: web-build
+          path: build/web
+
+      - name: Prepare Docker context
+        run: |
+          mkdir docker
+          cp -r build/web docker/html
+          cat <<'EOF' > docker/nginx.conf
+          # Inspired by: https://dev.to/it-wibrc/guide-to-containerizing-a-modern-javascript-spa-vuevitereact-with-a-multi-stage-nginx-build-1lma
+          events {}
+          http {
+            server {
+              listen 80;
+              root /usr/share/nginx/html;
+              index index.html;
+
+              # Security: Hides the Nginx version
+              server_tokens off;
+
+              # SPA Routing: Directs all unmatched requests to index.html
+              location / {
+                  try_files $uri $uri/ /index.html;
+              }
+
+              # Security: Block access to hidden files
+              location ~ /\. {
+                  deny all;
+              }
+
+              add_header Cross-Origin-Embedder-Policy credentialless;
+              add_header Cross-Origin-Opener-Policy same-origin;
+            }
+          }
+          EOF
+
+          cat <<'EOF' > docker/Dockerfile
+          FROM nginx:alpine
+          COPY nginx.conf /etc/nginx/nginx.conf
+          COPY html /usr/share/nginx/html
+          EOF
+
+      - name: Set lowercase image name
+        run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t ghcr.io/${{ env.IMAGE_NAME }}:latest \
+                       -t ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }} docker
+
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ env.IMAGE_NAME }}:latest
+          docker push ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Trigger deployment
+        env:
+          DOKPLOY_DEPLOY_WEBHOOK_URL: ${{ secrets.DOKPLOY_DEPLOY_WEBHOOK_URL }}
+        run: |
+          test -n "$DOKPLOY_DEPLOY_WEBHOOK_URL"
+          curl --fail --show-error --silent \
+            --request POST \
+            "$DOKPLOY_DEPLOY_WEBHOOK_URL"
