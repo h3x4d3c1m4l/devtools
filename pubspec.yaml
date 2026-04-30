@@ -57,7 +57,7 @@ dev_dependencies:
   flutter_lints: 6.0.0
 
   # Code generation
-  build_runner: 2.14.1
+  build_runner: 2.15.0
 
   # State management
   mobx_codegen: 2.7.7
