@@ -58,7 +58,7 @@ jobs:
         run: flutter build web --release --wasm --base-href '/devtools/'
 
       - name: Upload artifact for Pages
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: 'build/web'
 
@@ -69,7 +69,7 @@ jobs:
           flutter build web --release --wasm
 
       - name: Upload web build artifact (Docker)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: web-build
           path: build/web
@@ -86,7 +86,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   Deploy-Dokploy:
     name: Deploy-Dokploy
@@ -95,7 +95,7 @@ jobs:
 
     steps:
       - name: Download web build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: web-build
           path: build/web
@@ -149,7 +149,7 @@ jobs:
         run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Log in to GHCR
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
