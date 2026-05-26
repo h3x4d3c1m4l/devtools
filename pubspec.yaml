@@ -47,7 +47,7 @@ dependencies:
 
   # Misc
   rnd: 0.2.0
-  reflectable: 5.2.2
+  reflectable: 5.2.3
 
 dev_dependencies:
   # Flutter framework
