@@ -42,12 +42,12 @@ dependencies:
   url_launcher: 6.3.2
 
   # Persistence
-  flutter_secure_storage: 10.3.0
+  flutter_secure_storage: 10.3.1
   shared_preferences: 2.5.5
 
   # Misc
   rnd: 0.2.0
-  reflectable: 5.2.2
+  reflectable: 5.2.3
 
 dev_dependencies:
   # Flutter framework
