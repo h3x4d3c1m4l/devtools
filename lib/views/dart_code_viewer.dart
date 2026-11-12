@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:code_forge/code_forge.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:syntax_highlight/syntax_highlight.dart';
+import 'package:re_highlight/languages/dart.dart';
+import 'package:re_highlight/styles/vs.dart';
+import 'package:re_highlight/styles/vs2015.dart';
 
 class DartCodeViewer extends StatelessWidget {
 
@@ -11,27 +14,17 @@ class DartCodeViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Brightness brightness = MediaQuery.platformBrightnessOf(context);
-    return FutureBuilder(
-      // ignore: discarded_futures
-      future: HighlighterTheme.loadForBrightness(brightness),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return const SizedBox();
-
-        Highlighter highlighter = Highlighter(
-          language: 'dart',
-          theme: snapshot.data!,
-        );
-
-        TextSpan highlightedCode = highlighter.highlight(code);
-        return SelectableText.rich(
-          highlightedCode,
-          style: GoogleFonts.inconsolata(
-            fontSize: 16,
-            height: 1.20,
-            fontFeatures: [const FontFeature.enable('dlig')],
-          ),
-        );
-      },
+    return CodeForge(
+      initialText: code,
+      readOnly: true,
+      language: langDart,
+      editorTheme: brightness == Brightness.dark ? vs2015Theme : vsTheme,
+      enableMinimap: false,
+      textStyle: GoogleFonts.inconsolata(
+        fontSize: 16,
+        height: 1.20,
+        fontFeatures: [const FontFeature.enable('dlig')],
+      ),
     );
   }
 

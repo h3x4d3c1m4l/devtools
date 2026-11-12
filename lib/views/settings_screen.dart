@@ -14,7 +14,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldPage.withPadding(
+    return ScaffoldPage(
       header: const PageHeader(
         title: Text("Settings"),
       ),

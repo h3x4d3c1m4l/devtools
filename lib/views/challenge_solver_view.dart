@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:h3x_devtools/solvers/advent_of_code/aoc_solver.dart';
@@ -57,7 +55,7 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldPage.withPadding(
+    return ScaffoldPage(
       header: PageHeader(
         title: Text(widget.title),
         commandBar: CommandBar(
@@ -104,7 +102,7 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
           ),
         ],
       ),
-      bottomBar: _bottomBarWidget,
+      footer: _bottomBarWidget,
     );
   }
 
@@ -174,12 +172,12 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
         if (snapshot.hasData) {
           // success
           return Center(
-            child: material.SelectionArea(child: Text(snapshot.data ?? '')),
+            child: SelectionArea(child: Text(snapshot.data ?? '')),
           );
         } else if (snapshot.hasError) {
           // exception
           return Center(
-            child: material.SelectionArea(child: Text("Error: ${snapshot.error}")),
+            child: SelectionArea(child: Text("Error: ${snapshot.error}")),
           );
         } else if (_solutionFuture != null) {
           // solving
@@ -198,8 +196,8 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
 
   Future<void> _showCode(BuildContext context) async {
     // load list of assets
-    final manifestContent = await rootBundle.loadString('AssetManifest.json');
-    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+    final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+    final assets = assetManifest.listAssets();
 
     // find and read the code file asset
     String solverCodeFilename = widget.solver.solverCodeFilename;
@@ -207,8 +205,7 @@ class _ChallengeSolverViewState extends State<ChallengeSolverView> {
     // Dirty hack to avoid error on .single
     var year = widget.solver.challengeUrl.split('/')[3];
 
-    // ignore: avoid_dynamic_calls
-    String solverCodeAssetPath = manifestMap.entries.where((entry) => entry.key.contains(solverCodeFilename) && entry.key.contains(year)).single.value.first;
+    String solverCodeAssetPath = assets.where((a) => a.contains(solverCodeFilename) && a.contains(year)).single;
     String code = await rootBundle.loadString(solverCodeAssetPath);
 
     if (context.mounted) {

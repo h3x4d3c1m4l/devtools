@@ -12,7 +12,6 @@ import 'package:h3x_devtools/views/settings_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:reflectable/reflectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:syntax_highlight/syntax_highlight.dart';
 
 // Imports needed for Reflectable to find the solvers:
 
@@ -46,7 +45,6 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Highlighter.initialize(['dart']);
   prefs = await SharedPreferences.getInstance();
 
   runApp(const MyApp());

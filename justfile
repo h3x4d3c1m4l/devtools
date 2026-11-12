@@ -19,9 +19,6 @@ gen-code:
 # Watching
 ##
 
-watch-bridge:
-  flutter_rust_bridge_codegen generate --watch
-
 watch-code:
   fvm dart run build_runner watch
 
