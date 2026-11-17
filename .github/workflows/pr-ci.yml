@@ -19,7 +19,7 @@ jobs:
       uses: kuhnroyal/flutter-fvm-config-action@v3
 
     - name: Setup Flutter
-      uses: flutter-actions/setup-flutter@v4
+      uses: flutter-actions/setup-flutter@v5
       with:
         channel: stable
         version: ${{ env.FLUTTER_VERSION }}
